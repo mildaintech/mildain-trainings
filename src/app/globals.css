@@ -1,0 +1,91 @@
+
+@import 'react-phone-number-input/style.css';
+@import "react-quill-new/dist/quill.snow.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 149 90% 34%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220 14.3% 5.9%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220 14.3% 5.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 149 90% 34%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-snug;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-snug;
+  }
+
+  h4 {
+    @apply text-xl sm:text-2xl font-semibold text-foreground leading-normal;
+  }
+
+  h5 {
+    @apply text-lg sm:text-xl font-semibold text-foreground leading-normal;
+  }
+
+  h6 {
+    @apply text-base sm:text-lg font-semibold text-foreground leading-normal;
+  }
+
+  p {
+    @apply text-lg sm:text-lg leading-relaxed text-muted-foreground;
+  }
+
+  a {
+    @apply text-primary transition-opacity hover:opacity-80 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+  }
+
+  /* ::selection {
+    @apply bg-primary/20 text-primary;
+  } */
+
+  ::-webkit-scrollbar {
+    @apply w-2 h-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-secondary/50 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary/50 rounded-full transition-colors hover:bg-primary;
+  }
+}
