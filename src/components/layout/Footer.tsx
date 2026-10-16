@@ -116,9 +116,9 @@ export default function Footer() {
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Blog</Link></li>
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Career</Link></li>
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Contact Us</Link></li>
-              <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Terms & Conditions</Link></li>
-              <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Privacy Policy</Link></li>
-              <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Return Policy</Link></li>
+              <li><Link href="terms-and-conditions" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Terms & Conditions</Link></li>
+              <li><Link href="policy" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="refund-policy" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Return Policy</Link></li>
             </ul>
           </div>
           
