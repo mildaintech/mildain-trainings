@@ -22,7 +22,10 @@ export default function SeoManagementPage() {
       const res = await fetch("/api/admin/seo");
       if (res.ok) {
         const data = await res.json();
-        const filteredData = data.filter((item: any) => item.pageUrl !== "GLOBAL_SCHEMA");
+        // Sirf static/main pages aur custom pages ko rakhein, courses aur GLOBAL_SCHEMA hata dein
+        const filteredData = data.filter((item: any) => 
+          item.pageUrl !== "GLOBAL_SCHEMA" && !item.pageUrl.startsWith("/courses/")
+        );
         setPageList(filteredData);
       }
     } catch (err) {

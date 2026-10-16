@@ -4,12 +4,6 @@ import React from "react";
 
 export default function CoursePathSalaries({ course, isIndia }: { course?: any, isIndia?: boolean }) {
   if (!course || !course.selectedPathRoles || course.selectedPathRoles.length === 0) {
-    return (
-      <div className="w-full bg-red-50 py-12 text-center border-y border-red-100">
-        <p className="text-red-600 font-bold text-lg">Data Not Found</p>
-        <p className="text-red-500 text-sm mt-1">Please select roles from Admin Panel checkboxes and click "Save Changes"</p>
-      </div>
-    );
   }
 
   return (

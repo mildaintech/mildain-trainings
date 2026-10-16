@@ -76,20 +76,6 @@ export default function SeoTable({ pageList, loading, onOpenForm }: SeoTableProp
                 {searchFilteredPages.filter(p => !p.pageUrl.includes('/courses/')).length}
               </span>
             </button>
-            <button
-              onClick={() => setActiveTab("courses")}
-              className={`flex items-center gap-2 px-6 py-3 text-[13px] font-bold border-b-2 transition-all ${
-                activeTab === "courses" 
-                ? "border-gray-900 text-gray-900 bg-white rounded-t-sm" 
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100/50"
-              }`}
-            >
-              <BookOpen size={16} className={activeTab === "courses" ? "text-purple-600" : ""} /> 
-              Course Pages
-              <span className="ml-1.5 bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-[10px]">
-                {searchFilteredPages.filter(p => p.pageUrl.includes('/courses/')).length}
-              </span>
-            </button>
           </div>
 
           <div className="overflow-x-auto min-h-[400px]">

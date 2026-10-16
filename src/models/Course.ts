@@ -13,8 +13,6 @@ const courseSchema = new mongoose.Schema(
     badge: { type: String },
     bannerImage: { type: String },
     logoImage: { type: String },
-    metaTitle: { type: String },
-    metaDescription: { type: String },
     heroTitle: { type: String },
     heroSubtitle: { type: String },
     heroSubtitleLines: [{ type: String }],
@@ -148,6 +146,13 @@ const courseSchema = new mongoose.Schema(
       salaryInr: { type: String },
       salaryUsd: { type: String }
     }],
+    metaTitle: { type: String },
+    metaDescription: { type: String },
+    focusKeyword: { type: String },
+    schemaData: { type: String },
+    ogImage: { type: String },
+    ogImageAlt: { type: String },
+    ogImageTitle: { type: String },
 
     faqHeading: { type: String },
     faqs: [{

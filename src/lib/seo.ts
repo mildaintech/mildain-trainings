@@ -6,11 +6,18 @@ export async function getDynamicSeoMetadata(currentPath: string, defaultMetadata
   try {
     await connectToDatabase();
     
-    const formattedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    let formattedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    
+    if (formattedPath.endsWith('/') && formattedPath.length > 1) {
+      formattedPath = formattedPath.slice(0, -1);
+    }
     
     const seoData = await Seo.findOne({ 
-      pageUrl: { $regex: new RegExp(`^${formattedPath}$`, 'i') } 
-    }).lean();
+      $or: [
+        { pageUrl: { $regex: new RegExp(`^${formattedPath}$`, 'i') } },
+        { pageUrl: { $regex: new RegExp(`^${formattedPath}/$`, 'i') } }
+      ]
+    }).lean() as any;
 
     if (seoData) {
       const isBase64Og = seoData.ogImage && seoData.ogImage.startsWith('data:image');
@@ -28,7 +35,6 @@ export async function getDynamicSeoMetadata(currentPath: string, defaultMetadata
       };
     }
   } catch (error) {
-    console.error("SEO Fetch Error:", error);
   }
 
   return defaultMetadata || {
@@ -42,11 +48,18 @@ export async function getPageSchemaData(currentPath: string) {
   try {
     await connectToDatabase();
     
-    const formattedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    let formattedPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`;
+    
+    if (formattedPath.endsWith('/') && formattedPath.length > 1) {
+      formattedPath = formattedPath.slice(0, -1);
+    }
     
     const seoData = await Seo.findOne({ 
-      pageUrl: { $regex: new RegExp(`^${formattedPath}$`, 'i') } 
-    }).select('schemaData').lean();
+      $or: [
+        { pageUrl: { $regex: new RegExp(`^${formattedPath}$`, 'i') } },
+        { pageUrl: { $regex: new RegExp(`^${formattedPath}/$`, 'i') } }
+      ]
+    }).select('schemaData').lean() as any;
     
     return seoData?.schemaData || null;
   } catch (error) {

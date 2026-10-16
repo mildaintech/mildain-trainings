@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Save, AlertCircle, FileText, Layout, List, BookOpen, HelpCircle, DollarSign, Award, Wrench, Users, Briefcase, Star, TrendingUp } from "lucide-react";
+import { ArrowLeft, Save, AlertCircle, FileText, Layout, List, BookOpen, HelpCircle, DollarSign, Award, Wrench, Users, Briefcase, Star, TrendingUp, Globe } from "lucide-react";
 import BasicInfoTab from "./components/BasicInfoTab";
 import HeroSectionTab from "./components/HeroSectionTab";
 import OverviewTab from "./components/OverviewTab";
@@ -17,6 +17,7 @@ import AdvisorTab from "./components/AdvisorTab";
 import CareerSupportTab from "./components/CareerSupportTab";
 import ReviewsTab from "./components/ReviewsTab";
 import PathSalariesTab from "./components/PathSalariesTab";
+import SeoTab from "./components/SeoTab";
 
 export default function EditCoursePage() {
   const router = useRouter();
@@ -53,6 +54,8 @@ export default function EditCoursePage() {
     heroProviderLogoUrl: "",
     metaTitle: "",
     metaDescription: "",
+    focusKeyword: "",
+    schemaData: "",
     quoteText: "",
     quoteLinkText: "",
     quoteLinkUrl: "",
@@ -113,7 +116,10 @@ export default function EditCoursePage() {
     pathSalariesDescription: "",
     selectedCategory: "",
     roles: "",
-    selectedPathRoles: [] as any[]
+    selectedPathRoles: [] as any[],
+    ogImage: "",
+    ogImageAlt: "",
+    ogImageTitle: "",
   });
 
   useEffect(() => {
@@ -149,6 +155,8 @@ export default function EditCoursePage() {
             heroProviderLogoUrl: data.heroProviderLogoUrl || "",
             metaTitle: data.metaTitle || "",
             metaDescription: data.metaDescription || "",
+            focusKeyword: data.focusKeyword || "",
+            schemaData: data.schemaData || "",
             quoteText: data.quoteText || "",
             quoteLinkText: data.quoteLinkText || "",
             quoteLinkUrl: data.quoteLinkUrl || "",
@@ -209,7 +217,10 @@ export default function EditCoursePage() {
             pathSalariesDescription: data.pathSalariesDescription || "",
             selectedCategory: data.selectedCategory || "",
             roles: data.roles || "",
-            selectedPathRoles: data.selectedPathRoles || []
+            selectedPathRoles: data.selectedPathRoles || [],
+            ogImage: data.ogImage || "",
+            ogImageAlt: data.ogImageAlt || "",
+            ogImageTitle: data.ogImageTitle || "",
           });
         }
       } catch (err) {
@@ -244,6 +255,8 @@ export default function EditCoursePage() {
           trustpilotRating: formData.trustpilotRating ? Number(formData.trustpilotRating) : undefined,
           metaTitle: formData.metaTitle,
           metaDescription: formData.metaDescription,
+          focusKeyword: formData.focusKeyword,
+          schemaData: formData.schemaData,
           heroTitle: formData.heroTitle,
           heroSubtitle: formData.heroSubtitle,
           heroSubtitleLines: formData.heroSubtitleLines,
@@ -313,7 +326,10 @@ export default function EditCoursePage() {
           pathSalariesDescription: formData.pathSalariesDescription,
           selectedCategory: formData.selectedCategory,
           roles: formData.roles,
-          selectedPathRoles: formData.selectedPathRoles
+          selectedPathRoles: formData.selectedPathRoles,
+          ogImage: formData.ogImage,
+          ogImageAlt: formData.ogImageAlt,
+          ogImageTitle: formData.ogImageTitle,
         }),
       });
 
@@ -338,6 +354,7 @@ export default function EditCoursePage() {
 
   const tabs = [
     { id: "basic", label: "Basic Info", icon: FileText },
+    { id: "seo", label: "SEO Details", icon: Globe },
     { id: "hero", label: "Hero Section", icon: Layout },
     { id: "overview", label: "Overview", icon: List },
     { id: "curriculum", label: "Curriculum", icon: BookOpen },
@@ -405,6 +422,7 @@ export default function EditCoursePage() {
 
         <div className="flex-1 min-h-[500px]">
           {activeTab === "basic" && <BasicInfoTab formData={formData} setFormData={setFormData} setError={setError} />}
+          {activeTab === "seo" && <SeoTab formData={formData} setFormData={setFormData} />}
           {activeTab === "hero" && <HeroSectionTab formData={formData} setFormData={setFormData} />}
           {activeTab === "overview" && <OverviewTab formData={formData} setFormData={setFormData} />}
           {activeTab === "curriculum" && <CurriculumTab formData={formData} setFormData={setFormData} />}

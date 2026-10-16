@@ -136,7 +136,7 @@ export default function InquiryForm() {
       <div className="bg-primary text-white p-5 flex items-center justify-between">
         <div>
           <p className="text-[13px] font-medium text-white/90 mb-1">Get Free Career Guidance</p>
-          <p className="text-2xl lg:text-3xl font-bold text-white tracking-tight">+91 8929199704</p>
+          <p className="text-2xl lg:text-3xl font-bold text-white tracking-tight">+91 <span className="ml-2">892-919-9704</span></p>
         </div>
         <PhoneCall className="w-8 h-8 text-white opacity-90" strokeWidth={2} />
       </div>
