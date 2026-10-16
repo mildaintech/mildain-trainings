@@ -24,11 +24,11 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const { id } = await params;
     const body = await request.json();
     
-    const updatedCourse = await Course.findByIdAndUpdate(
-      id, 
-      { $set: body }, 
-      { new: true, runValidators: true }
-    );
+const updatedCourse = await Course.findByIdAndUpdate(
+  id, 
+  { $set: body }, 
+  { returnDocument: 'after', runValidators: true }
+);
     
     if (!updatedCourse) {
       return NextResponse.json({ error: "Course not found" }, { status: 404 });
