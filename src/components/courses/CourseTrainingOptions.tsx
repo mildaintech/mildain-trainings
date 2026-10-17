@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, User, Mail, Phone, ArrowLeft, CheckCircle } from 'lucide-react';
+import PayPalCheckout from "@/components/payment/PayPalCheckout";
 
 interface PriceDetails {
   symbol: string;
@@ -11,46 +12,33 @@ interface PriceDetails {
 
 export default function CourseTrainingOptions({ course, priceDetails }: { course?: any, priceDetails?: PriceDetails }) {
   
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [checkoutStep, setCheckoutStep] = useState<1 | 2 | 3>(1);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
   const originalAmount = priceDetails ? Math.ceil(priceDetails.amount * 1.2) : 0;
   const originalPriceFormatted = priceDetails ? `${priceDetails.symbol}${originalAmount}` : '';
   const heading = course?.trainingOptionsHeading;
   const subHeading = course?.trainingOptionsSubHeading;
-  const card1Image = course?.trainingCard1Image ;
-  const card1ImageAlt = course?.trainingCard1ImageAlt ;
+  const card1Image = course?.trainingCard1Image;
+  const card1ImageAlt = course?.trainingCard1ImageAlt;
   const card1ImageTitle = course?.trainingCard1ImageTitle;
   const card1Title = course?.trainingCard1Title;
   const card1Description = course?.trainingCard1Description;
   const badgeText = course?.badge;
 
-  const handlePayment = async () => {
-    try {
-      setIsProcessing(true);
-      
-      const response = await fetch('/api/ccavenue/initiate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: priceDetails?.amount || 1,
-          studentName: "Test Student", 
-          email: "test@mildaintrainings.com",
-          contactNumber: "9999999999"
-        }),
-      });
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-      const html = await response.text();
-      
-      const newDoc = document.open("text/html", "replace");
-      newDoc.write(html);
-      newDoc.close();
-      
-    } catch (error) {
-      console.error(error);
-      setIsProcessing(false);
+  const handleContinueToPayment = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (formData.name && formData.email && formData.phone) {
+      setCheckoutStep(3);
     }
+  };
+
+const handlePayPalSuccess = () => {
+    window.location.href = `/payment-success?course=${course?.slug}`;
   };
 
   return (
@@ -59,7 +47,7 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
         
         <div className="mb-10 text-center lg:text-left">
           <h2 className="text-[32px] md:text-[40px] font-extrabold text-slate-900 mb-2">
-            Start Your <span className="text-[#10b981]">{course?.trainingOptionsHeading }</span> Journey Today
+            Start Your <span className="text-[#10b981]">{heading}</span> Journey Today
           </h2>
           <p className="text-slate-600 text-[15px] md:text-[16px] font-medium">
             {subHeading}
@@ -69,17 +57,15 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
           
           <div className="bg-[#f0f6ff] rounded-2xl overflow-hidden border border-blue-100 flex flex-col">
-            <div className="relative h-[240px] w-full overflow-hidden">
-              
-              {card1Image ? (
+            <div className="relative h-[240px] w-full overflow-hidden bg-slate-100">
+              {card1Image && (
                 <img 
                   src={card1Image} 
                   alt={card1ImageAlt} 
                   title={card1ImageTitle}
                   className="w-full h-full object-cover"
                 />
-              ) : null}
-
+              )}
               {badgeText && (
                 <div className="absolute bottom-4 right-4 bg-[#10b981] text-white text-[12px] font-bold px-3 py-1 rounded-full tracking-wide uppercase">
                   {badgeText}
@@ -103,24 +89,103 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
                   <div className="flex items-baseline gap-2">
                     <span className="text-[32px] font-extrabold text-slate-900">{priceDetails?.formatted || '$0'}</span>
                   </div>
-                  <span className="text-[12px] font-bold text-[#10b981] bg-[#10b981]/10 px-2.5 py-1 rounded-sm">
-                    All Inclusive
+                  <span className="text-[12px] font-bold text-[#10b981] bg-[#10b981]/10 px-2.5 py-1 rounded-sm flex items-center gap-1">
+                    <CheckCircle size={14} /> All Inclusive
                   </span>
                 </div>
               </div>
               
               <div className="mt-auto">
-                <button 
-                  onClick={handlePayment}
-                  disabled={isProcessing}
-                  className="w-full bg-[#047857] hover:bg-[#065f46] disabled:bg-[#047857]/70 text-white font-bold py-3.5 rounded-lg transition-colors mb-3"
-                >
-                  {isProcessing ? 'Redirecting to Payment...' : 'Enroll Instantly'}
-                </button>
-                <div className="flex items-center justify-center gap-1.5 text-[12px] text-slate-500">
-                  <ShieldCheck size={14} className="text-blue-500" />
-                  <span>Secure checkout via CCAvenue</span>
-                </div>
+                {checkoutStep === 1 && (
+                  <button 
+                    onClick={() => setCheckoutStep(2)}
+                    className="w-full bg-[#047857] hover:bg-[#065f46] text-white font-bold py-3.5 rounded-lg transition-colors mb-3 flex items-center justify-center gap-2"
+                  >
+                    Enroll Instantly
+                  </button>
+                )}
+
+                {checkoutStep === 2 && (
+                  <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm animate-in fade-in duration-300">
+                    <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-3">
+                      <button onClick={() => setCheckoutStep(1)} className="text-slate-400 hover:text-slate-700">
+                        <ArrowLeft size={18} />
+                      </button>
+                      <h4 className="font-bold text-slate-800">Learner Details</h4>
+                    </div>
+                    
+                    <form onSubmit={handleContinueToPayment} className="space-y-4">
+                      <div className="relative">
+                        <span className="absolute left-3 top-2.5 text-slate-400"><User size={16} /></span>
+                        <input 
+                          type="text" 
+                          name="name"
+                          required
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          placeholder="Full Name" 
+                          className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-md text-[14px] outline-none focus:border-[#10b981]"
+                        />
+                      </div>
+                      <div className="relative">
+                        <span className="absolute left-3 top-2.5 text-slate-400"><Mail size={16} /></span>
+                        <input 
+                          type="email" 
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          placeholder="Email Address" 
+                          className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-md text-[14px] outline-none focus:border-[#10b981]"
+                        />
+                      </div>
+                      <div className="relative">
+                        <span className="absolute left-3 top-2.5 text-slate-400"><Phone size={16} /></span>
+                        <input 
+                          type="tel" 
+                          name="phone"
+                          required
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          placeholder="Phone Number" 
+                          className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-md text-[14px] outline-none focus:border-[#10b981]"
+                        />
+                      </div>
+                      <button 
+                        type="submit"
+                        className="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-2.5 rounded-md transition-colors mt-2"
+                      >
+                        Proceed to Payment
+                      </button>
+                    </form>
+                  </div>
+                )}
+
+                {checkoutStep === 3 && (
+                  <div className="animate-in fade-in duration-300 bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                    <div className="flex items-center gap-3 mb-5 border-b border-slate-100 pb-3">
+                      <button onClick={() => setCheckoutStep(2)} className="text-slate-400 hover:text-slate-700">
+                        <ArrowLeft size={18} />
+                      </button>
+                      <div>
+                        <h4 className="font-bold text-slate-800">Complete Payment</h4>
+                      </div>
+                    </div>
+                    <PayPalCheckout 
+                      amount={priceDetails?.amount || 0} 
+                      courseId={course?._id || ""} 
+                      guestEmail={formData.email}
+                      onSuccess={handlePayPalSuccess} 
+                    />
+                  </div>
+                )}
+
+                {checkoutStep === 1 && (
+                  <div className="flex items-center justify-center gap-1.5 text-[12px] text-slate-500">
+                    <ShieldCheck size={14} className="text-blue-500" />
+                    <span>Secure checkout via PayPal</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
