@@ -7,10 +7,11 @@ interface PayPalCheckoutProps {
   amount: number;
   courseId: string;
   guestEmail: string;
+  guestName: string;
   onSuccess: () => void;
 }
 
-export default function PayPalCheckout({ amount, courseId, guestEmail, onSuccess }: PayPalCheckoutProps) {
+export default function PayPalCheckout({ amount, courseId, guestEmail, guestName, onSuccess }: PayPalCheckoutProps) {
   const [error, setError] = useState("");
 
   return (
@@ -33,7 +34,7 @@ export default function PayPalCheckout({ amount, courseId, guestEmail, onSuccess
                     currency_code: "USD",
                     value: amount.toString(),
                   },
-                  custom_id: `${guestEmail}___${courseId}`,
+                  custom_id: `${guestEmail}___${courseId}___${guestName.replace(/ /g, "_")}`,
                 },
               ],
             });
