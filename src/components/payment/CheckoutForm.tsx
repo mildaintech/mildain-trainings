@@ -1,17 +1,19 @@
 "use client";
 
 import React, { useState } from "react";
-import { CheckCircle2, ShieldCheck, Lock, Tag } from "lucide-react";
+import { CheckCircle2, ShieldCheck, Lock, Tag, CreditCard } from "lucide-react";
 import PayPalCheckout from "@/components/payment/PayPalCheckout";
 import Image from "next/image";
 
-export default function CheckoutForm({ course }: { course: any }) {
+export default function CheckoutForm({ course, isIndia }: { course: any, isIndia: boolean }) {
   const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
   const [promoCode, setPromoCode] = useState("");
   const [isPromoApplied, setIsPromoApplied] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const baseAmount = course.usdPrice || 0;
+  const baseAmount = isIndia ? (course.inrPrice || 0) : (course.usdPrice || 0);
+  const symbol = isIndia ? '₹' : '$';
   const originalAmount = Math.ceil(baseAmount * 1.2);
   
   const discountAmount = isPromoApplied ? Math.floor(baseAmount * 0.1) : 0;
@@ -27,6 +29,32 @@ export default function CheckoutForm({ course }: { course: any }) {
   const handleApplyPromo = () => {
     if (promoCode.trim().length > 3) {
       setIsPromoApplied(true);
+    }
+  };
+
+  const handleCCAvenuePayment = async () => {
+    try {
+      setIsProcessing(true);
+      const response = await fetch('/api/ccavenue/initiate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: finalAmount,
+          courseId: course._id,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone
+        }),
+      });
+
+      const html = await response.text();
+      const newDoc = document.open("text/html", "replace");
+      newDoc.write(html);
+      newDoc.close();
+    } catch (error) {
+      setIsProcessing(false);
     }
   };
 
@@ -120,21 +148,32 @@ export default function CheckoutForm({ course }: { course: any }) {
                   <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-wider">Pay Now</p>
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-3 text-sm font-bold text-slate-800 bg-[#f0fdf4] p-3.5 border-l-4 border-[#10b981] rounded-r cursor-pointer shadow-sm">
-                      PayPal
+                      {isIndia ? 'CCAvenue' : 'PayPal'}
                     </div>
                   </div>
                 </div>
                 <div className="w-full md:w-3/4">
-                  <p className="text-sm text-gray-700 mb-6 font-medium">You will be charged <strong className="text-lg">${finalAmount}</strong> via your PayPal account.</p>
+                  <p className="text-sm text-gray-700 mb-6 font-medium">You will be charged <strong className="text-lg">{symbol}{finalAmount}</strong> via {isIndia ? 'Secure Payment Gateway' : 'your PayPal account'}.</p>
                   
                   <div className="bg-white p-1 rounded-md">
-                    <PayPalCheckout 
-                      amount={finalAmount} 
-                      courseId={course._id} 
-                      guestEmail={formData.email} 
-                      guestName={formData.name}
-                      onSuccess={() => window.location.href = `/payment-success?course=${course.slug}`} 
-                    />
+                    {isIndia ? (
+                      <button 
+                        onClick={handleCCAvenuePayment}
+                        disabled={isProcessing}
+                        className="w-full bg-[#10b981] hover:bg-[#0d9468] disabled:bg-[#10b981]/70 text-white font-bold py-3.5 px-6 rounded-md text-sm transition-colors shadow-sm flex items-center justify-center gap-2"
+                      >
+                        <CreditCard size={18} />
+                        {isProcessing ? 'Connecting securely...' : `Pay ${symbol}${finalAmount} Now`}
+                      </button>
+                    ) : (
+                      <PayPalCheckout 
+                        amount={finalAmount} 
+                        courseId={course._id} 
+                        guestEmail={formData.email} 
+                        guestName={formData.name}
+                        onSuccess={() => window.location.href = `/payment-success?course=${course.slug}`} 
+                      />
+                    )}
                   </div>
                   
                   <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col items-center gap-2">
@@ -162,23 +201,23 @@ export default function CheckoutForm({ course }: { course: any }) {
               <div className="pt-3 pb-5 border-b border-gray-100 space-y-3">
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-500">Program Fees</span>
-                  <span className="font-bold text-gray-800">${baseAmount}</span>
+                  <span className="font-bold text-gray-800">{symbol}{baseAmount}</span>
                 </div>
                 <div className="flex justify-between items-center text-sm">
                   <span className="text-gray-500">Default Discount</span>
-                  <span className="font-bold text-[#10b981]">-${originalAmount - baseAmount}</span>
+                  <span className="font-bold text-[#10b981]">-{symbol}{originalAmount - baseAmount}</span>
                 </div>
                 {isPromoApplied && (
                   <div className="flex justify-between items-center text-sm bg-[#f0fdf4] p-2 rounded text-[#10b981] font-medium">
                     <span>Coupon Discount</span>
-                    <span>-${discountAmount}</span>
+                    <span>-{symbol}{discountAmount}</span>
                   </div>
                 )}
               </div>
               
               <div className="flex justify-between items-center text-2xl font-black text-slate-900 pt-2">
                 <span>Grand Total</span>
-                <span>${finalAmount}</span>
+                <span>{symbol}{finalAmount}</span>
               </div>
             </div>
           </div>

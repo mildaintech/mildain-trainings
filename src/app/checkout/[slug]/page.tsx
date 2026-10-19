@@ -2,6 +2,7 @@ import { connectToDatabase } from "@/lib/db";
 import Course from "@/models/Course";
 import { notFound } from "next/navigation";
 import CheckoutForm from "@/components/payment/CheckoutForm";
+import { cookies } from "next/headers";
 
 export default async function CheckoutPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -21,6 +22,10 @@ export default async function CheckoutPage({ params }: { params: Promise<{ slug:
   }
   
   const plainCourse = JSON.parse(JSON.stringify(course));
+
+  const cookieStore = await cookies();
+  const regionCookie = cookieStore.get('userRegion');
+  const isIndia = regionCookie?.value === 'IN' ? true : false;
   
-  return <CheckoutForm course={plainCourse} />;
+  return <CheckoutForm course={plainCourse} isIndia={isIndia} />;
 }
