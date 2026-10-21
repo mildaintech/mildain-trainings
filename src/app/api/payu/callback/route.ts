@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
     if (!merchantSalt) {
       console.error("Missing PAYU_MERCHANT_SALT");
-      return NextResponse.redirect(new URL('/payment-failure?reason=missing_salt', req.url));
+      return NextResponse.redirect(new URL('/payment-failure?reason=missing_salt', req.url), 303);
     }
 
     const isValidHash = verifyPayUHash(dataObj, merchantSalt);
@@ -41,9 +41,7 @@ export async function POST(req: Request) {
           let user = await User.findOne({ email });
 
           if (!user) {
-            // Naya random password generate ho raha hai
             const randomPassword = `Mildain@${Math.floor(1000 + Math.random() * 9000)}`;
-            
             user = await User.create({
               name: name || "Student",
               email: email,
@@ -67,17 +65,17 @@ export async function POST(req: Request) {
           }
         }
 
-        return NextResponse.redirect(new URL(`/payment-success?course=${courseSlug}`, req.url));
+        return NextResponse.redirect(new URL(`/payment-success?course=${courseSlug}`, req.url), 303);
         
       } catch (dbError) {
         console.error("Database error:", dbError);
-        return NextResponse.redirect(new URL('/payment-failure?reason=db_error', req.url));
+        return NextResponse.redirect(new URL('/payment-failure?reason=db_error', req.url), 303);
       }
     } else {
-      return NextResponse.redirect(new URL('/payment-failure?reason=status_failed', req.url));
+      return NextResponse.redirect(new URL('/payment-failure?reason=status_failed', req.url), 303);
     }
   } catch (error) {
     console.error("Critical Error:", error);
-    return NextResponse.redirect(new URL('/payment-failure?reason=critical_error', req.url));
+    return NextResponse.redirect(new URL('/payment-failure?reason=critical_error', req.url), 303);
   }
 }
