@@ -111,7 +111,7 @@ export default function LoginPage() {
               Don't have an account? <Link href="/register" className="text-primary hover:underline">Sign Up</Link>
             </p>
             <p className="text-[12px] text-gray-400 pt-4 border-t border-gray-100">
-              ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy" className="hover:underline text-primary">Privacy Policy</Link>
+              ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline text-primary">Privacy Policy</Link>
             </p>
           </div>
         </div>

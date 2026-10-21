@@ -298,7 +298,7 @@ export default function TermsConditions() {
             We process personal data in line with our existing policies and regulatory requirements. Refer to
             our Privacy Policy to learn how we gather your information, use it, and ensure its safety.
           </p>
-          <Link href="/privacy" className="inline-flex items-center justify-center px-6 py-2.5 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors shadow-sm mt-2 mb-4">
+          <Link href="/privacy-policy" className="inline-flex items-center justify-center px-6 py-2.5 bg-slate-900 text-white font-medium rounded-lg hover:bg-slate-800 transition-colors shadow-sm mt-2 mb-4">
             Read our Privacy Policy here
           </Link>
           <p className="mt-4">

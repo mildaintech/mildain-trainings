@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     const merchant_id = process.env.CCAVENUE_MERCHANT_ID;
     const access_code = process.env.CCAVENUE_ACCESS_CODE;
     const working_key = process.env.CCAVENUE_WORKING_KEY;
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:9002';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://mildaintrainings.com';
 
     if (!merchant_id || !access_code || !working_key) {
       return NextResponse.json({ error: 'CCAvenue credentials missing' }, { status: 500 });
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
         <head><title>Redirecting to Payment...</title></head>
         <body>
           <center><h2>Please wait, redirecting to secure payment gateway...</h2></center>
-          <form id="nonseamless" method="post" name="redirect" action="https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
+          <form id="nonseamless" method="post" name="redirect" action="https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction">
             <input type="hidden" id="encRequest" name="encRequest" value="${encryptedData}">
             <input type="hidden" name="access_code" id="access_code" value="${access_code}">
           </form>

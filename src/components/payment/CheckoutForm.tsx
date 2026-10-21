@@ -32,10 +32,10 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
     }
   };
 
-  const handleCCAvenuePayment = async () => {
+  const handlePayUPayment = async () => {
     try {
       setIsProcessing(true);
-      const response = await fetch('/api/ccavenue/initiate', {
+      const response = await fetch('/api/payu/initiate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -148,7 +148,7 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
                   <p className="text-xs font-bold text-gray-400 mb-4 uppercase tracking-wider">Pay Now</p>
                   <div className="flex flex-col gap-3">
                     <div className="flex items-center gap-3 text-sm font-bold text-slate-800 bg-[#f0fdf4] p-3.5 border-l-4 border-[#10b981] rounded-r cursor-pointer shadow-sm">
-                      {isIndia ? 'CCAvenue' : 'PayPal'}
+                      {isIndia ? 'PayU' : 'PayPal'}
                     </div>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
                   <div className="bg-white p-1 rounded-md">
                     {isIndia ? (
                       <button 
-                        onClick={handleCCAvenuePayment}
+                        onClick={handlePayUPayment}
                         disabled={isProcessing}
                         className="w-full bg-[#10b981] hover:bg-[#0d9468] disabled:bg-[#10b981]/70 text-white font-bold py-3.5 px-6 rounded-md text-sm transition-colors shadow-sm flex items-center justify-center gap-2"
                       >

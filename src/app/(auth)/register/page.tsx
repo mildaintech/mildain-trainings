@@ -230,7 +230,7 @@ export default function RegisterPage() {
                Already have an account? Sign in here!
             </Link>
             <p className="text-[13px] text-gray-500 mt-6">
-              © 2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy" className="hover:underline text-primary">Privacy Policy</Link>
+              © 2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline text-primary">Privacy Policy</Link>
             </p>
           </div>
         </div>
