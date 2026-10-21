@@ -14,14 +14,16 @@ export async function POST(req: Request) {
       dataObj[key] = value.toString();
     });
 
+    console.log("PayU Callback Data:", dataObj);
+
     const merchantSalt = process.env.PAYU_MERCHANT_SALT;
 
     if (!merchantSalt) {
-      return NextResponse.redirect(new URL('/payment-failure', req.url));
+      console.error("Missing PAYU_MERCHANT_SALT");
+      return NextResponse.redirect(new URL('/payment-failure?reason=missing_salt', req.url));
     }
 
     const isValidHash = verifyPayUHash(dataObj, merchantSalt);
-
     const orderStatus = dataObj['status'];
     const courseId = dataObj['productinfo'];
     const email = dataObj['email'];
@@ -29,38 +31,49 @@ export async function POST(req: Request) {
     const amount = dataObj['amount'];
     const transactionId = dataObj['txnid'];
 
-    await connectToDatabase();
-    const course = await Course.findById(courseId);
-    const courseSlug = course ? course.slug : '';
+    if (orderStatus === 'success') {
+      try {
+        await connectToDatabase();
+        const course = await Course.findById(courseId);
+        const courseSlug = course ? course.slug : '';
 
-    if (orderStatus === 'success' && isValidHash) {
-      if (email && courseId) {
-        let user = await User.findOne({ email });
+        if (email && courseId) {
+          let user = await User.findOne({ email });
 
-        if (!user) {
-          user = await User.create({
-            name: name || "Student",
-            email: email,
-            purchasedCourses: [courseId]
-          });
-        } else {
-          await User.findByIdAndUpdate(user._id, {
-            $addToSet: { purchasedCourses: courseId }
-          });
+          if (!user) {
+            user = await User.create({
+              name: name || "Student",
+              email: email,
+              purchasedCourses: [courseId]
+            });
+          } else {
+            await User.findByIdAndUpdate(user._id, {
+              $addToSet: { purchasedCourses: courseId }
+            });
+          }
+
+          if (course) {
+            const amountString = `INR ${amount}`;
+            try {
+              await sendCoursePurchaseEmail(email, name || "Student", course.title, transactionId, amountString);
+              await sendAdminPurchaseAlert(name || "Student", email, course.title, transactionId, amountString);
+            } catch (mailErr) {
+              console.error("Mail sending failed:", mailErr);
+            }
+          }
         }
 
-        if (course) {
-          const amountString = `INR ${amount}`;
-          await sendCoursePurchaseEmail(email, name || "Student", course.title, transactionId, amountString);
-          await sendAdminPurchaseAlert(name || "Student", email, course.title, transactionId, amountString);
-        }
+        return NextResponse.redirect(new URL(`/payment-success?course=${courseSlug}`, req.url));
+        
+      } catch (dbError) {
+        console.error("Database error:", dbError);
+        return NextResponse.redirect(new URL('/payment-failure?reason=db_error', req.url));
       }
-
-      return NextResponse.redirect(new URL(`/payment-success?course=${courseSlug}`, req.url));
     } else {
-      return NextResponse.redirect(new URL('/payment-failure', req.url));
+      return NextResponse.redirect(new URL('/payment-failure?reason=status_failed', req.url));
     }
   } catch (error) {
-    return NextResponse.redirect(new URL('/payment-failure', req.url));
+    console.error("Critical Error:", error);
+    return NextResponse.redirect(new URL('/payment-failure?reason=critical_error', req.url));
   }
 }
