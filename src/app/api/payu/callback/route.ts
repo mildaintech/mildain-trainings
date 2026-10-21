@@ -41,9 +41,13 @@ export async function POST(req: Request) {
           let user = await User.findOne({ email });
 
           if (!user) {
+            // Naya random password generate ho raha hai
+            const randomPassword = `Mildain@${Math.floor(1000 + Math.random() * 9000)}`;
+            
             user = await User.create({
               name: name || "Student",
               email: email,
+              password: randomPassword,
               purchasedCourses: [courseId]
             });
           } else {
