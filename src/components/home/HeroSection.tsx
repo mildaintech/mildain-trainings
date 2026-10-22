@@ -19,7 +19,7 @@ const slides = [
     btn2: "Enroll Now",
     statsNum: "150+",
     statsText: "Courses",
-    image: "/images/home/hero.png",
+    image: "/images/home/home-page-slide-1.png",
   },
   {
     id: 1,
@@ -34,7 +34,7 @@ const slides = [
     btn2: "",
     statsNum: "",
     statsText: "",
-    image: "/images/home/hero1.png",
+    image: "/images/home/home-page-slide-2.png",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ const slides = [
     btn2: "",
     statsNum: "",
     statsText: "",
-    image: "/images/home/hero2.png",
+    image: "/images/home/home-page-slide-3.png",
   }
 ];
 
@@ -85,40 +85,14 @@ export default function HeroSection() {
 
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 items-center w-full transition-opacity duration-300 ease-in-out ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}>
 
-          <div className="relative flex justify-center items-end w-full min-h-[280px] sm:min-h-[360px] lg:min-h-[440px] order-1 lg:order-2 pt-4 lg:pt-0">
-
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] lg:w-[340px] lg:h-[340px] xl:w-[380px] xl:h-[380px] rounded-full bg-primary/10 -z-20"></div>
-
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[160px] h-[160px] sm:w-[200px] sm:h-[200px] lg:w-[240px] lg:h-[240px] xl:w-[280px] xl:h-[280px] rounded-full bg-primary/90 -z-10"></div>
-
-            <svg className="absolute top-[10%] right-[15%] sm:top-[15%] sm:right-[20%] w-5 h-5 sm:w-7 sm:h-7 text-foreground opacity-30 lg:opacity-50" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round">
-              <path d="M20,80 L35,65" />
-              <path d="M50,80 L50,55" />
-              <path d="M80,80 L65,65" />
-            </svg>
-
-            <div className="relative w-full max-w-[220px] sm:max-w-[280px] lg:max-w-[340px] xl:max-w-[380px] z-10 flex justify-center">
+          <div className="relative flex justify-center items-center w-full min-h-[280px] sm:min-h-[360px] lg:min-h-[440px] order-1 lg:order-2 pt-4 lg:pt-0">
+            <div className="relative w-full max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] xl:max-w-[600px] z-10 flex justify-center">
               <img
                 src={slides[current].image}
                 alt="Student"
                 className="w-full h-auto object-contain drop-shadow-xl"
               />
-              <div className="absolute bottom-[-2px] left-0 w-full h-[100px] sm:h-[130px] bg-gradient-to-t from-background via-background/80 to-transparent z-20 pointer-events-none lg:hidden"></div>
             </div>
-
-            <div className="absolute top-[15%] sm:top-[20%] left-6 sm:left-12 lg:left-0 z-30 flex flex-col items-center">
-              <div className="bg-primary rounded-full w-[54px] h-[54px] sm:w-[64px] sm:h-[64px] lg:w-[76px] lg:h-[76px] flex flex-col items-center justify-center shadow-lg border-[3px] border-background text-primary-foreground">
-                <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 lg:w-5 lg:h-5 mb-0.5" strokeWidth={2.5} />
-                <span className="text-[9px] sm:text-[11px] lg:text-[13px] font-black leading-none mt-1 tracking-tight">{slides[current].statsNum}</span>
-                <span className="text-[6px] sm:text-[7px] lg:text-[8px] font-medium leading-none mt-0.5 opacity-95">{slides[current].statsText}</span>
-              </div>
-
-              <svg width="24" height="10" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-1 w-5 sm:w-7 h-auto">
-                <path d="M2 6C12 1.5 28 1.5 38 6" stroke="currentColor" className="text-primary" strokeWidth="2.5" strokeLinecap="round" />
-                <path d="M8 12C14 9 26 9 32 12" stroke="currentColor" className="text-primary" strokeWidth="2.5" strokeLinecap="round" />
-              </svg>
-            </div>
-
           </div>
 
           <div className="flex flex-col justify-center items-start text-left w-full max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1 relative z-30 pb-10 lg:pb-0 -mt-10 sm:-mt-12 lg:mt-0 px-2 sm:px-0">
@@ -140,7 +114,7 @@ export default function HeroSection() {
             </ul>
 
             <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
-              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground  text-[18px] px-6 h-[44px] sm:h-[48px] rounded-radius shadow-sm transition-all cursor-pointer w-full sm:w-auto">
+              <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground text-[18px] px-6 h-[44px] sm:h-[48px] rounded-radius shadow-sm transition-all cursor-pointer w-full sm:w-auto">
                 <Link href={slides[current].btn1Link}>{slides[current].btn1}</Link>
               </Button>
 

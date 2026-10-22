@@ -111,11 +111,11 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col">
             <h3 className="text-white font-bold text-[15px] mb-6">Company</h3>
             <ul className="flex flex-col gap-3.5">
-              <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Corporate</Link></li>
+              <li><Link href="corporate" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Corporate</Link></li>
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Newsletters</Link></li>
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Blog</Link></li>
               <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Career</Link></li>
-              <li><Link href="#" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Contact Us</Link></li>
+              <li><Link href="contact-us" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Contact Us</Link></li>
               <li><Link href="terms-and-conditions" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Terms & Conditions</Link></li>
               <li><Link href="privacy-policy" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Privacy Policy</Link></li>
               <li><Link href="refund-privacy-policy" className="text-[#8896AB] text-[14px] hover:text-[#0f9d58] transition-colors">Return Policy</Link></li>
