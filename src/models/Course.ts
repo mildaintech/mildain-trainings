@@ -5,6 +5,7 @@ const courseSchema = new mongoose.Schema(
     title: { type: String, required: true },
     slug: { type: String, required: true, unique: true },
     category: { type: String, required: true },
+    subcategory: { type: String, required: true },
     inrPrice: { type: Number, required: true },
     usdPrice: { type: Number, required: true },
     provider: { type: String },

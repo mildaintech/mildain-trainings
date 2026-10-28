@@ -98,7 +98,7 @@ export default function Navbar() {
     fetchCourses();
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await fetch("/api/auth/profile");
@@ -137,7 +137,7 @@ useEffect(() => {
       }`}
     >
       
-      <div className="w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between bg-background z-50">
+      <div className="w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between bg-secondary/5 z-50">
         
         <div className="flex items-center gap-3 sm:gap-5 lg:gap-4 xl:gap-5 h-full shrink-0">
           <button 
@@ -163,7 +163,7 @@ useEffect(() => {
             onMouseEnter={() => setIsMegaMenuOpen(true)}
             onMouseLeave={() => setIsMegaMenuOpen(false)}
           >
-            <button className="flex items-center gap-1.5 sm:gap-2 bg-primary hover:bg-primary/90 text-primary-foreground px-4 lg:px-5 h-[38px] lg:h-[42px] rounded-sm font-medium transition-colors whitespace-nowrap shrink-0">
+            <button className="flex items-center gap-1.5 sm:gap-2 bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground px-4 lg:px-5 h-[38px] lg:h-[42px] rounded-sm font-medium transition-all whitespace-nowrap shrink-0">
               <LayoutGrid size={16} className="w-[16px] h-[16px]" />
               <span className="text-[13px] lg:text-[14px]">All Courses</span>
             </button>
@@ -184,7 +184,7 @@ useEffect(() => {
           <div className="lg:hidden flex items-center h-full">
             <button 
               onClick={() => setIsMegaMenuOpen(!isMegaMenuOpen)}
-              className="flex items-center gap-1.5 bg-primary hover:bg-primary/90 text-primary-foreground px-3 sm:px-4 h-[36px] sm:h-[40px] rounded-sm font-medium transition-colors whitespace-nowrap shrink-0"
+              className="flex items-center gap-1.5 bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground px-3 sm:px-4 h-[36px] sm:h-[40px] rounded-sm font-medium transition-all whitespace-nowrap shrink-0"
             >
               <LayoutGrid size={14} />
               <span className="text-[12px] sm:text-[13px]">All Courses</span>
@@ -207,12 +207,12 @@ useEffect(() => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3 xl:gap-4 h-full">
-            <Link href="/corporate" className="flex items-center justify-center bg-primary hover:bg-primary/90 text-primary-foreground px-4 xl:px-6 h-[38px] xl:h-[42px] rounded-sm font-bold text-[13px] xl:text-[14px] transition-colors whitespace-nowrap shrink-0">
+            <Link href="/corporate" className="flex items-center justify-center bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground px-4 xl:px-6 h-[38px] xl:h-[42px] rounded-sm font-bold text-[13px] xl:text-[14px] transition-all whitespace-nowrap shrink-0">
               Corporate
             </Link>
 
             {!user ? (
-              <Button asChild className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary font-bold text-[13px] xl:text-[14px] rounded-sm px-5 xl:px-7 h-[38px] xl:h-[42px] transition-all shadow-none shrink-0">
+              <Button asChild className="bg-transparent hover:bg-primary/10 text-primary border-[1.5px] border-primary font-bold text-[13px] xl:text-[14px] rounded-sm px-5 xl:px-7 h-[38px] xl:h-[42px] transition-all shadow-none shrink-0">
                 <Link href="/login">Login</Link>
               </Button>
             ) : (
@@ -381,12 +381,12 @@ useEffect(() => {
           </div>
           
           <div className="flex flex-col gap-3 mt-2">
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-[14px] rounded-lg w-full h-[42px]">
+            <Button asChild className="bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground font-bold text-[14px] rounded-lg w-full h-[42px]">
               <Link href="/corporate">Corporate</Link>
             </Button>
 
             {!user ? (
-              <Button asChild className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary font-bold text-[14px] rounded-lg w-full h-[42px]">
+              <Button asChild className="bg-transparent hover:bg-primary/10 text-primary border-[1.5px] border-primary font-bold text-[14px] rounded-lg w-full h-[42px]">
                 <Link href="/login">Login</Link>
               </Button>
             ) : (

@@ -15,10 +15,10 @@ const logos = [
 
 export default function CorporatePartnerLogos() {
   return (
-    <section className="pt-10 md:pt-12 pb-4 md:pb-6 bg-white overflow-hidden border-t border-border">
+    <section className="pt-10 md:pt-12 pb-4 md:pb-6 bg-background overflow-hidden border-t border-border">
       
       <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 md:mb-10">
-        <h2 className="text-center text-xl md:text-2xl font-semibold text-foreground tracking-wide">
+        <h2 className="text-center text-2xl md:text-3xl font-semibold text-foreground tracking-wide">
           Trusted by Global Enterprises and Industry Leaders
         </h2>
       </div>
@@ -38,7 +38,7 @@ export default function CorporatePartnerLogos() {
         }
       `}</style>
 
-      <div className="relative flex overflow-x-hidden w-full before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-12 md:before:w-40 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-12 md:after:w-40 after:bg-gradient-to-l after:from-white after:to-transparent">
+      <div className="relative flex overflow-x-hidden w-full before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-12 md:before:w-40 before:bg-gradient-to-r before:from-background before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-12 md:after:w-40 after:bg-gradient-to-l after:from-background after:to-transparent">
         <div className="scrolling-track items-center">
           {[...logos, ...logos].map((logo, index) => (
             <div 

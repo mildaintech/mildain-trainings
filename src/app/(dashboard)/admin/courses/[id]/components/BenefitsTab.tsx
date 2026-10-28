@@ -1,8 +1,10 @@
 "use client";
 
-import { Plus, X, Upload } from "lucide-react";
+import React, { useState } from "react";
+import { Plus, X, Upload, AlertCircle } from "lucide-react";
 
 export default function BenefitsTab({ formData, setFormData }: { formData: any, setFormData: any }) {
+  const [error, setError] = useState("");
 
   const addTab = () => {
     setFormData({
@@ -49,11 +51,19 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
     const updatedTabs = [...(formData.benefitsTabs || [])];
     updatedTabs[tabIndex].companies.splice(compIndex, 1);
     setFormData({ ...formData, benefitsTabs: updatedTabs });
+    setError(""); // Clear error on removal
   };
 
   const handleCompanyLogo = (e: React.ChangeEvent<HTMLInputElement>, tIndex: number, cIndex: number) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Limit file size to 1MB to prevent Vercel Payload Too Large error
+      if (file.size > 1 * 1024 * 1024) {
+        setError(`Logo for Company ${cIndex + 1} must be less than 1MB`);
+        return;
+      }
+      
+      setError(""); // Clear error if size is valid
       const reader = new FileReader();
       reader.onloadend = () => {
         updateCompany(tIndex, cIndex, "logo", reader.result as string);
@@ -65,6 +75,15 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
   return (
     <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
       
+      {/* Global Error Display for Image Uploads */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
+          <AlertCircle size={16} />
+          {error}
+          <button onClick={() => setError("")} className="ml-auto"><X size={14}/></button>
+        </div>
+      )}
+
       <div className="border-b border-gray-100 pb-6">
         <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-4">Header Settings</h2>
         <div className="space-y-4">
@@ -163,7 +182,7 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
                            ) : (
                               <div className="relative border border-dashed border-gray-300 px-3 py-2 bg-white flex items-center justify-center cursor-pointer hover:bg-gray-50 text-[11px] font-bold text-gray-500">
                                 <input type="file" accept="image/*" onChange={(e) => handleCompanyLogo(e, tIndex, cIndex)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                                <Upload size={14} className="mr-1.5" /> Upload Logo
+                                <Upload size={14} className="mr-1.5" /> Upload Logo (Max 1MB)
                               </div>
                            )}
                         </div>
@@ -177,6 +196,9 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
           ))}
         </div>
       </div>
+      <h1 className="bg-background/5 text-stone-700 text-3xl sm-text-4xl font-bold py-16 mt-6 width-[1400] text-justify ">
+       CISA
+      </h1>
     </div>
   );
 }

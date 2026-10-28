@@ -43,10 +43,10 @@ export function ScrollButton() {
         >
           <button
             onClick={scrollToTop}
-            className="relative flex h-12 w-12 items-center justify-center rounded-full bg-card shadow-lg transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+            className="relative flex h-12 w-12 md:h-14 md:w-14 items-center justify-center rounded-full bg-background shadow-md border border-border transition-all hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
             aria-label="Scroll to top"
           >
-            <ArrowUp className="h-6 w-6 text-primary" />
+            <ArrowUp className="h-5 w-5 md:h-6 md:w-6 text-primary" />
 
             <svg
               className="absolute inset-0 h-full w-full"
@@ -56,19 +56,19 @@ export function ScrollButton() {
               <circle
                 cx="50"
                 cy="50"
-                r="45"
-                className="stroke-border"
-                strokeWidth="5"
+                r="46"
+                className="stroke-primary/10"
+                strokeWidth="6"
                 fill="transparent"
               />
 
               <motion.circle
                 cx="50"
                 cy="50"
-                r="45"
+                r="46"
                 className="text-primary"
                 stroke="currentColor"
-                strokeWidth="5"
+                strokeWidth="6"
                 fill="transparent"
                 strokeLinecap="round"
                 style={{ pathLength }}

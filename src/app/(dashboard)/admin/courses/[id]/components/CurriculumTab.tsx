@@ -1,215 +1,109 @@
+
 "use client";
 
-import { X, Plus, Upload, FileSpreadsheet } from "lucide-react";
-import dynamic from "next/dynamic";
-import * as XLSX from "xlsx";
-// @ts-ignore
-import "react-quill-new/dist/quill.snow.css";
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false }) as any;
+import { FileText, Download } from "lucide-react";
+import { useState, useEffect } from "react";
 
-export default function CurriculumTab({ formData, setFormData }: { formData: any, setFormData: any }) {
+export default function CurriculumTab({ formData }: { formData: any }) {
+  const [subcategoryData, setSubcategoryData] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      if (file.type !== "application/pdf") {
-        alert("Only PDF files are allowed");
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, [field]: reader.result as string });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleBulkExcelUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (file.size > 15360) {
-      alert("File size 15 KB se choti honi chahiye.");
-      e.target.value = "";
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (evt) => {
-      try {
-        const bstr = evt.target?.result;
-        const wb = XLSX.read(bstr, { type: "binary" });
-        const wsname = wb.SheetNames[0];
-        const ws = wb.Sheets[wsname];
-        
-        const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-
-        const newModules: any[] = [];
-        let currentModule: any = null;
-        let currentContent = "";
-
-        data.forEach((row: any) => {
-          const cellValue = row[0]; 
-          if (cellValue && typeof cellValue === "string") {
-            const text = cellValue.trim();
-            
-            if (/^Module/i.test(text)) {
-              if (currentModule) {
-                currentModule.contentHtml = `<ul>${currentContent}</ul>`;
-                newModules.push(currentModule);
-              }
-              currentModule = { title: text, contentHtml: "" };
-              currentContent = "";
-            } else {
-              if (currentModule) {
-                currentContent += `<li>${text}</li>`;
-              }
-            }
-          }
+  useEffect(() => {
+    if (formData.subcategory) {
+      setLoading(true);
+      fetch(`/api/admin/subcategories`)
+        .then(res => res.json())
+        .then(data => {
+          const subcategories = Array.isArray(data) ? data : (data.data || []);
+          const selectedSub = subcategories.find((s: any) => s.name === formData.subcategory);
+          setSubcategoryData(selectedSub || null);
+          setLoading(false);
+        })
+        .catch(() => {
+          setLoading(false);
         });
+    } else {
+      setSubcategoryData(null);
+    }
+  }, [formData.subcategory]);
 
-        if (currentModule) {
-          currentModule.contentHtml = `<ul>${currentContent}</ul>`;
-          newModules.push(currentModule);
-        }
+  if (!formData.subcategory) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-12 text-center">
+        <FileText size={48} className="mx-auto text-gray-300 mb-4" />
+        <h2 className="text-[16px] font-bold text-gray-900 mb-2">No Subcategory Selected</h2>
+        <p className="text-[13px] text-gray-500 max-w-md mx-auto">
+          Please select a subcategory in the Basic Info tab first. The curriculum syllabus and PDF will automatically be loaded from the selected subcategory.
+        </p>
+      </div>
+    );
+  }
 
-        if (newModules.length > 0) {
-          setFormData({ ...formData, curriculumModules: newModules });
-        } else {
-          alert("Invalid format. Make sure module rows start with the word 'Module'.");
-        }
-      } catch (error) {
-        alert("Error reading Excel file.");
-      }
-    };
-    reader.readAsBinaryString(file);
-    
-    e.target.value = "";
-  };
+  if (loading) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-12 text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
+        <p className="text-[13px] text-gray-500 font-medium">Fetching curriculum data for {formData.subcategory}...</p>
+      </div>
+    );
+  }
 
-  const removePdf = () => {
-    setFormData({ ...formData, curriculumPdf: "" });
-  };
-
-  const addModule = () => {
-    setFormData({
-      ...formData,
-      curriculumModules: [...(formData.curriculumModules || []), { title: "", contentHtml: "" }]
-    });
-  };
-
-  const updateModule = (index: number, field: string, value: string) => {
-    const updatedModules = [...(formData.curriculumModules || [])];
-    updatedModules[index][field] = value;
-    setFormData({ ...formData, curriculumModules: updatedModules });
-  };
-
-  const removeModule = (index: number) => {
-    const updatedModules = [...(formData.curriculumModules || [])];
-    updatedModules.splice(index, 1);
-    setFormData({ ...formData, curriculumModules: updatedModules });
-  };
+  if (!subcategoryData) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-12 text-center text-red-600">
+        <p className="text-[13px] font-bold">Could not load curriculum data for the selected subcategory.</p>
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
-      
-      <div className="border-b border-gray-100 pb-6">
+    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8 relative">
+      <div className="absolute top-0 right-0 bg-blue-50 text-blue-700 px-4 py-1.5 text-[11px] font-bold rounded-bl-sm border-b border-l border-blue-100 uppercase tracking-wide">
+        Auto-Synced (Read Only)
+      </div>
+
+      <div className="border-b border-gray-100 pb-6 pt-4">
         <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-4">
           Curriculum Header Setup
         </h2>
         <div className="space-y-4">
           <div>
             <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Section Title</label>
-            <input 
-              type="text" 
-              value={formData.curriculumTitle || ""}
-              onChange={(e) => setFormData({ ...formData, curriculumTitle: e.target.value })}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
-            />
+            <div className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-sm text-[13px] text-gray-700">
+              {subcategoryData.curriculumTitle || <span className="text-gray-400 italic">Not provided</span>}
+            </div>
           </div>
           <div>
             <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Section Subtitle / Description</label>
-            <input 
-              type="text" 
-              value={formData.curriculumDescription || ""}
-              onChange={(e) => setFormData({ ...formData, curriculumDescription: e.target.value })}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
-            />
+            <div className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-sm text-[13px] text-gray-700">
+              {subcategoryData.curriculumDescription || <span className="text-gray-400 italic">Not provided</span>}
+            </div>
           </div>
         </div>
       </div>
 
       <div className="border-b border-gray-100 pb-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-          <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider">
-            Curriculum Modules
-          </h2>
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <input 
-                type="file" 
-                accept=".xlsx, .xls, .csv"
-                onChange={handleBulkExcelUpload}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                title="Upload Excel to auto-generate modules"
-              />
-              <button
-                type="button"
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-green-600 text-white text-[12px] font-bold rounded-sm hover:bg-green-700 transition-colors pointer-events-none"
-              >
-                <FileSpreadsheet size={14} /> Bulk Upload Excel (Max 15 KB)
-              </button>
-            </div>
-            <button
-              type="button"
-              onClick={addModule}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900 text-white text-[12px] font-bold rounded-sm hover:bg-black transition-colors"
-            >
-              <Plus size={14} /> Add Module Manually
-            </button>
-          </div>
-        </div>
+        <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-4">
+          Curriculum Modules
+        </h2>
 
-        <div className="space-y-6">
-          {(formData.curriculumModules || []).map((module: any, index: number) => (
-            <div key={index} className="border border-gray-200 rounded-sm p-5 bg-gray-50 relative">
-              <button
-                type="button"
-                onClick={() => removeModule(index)}
-                className="absolute top-3 right-3 text-red-500 hover:bg-red-50 p-1.5 rounded-sm transition-colors"
-              >
-                <X size={16} />
-              </button>
-              
-              <div className="space-y-4 pr-8">
-                <div>
-                  <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Module Title</label>
-                  <input
-                    type="text"
-                    value={module.title || ""}
-                    onChange={(e) => updateModule(index, "title", e.target.value)}
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Content Details (Rich Text)</label>
-                  <div className="bg-white">
-                    <ReactQuill 
-                      theme="snow" 
-                      value={module.contentHtml || ""} 
-                      onChange={(val: string) => updateModule(index, "contentHtml", val)} 
-                      className="h-40 mb-10"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-          {(!formData.curriculumModules || formData.curriculumModules.length === 0) && (
+        <div className="space-y-4">
+          {(!subcategoryData.curriculumModules || subcategoryData.curriculumModules.length === 0) ? (
             <div className="text-center p-8 border border-dashed border-gray-300 rounded-sm text-gray-500 text-[13px]">
-              No modules added yet. Click "Add Module Manually" or use "Bulk Upload Excel" to start building your curriculum.
+              No modules exist in the {formData.subcategory} subcategory. Update the subcategory to add modules.
             </div>
+          ) : (
+            subcategoryData.curriculumModules.map((module: any, index: number) => (
+              <div key={index} className="border border-gray-200 rounded-sm overflow-hidden bg-gray-50">
+                <div className="bg-gray-100 px-4 py-3 border-b border-gray-200">
+                  <h3 className="text-[13px] font-bold text-gray-800">
+                    {module.title || `Module ${index + 1}`}
+                  </h3>
+                </div>
+                <div className="p-4 bg-white text-[13px] text-gray-600 prose prose-sm max-w-none"
+                     dangerouslySetInnerHTML={{ __html: module.contentHtml || "No content provided." }} />
+              </div>
+            ))
           )}
         </div>
       </div>
@@ -219,34 +113,26 @@ export default function CurriculumTab({ formData, setFormData }: { formData: any
           Download PDF Upload
         </h2>
         <div className="w-full md:w-1/2">
-          {!formData.curriculumPdf ? (
-            <div className="border border-dashed border-gray-300 rounded-sm p-4 flex flex-col items-center justify-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer relative min-h-[120px]">
-              <input 
-                type="file" 
-                accept=".pdf"
-                onChange={(e) => handleFileUpload(e, 'curriculumPdf')}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-              <Upload size={20} className="text-gray-400 mb-2" />
-              <p className="text-[11px] font-bold text-gray-600">Upload PDF File</p>
+          {!subcategoryData.curriculumPdf ? (
+            <div className="border border-dashed border-gray-300 rounded-sm p-4 flex flex-col items-center justify-center bg-gray-50 text-gray-500 min-h-[100px]">
+              <p className="text-[12px] font-medium">No PDF attached to this subcategory.</p>
             </div>
           ) : (
-            <div className="flex items-center justify-between p-4 border border-gray-200 rounded-sm bg-green-50 text-green-700">
+            <div className="flex items-center justify-between p-4 border border-blue-200 rounded-sm bg-blue-50 text-blue-700">
               <span className="text-[13px] font-bold flex items-center gap-2">
-                PDF Uploaded Successfully
+                <FileText size={16} /> Syllabus PDF Available
               </span>
-              <button 
-                type="button"
-                onClick={removePdf}
-                className="bg-white text-red-600 py-1.5 px-3 rounded-sm hover:bg-red-50 text-[11px] font-bold flex items-center gap-1 shadow-sm border border-red-100"
+              <a 
+                href={subcategoryData.curriculumPdf} 
+                download="syllabus.pdf"
+                className="bg-white text-blue-600 py-1.5 px-3 rounded-sm hover:bg-blue-100 text-[11px] font-bold flex items-center gap-1.5 shadow-sm border border-blue-200"
               >
-                <X size={12} /> Remove
-              </button>
+                <Download size={14} /> Preview
+              </a>
             </div>
           )}
         </div>
       </div>
-
     </div>
   );
 }

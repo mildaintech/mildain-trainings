@@ -1,12 +1,20 @@
 "use client";
 
-import { X, Upload } from "lucide-react";
+import React, { useState } from "react";
+import { X, Upload, AlertCircle } from "lucide-react";
 
 export default function HeroSectionTab({ formData, setFormData }: { formData: any, setFormData: any }) {
+  const [error, setError] = useState("");
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const file = e.target.files?.[0];
     if (file) {
+      if (file.size > 1 * 1024 * 1024) {
+        setError("Image size must be less than 1MB");
+        return;
+      }
+      
+      setError(""); // Clear error if size is valid
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData({ ...formData, [field]: reader.result as string });
@@ -17,11 +25,21 @@ export default function HeroSectionTab({ formData, setFormData }: { formData: an
 
   const removeImage = (field: string) => {
     setFormData({ ...formData, [field]: "" });
+    setError(""); // Clear error when removing
   };
 
   return (
     <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-6">
       
+      {/* Global Error Display for Image Uploads */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
+          <AlertCircle size={16} />
+          {error}
+          <button onClick={() => setError("")} className="ml-auto"><X size={14}/></button>
+        </div>
+      )}
+
       <div className="border-b border-gray-100 pb-6 mb-6">
 
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -223,7 +241,7 @@ export default function HeroSectionTab({ formData, setFormData }: { formData: an
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <Upload size={20} className="text-gray-400 mb-2" />
-                  <p className="text-[11px] font-bold text-gray-600">Upload Image</p>
+                  <p className="text-[11px] font-bold text-gray-600">Upload Image (Max 1MB)</p>
                 </div>
               ) : (
                 <div className="relative w-full rounded-sm overflow-hidden border border-gray-200 shadow-sm group">
@@ -276,7 +294,7 @@ export default function HeroSectionTab({ formData, setFormData }: { formData: an
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <Upload size={20} className="text-gray-400 mb-2" />
-                  <p className="text-[11px] font-bold text-gray-600">Upload Logo</p>
+                  <p className="text-[11px] font-bold text-gray-600">Upload Logo (Max 1MB)</p>
                 </div>
               ) : (
                 <div className="relative w-full rounded-sm overflow-hidden border border-gray-200 shadow-sm group">

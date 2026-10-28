@@ -1,153 +1,138 @@
 "use client";
 
-import { Plus, X, Upload, FileText } from "lucide-react";
+import { useState, useEffect } from "react";
+import { FileText, Briefcase, Download } from "lucide-react";
 
-export default function CareerSupportTab({ formData, setFormData }: { formData: any, setFormData: any }) {
-  const addItem = () => {
-    setFormData({
-      ...formData,
-      careerSupportItems: [...(formData.careerSupportItems || []), { title: "", image: "", imageAlt: "", imageTitle: "" }]
-    });
-  };
+export default function CareerSupportTab({ formData }: { formData: any }) {
+  const [subcategoryData, setSubcategoryData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const removeItem = (index: number) => {
-    const updatedItems = [...(formData.careerSupportItems || [])];
-    updatedItems.splice(index, 1);
-    setFormData({ ...formData, careerSupportItems: updatedItems });
-  };
-
-  const updateItem = (index: number, field: string, value: string) => {
-    const updatedItems = [...(formData.careerSupportItems || [])];
-    updatedItems[index] = { ...updatedItems[index], [field]: value };
-    setFormData({ ...formData, careerSupportItems: updatedItems });
-  };
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updateItem(index, "image", reader.result as string);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (formData?.subcategory) {
+      setLoading(true);
+      fetch('/api/admin/subcategories')
+        .then(res => res.json())
+        .then(data => {
+          const subcategories = Array.isArray(data) ? data : (data.data || []);
+          const target = formData.subcategory.trim().toLowerCase();
+          
+          const selectedSub = subcategories.find(
+            (s: any) =>
+              s.name?.trim().toLowerCase() === target ||
+              s.slug?.trim().toLowerCase() === target ||
+              s._id === formData.subcategory
+          );
+          
+          if (selectedSub) {
+            setSubcategoryData(selectedSub);
+          }
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
-  };
+  }, [formData?.subcategory]);
 
-  const handlePdfUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData({ ...formData, careerSupportBrochurePdf: reader.result as string });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  if (!formData?.subcategory) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-12 text-center text-red-600 font-medium">
+        Please select a subcategory in the Basic Info tab first.
+      </div>
+    );
+  }
+
+  if (loading) {
+    return (
+      <div className="w-full bg-white border border-gray-200 rounded-sm p-12 flex justify-center items-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#10b981]"></div>
+      </div>
+    );
+  }
+
+  const items = subcategoryData?.careerSupportItems?.length > 0 ? subcategoryData.careerSupportItems : formData.careerSupportItems || [];
+  const title = subcategoryData?.careerSupportTitle || formData.careerSupportTitle || "";
+  const description = subcategoryData?.careerSupportDescription || formData.careerSupportDescription || "";
+  const pdfUrl = subcategoryData?.careerSupportBrochurePdf || formData.careerSupportBrochurePdf || "";
+
+  if (!title && items.length === 0) {
+    return (
+      <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-12 text-center text-gray-500 text-[13px]">
+        No Career Support data found in the linked subcategory ({formData.subcategory}). Make sure you have saved it inside Categories &rarr; Edit Subcategory &rarr; Career Support.
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
-      
-      <div className="border-b border-gray-100 pb-6 space-y-6">
+    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8 relative">
+      <div className="absolute top-0 right-0 bg-blue-50 text-blue-700 px-4 py-1.5 text-[11px] font-bold rounded-bl-sm border-b border-l border-blue-100 uppercase tracking-wide">
+        Auto-Synced (Read Only)
+      </div>
+
+      <div className="border-b border-gray-100 pb-6 pt-4 space-y-6">
         <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider">Main Content Box</h2>
         
         <div>
           <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Box Title</label>
-          <input
-            type="text"
-            value={formData.careerSupportTitle || ""}
-            onChange={(e) => setFormData({ ...formData, careerSupportTitle: e.target.value })}
-            className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[13px]"
-          />
+          <div className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-sm text-[13px] text-gray-700">
+            {title || "N/A"}
+          </div>
         </div>
 
         <div>
           <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Box Description</label>
-          <textarea
-            rows={4}
-            value={formData.careerSupportDescription || ""}
-            onChange={(e) => setFormData({ ...formData, careerSupportDescription: e.target.value })}
-            className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[13px]"
-          />
+          <div className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-sm text-[13px] text-gray-700 whitespace-pre-wrap min-h-[100px]">
+            {description || "N/A"}
+          </div>
         </div>
 
         <div>
-          <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Brochure PDF (Download)</label>
-          <div className="flex items-center gap-4">
-            <label className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-sm cursor-pointer hover:bg-gray-50 text-[13px] font-medium transition-colors">
-              <Upload size={16} className="mr-2" /> Upload PDF
-              <input type="file" accept="application/pdf" onChange={handlePdfUpload} className="hidden" />
-            </label>
-            {formData.careerSupportBrochurePdf && (
-              <span className="flex items-center text-[13px] text-green-600 font-medium">
-                <FileText size={16} className="mr-1" /> PDF Uploaded
+          <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Brochure PDF</label>
+          {pdfUrl ? (
+            <div className="flex items-center gap-3 p-3 bg-gray-50 border border-gray-200 rounded-sm">
+              <span className="flex items-center text-[13px] text-gray-700 font-medium">
+                <FileText size={16} className="mr-2 text-green-600" /> Brochure Available
               </span>
-            )}
-          </div>
+              <a href={pdfUrl} download="career_brochure.pdf" className="bg-white text-gray-600 py-1.5 px-3 rounded-sm hover:bg-gray-100 text-[11px] font-bold flex items-center gap-1 shadow-sm border border-gray-200">
+                <Download size={14} /> Download File
+              </a>
+            </div>
+          ) : (
+            <div className="p-3 bg-gray-50 border border-gray-200 rounded-sm text-[13px] text-gray-500">
+              No PDF uploaded.
+            </div>
+          )}
         </div>
       </div>
 
       <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider">Support Items</h2>
-          <button type="button" onClick={addItem} className="px-3 py-1.5 bg-gray-900 text-white text-[12px] font-bold rounded-sm flex items-center gap-1.5">
-            <Plus size={14} /> Add Item
-          </button>
-        </div>
-        
-        <div className="space-y-6">
-          {(formData.careerSupportItems || []).map((item: any, index: number) => (
-            <div key={index} className="bg-gray-50 p-5 border border-gray-200 rounded-sm relative grid grid-cols-1 md:grid-cols-12 gap-6">
-              <button type="button" onClick={() => removeItem(index)} className="absolute top-2 right-2 text-red-500 hover:text-red-700 p-1 z-10">
-                <X size={16} />
-              </button>
-              
-              <div className="md:col-span-4">
-                <label className="block text-[12px] font-bold text-gray-700 mb-1">Item Image</label>
+        <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-4">Support Items</h2>
+        <div className="space-y-4">
+          {items.map((item: any, index: number) => (
+            <div key={index} className="bg-gray-50 p-4 border border-gray-200 rounded-sm grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+              <div className="md:col-span-3 flex justify-center">
                 {item.image ? (
-                  <div className="relative">
-                    <img src={item.image} alt="Preview" className="w-full h-24 object-cover bg-white border border-gray-200 p-1 rounded-sm" />
-                    <button type="button" onClick={() => updateItem(index, "image", "")} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1">
-                      <X size={12} />
-                    </button>
-                  </div>
+                  <img src={item.image} alt={item.imageAlt || "Preview"} title={item.imageTitle || ""} className="w-full h-20 object-contain bg-white border border-gray-200 p-1 rounded-sm" />
                 ) : (
-                  <div className="relative border border-dashed border-gray-300 h-24 bg-white flex items-center justify-center cursor-pointer hover:bg-gray-50 text-[11px] font-bold text-gray-500 rounded-sm">
-                    <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, index)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
-                    <Upload size={16} className="mr-2" /> Upload Image
+                  <div className="w-full h-20 bg-white border border-gray-200 flex items-center justify-center rounded-sm">
+                    <Briefcase size={24} className="text-gray-300" />
                   </div>
                 )}
-                <div className="mt-3 space-y-2">
-                  <input
-                    type="text"
-                    value={item.imageAlt || ""}
-                    onChange={(e) => updateItem(index, "imageAlt", e.target.value)}
-                    placeholder="Image Alt Text"
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[12px]"
-                  />
-                  <input
-                    type="text"
-                    value={item.imageTitle || ""}
-                    onChange={(e) => updateItem(index, "imageTitle", e.target.value)}
-                    placeholder="Image Title Text"
-                    className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[12px]"
-                  />
-                </div>
               </div>
-              
-              <div className="md:col-span-8 flex flex-col justify-center">
-                <label className="block text-[12px] font-bold text-gray-700 mb-1">Item Title</label>
-                <input
-                  type="text"
-                  value={item.title || ""}
-                  onChange={(e) => updateItem(index, "title", e.target.value)}
-                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[13px]"
-                />
+              <div className="md:col-span-9 flex flex-col justify-center">
+                <label className="block text-[11px] font-bold text-gray-500 mb-1">Item Title</label>
+                <div className="w-full px-3 py-2 bg-white border border-gray-200 rounded-sm text-[14px] font-bold text-gray-900">
+                  {item.title || "Untitled Item"}
+                </div>
+                {item.imageAlt && <span className="text-[11px] text-gray-500 mt-2 font-medium">Alt: {item.imageAlt}</span>}
               </div>
             </div>
           ))}
         </div>
       </div>
-
     </div>
   );
 }

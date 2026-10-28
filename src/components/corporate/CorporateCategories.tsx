@@ -23,12 +23,12 @@ export default function CorporateCategories() {
   const [activeId, setActiveId] = useState<number>(1);
 
   return (
-    <section className="py-16 md:py-24 bg-[#f8fbf9] overflow-hidden">
+    <section className="py-8 md:py-16 bg-background overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold text-[#1f2937] leading-[1.2] tracking-tight">
-            Explore Courses by <span className="text-[#0AA34F]">Category</span>
+          <h2 className="mb-0">
+            Explore Courses by <span className="text-primary">Category</span>
           </h2>
         </div>
 
@@ -41,19 +41,23 @@ export default function CorporateCategories() {
               <div 
                 key={category.id}
                 onMouseEnter={() => setActiveId(category.id)}
-                className={`flex flex-col items-center justify-center p-6 md:p-8 rounded-xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md bg-white border-2
-                  ${isActive 
-                    ? 'border-[#0AA34F] text-[#0AA34F]' 
-                    : 'border-transparent text-[#4b5563] hover:border-gray-200'
-                  }`}
+                className={`relative overflow-hidden group flex flex-col items-center justify-center p-6 md:p-8 rounded-xl cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${
+                  isActive 
+                    ? 'bg-btn-gradient border-primary text-primary-foreground shadow-md' 
+                    : 'bg-card border-border text-foreground hover:border-primary/50'
+                }`}
               >
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
+
                 <Icon 
-                  className={`w-10 h-10 md:w-12 md:h-12 mb-4 transition-colors duration-300 
-                    ${isActive ? 'text-[#0AA34F]' : 'text-[#374151]'}`} 
+                  className={`w-10 h-10 md:w-12 md:h-12 mb-4 transition-colors duration-300 relative z-10 ${
+                    isActive ? 'text-primary-foreground' : 'text-primary'
+                  }`} 
                   strokeWidth={1.5}
                 />
-                <span className={`text-[14px] md:text-[16px] font-bold text-center leading-tight
-                  ${isActive ? 'text-[#0AA34F]' : 'text-[#1f2937]'}`}>
+                <span className={`text-[14px] md:text-[16px] font-bold text-center leading-tight relative z-10 ${
+                  isActive ? 'text-primary-foreground' : 'text-foreground'
+                }`}>
                   {category.name}
                 </span>
               </div>

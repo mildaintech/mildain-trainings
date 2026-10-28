@@ -109,8 +109,8 @@ export default function AddCoursePage() {
   };
 
   const renderDurationValues = () => {
-    let max = 15;
-    if (formData.durationUnit === "Weeks") max = 4;
+    let max = 20;
+    if (formData.durationUnit === "Weeks") max = 16;
     if (formData.durationUnit === "Years") max = 5;
     
     const options = [];
@@ -302,7 +302,6 @@ export default function AddCoursePage() {
                     <Upload size={14} />
                   </div>
                   <p className="text-[13px] font-bold text-gray-700">Upload Banner</p>
-                  <p className="text-[11px] font-medium text-gray-500 mt-1">(max 2MB)</p>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -359,7 +358,6 @@ export default function AddCoursePage() {
                     <Upload size={14} />
                   </div>
                   <p className="text-[13px] font-bold text-gray-700">Upload Logo</p>
-                  <p className="text-[11px] font-medium text-gray-500 mt-1">(max 2MB)</p>
                 </div>
               ) : (
                 <div className="space-y-4">

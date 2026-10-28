@@ -7,7 +7,6 @@ import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 // @ts-ignore
 import 'react-phone-number-input/style.css';
 
-
 const testimonials = [
   {
     id: 1,
@@ -18,6 +17,36 @@ const testimonials = [
     authorName: "Ramesh Pattnaik",
     authorTitle: "Program Manager",
     authorCompany: "Microsoft"
+  },
+  {
+    id: 2,
+    logo: "/images/home/partner/google.png",
+    quoteHeading: "Exceptional quality and seamless execution across all tracks.",
+    quoteBody: "Working with Mildain has significantly accelerated our internal tech readiness. Their expert instructors and structured programs ensure our engineers stay ahead of industry demands.",
+    authorImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+    authorName: "Sarah Jenkins",
+    authorTitle: "Director of Talent Development",
+    authorCompany: "Google"
+  },
+  {
+    id: 3,
+    logo: "/images/home/partner/amazon.png",
+    quoteHeading: "The best enterprise learning platform we have integrated.",
+    quoteBody: "The custom learning paths and hands-on cloud labs provided robust upskilling for our engineering teams, resulting in much higher certification success rates.",
+    authorImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+    authorName: "David Miller",
+    authorTitle: "Cloud Solutions Architect",
+    authorCompany: "Amazon"
+  },
+  {
+    id: 4,
+    logo: "/images/home/partner/comptia.png",
+    quoteHeading: "Unmatched expertise in security and compliance training.",
+    quoteBody: "Mildain's comprehensive curriculum on cybersecurity and risk management has empowered our workforce to maintain elite security standards globally.",
+    authorImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
+    authorName: "Ananya Sharma",
+    authorTitle: "Head of Global Compliance",
+    authorCompany: "CompTIA Partner Network"
   }
 ];
 
@@ -42,6 +71,14 @@ export default function CorporateTestimonialForm() {
     message: "",
     global: ""
   });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const cookies = document.cookie.split("; ");
@@ -124,7 +161,7 @@ export default function CorporateTestimonialForm() {
     return isValid;
   };
 
- const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
@@ -166,20 +203,20 @@ export default function CorporateTestimonialForm() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section className="py-16 md:py-24 bg-background overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          <div className="flex flex-col w-full">
-            <h2 className="text-[36px] md:text-[44px] lg:text-[48px] font-bold text-[#1f2937] leading-[1.2] tracking-tight mb-4">
+          <div className="lg:col-span-7 flex flex-col w-full">
+            <h2 className="mb-4">
               Hear It From Our Customers
             </h2>
-            <p className="text-[18px] md:text-[20px] lg:text-[22px] text-[#6b7280] font-medium mb-10 leading-relaxed max-w-[500px]">
+            <p className="mb-10 max-w-[500px]">
               See how leading organizations upskill their workforce with Mildain.
             </p>
 
-            <div className="bg-[#f9fbf9] border border-gray-100 rounded-xl p-8 md:p-12 shadow-sm relative w-full mb-8">
+            <div className="bg-card border border-border rounded-xl p-8 md:p-12 shadow-sm relative w-full mb-8">
               <div className="h-12 mb-8">
                 <img 
                   src={testimonials[currentIndex].logo} 
@@ -188,18 +225,18 @@ export default function CorporateTestimonialForm() {
                 />
               </div>
 
-              <h3 className="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-[#1f2937] leading-tight mb-6">
+              <h3 className="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-foreground leading-tight mb-6">
                 {testimonials[currentIndex].quoteHeading}
               </h3>
 
-              <p className="text-[16px] md:text-[18px] lg:text-[20px] text-[#4b5563] leading-relaxed mb-10">
+              <p className="text-[16px] md:text-[18px] lg:text-[20px] text-muted-foreground leading-relaxed mb-10">
                 {testimonials[currentIndex].quoteBody}
               </p>
 
-              <div className="w-full h-px bg-gray-200 mb-8"></div>
+              <div className="w-full h-px bg-border mb-8"></div>
 
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full overflow-hidden shrink-0">
+                <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border border-border">
                   <img 
                     src={testimonials[currentIndex].authorImage} 
                     alt={testimonials[currentIndex].authorName}
@@ -207,13 +244,13 @@ export default function CorporateTestimonialForm() {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-[20px] md:text-[22px] font-bold text-[#1f2937]">
+                  <span className="text-[20px] md:text-[22px] font-bold text-foreground">
                     {testimonials[currentIndex].authorName}
                   </span>
-                  <span className="text-[14px] md:text-[16px] text-[#6b7280] leading-snug">
+                  <span className="text-[14px] md:text-[16px] text-muted-foreground leading-snug">
                     {testimonials[currentIndex].authorTitle}
                   </span>
-                  <span className="text-[14px] md:text-[16px] font-bold text-[#1f2937] leading-snug">
+                  <span className="text-[14px] md:text-[16px] font-bold text-foreground leading-snug">
                     {testimonials[currentIndex].authorCompany}
                   </span>
                 </div>
@@ -221,20 +258,20 @@ export default function CorporateTestimonialForm() {
             </div>
 
             <div className="flex items-center gap-6 pl-4">
-              <button onClick={prevSlide} className="text-[#0AA34F] hover:text-[#088a42] transition-colors cursor-pointer">
+              <button onClick={prevSlide} className="text-primary hover:text-primary/80 transition-colors cursor-pointer">
                 <ArrowLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
               </button>
-              <button onClick={nextSlide} className="text-[#0AA34F] hover:text-[#088a42] transition-colors cursor-pointer">
+              <button onClick={nextSlide} className="text-primary hover:text-primary/80 transition-colors cursor-pointer">
                 <ArrowRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2} />
               </button>
             </div>
           </div>
 
-          <div className="w-full flex justify-center lg:justify-end">
-            <div className="w-full max-w-[550px] bg-white rounded-md shadow-[0_4px_20px_rgb(0,0,0,0.08)] border border-gray-100 overflow-hidden">
+          <div className="lg:col-span-5 w-full flex justify-center lg:justify-end">
+            <div className="w-full max-w-[550px] bg-card rounded-md shadow-lg border border-border overflow-hidden">
               
-              <div className="bg-[#0AA34F] py-6 px-8 text-center">
-                <h3 className="text-[24px] md:text-[28px] font-bold text-white tracking-wide">
+              <div className="bg-btn-gradient py-6 px-8 text-center">
+                <h3 className="text-[24px] md:text-[28px] font-bold text-primary-foreground tracking-wide mb-0">
                   Speak to Solution Expert
                 </h3>
               </div>
@@ -242,7 +279,7 @@ export default function CorporateTestimonialForm() {
               <form onSubmit={handleSubmit} className="p-8 md:p-10 flex flex-col gap-5">
                 
                 {errors.global && (
-                  <div className="bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-md font-medium">
+                  <div className="bg-destructive/10 border border-destructive/20 text-destructive text-sm p-3 rounded-md font-medium">
                     {errors.global}
                   </div>
                 )}
@@ -254,9 +291,9 @@ export default function CorporateTestimonialForm() {
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="Full Name*" 
-                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-[#1f2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0AA34F] transition-all ${errors.fullName ? "border-red-500" : "border-gray-300"}`}
+                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all ${errors.fullName ? "border-destructive" : "border-border"}`}
                   />
-                  {errors.fullName && <p className="text-red-500 text-[12px] mt-1.5 font-medium px-1">{errors.fullName}</p>}
+                  {errors.fullName && <p className="text-destructive text-[12px] mt-1.5 font-medium px-1">{errors.fullName}</p>}
                 </div>
 
                 <div>
@@ -266,13 +303,13 @@ export default function CorporateTestimonialForm() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Email Address*" 
-                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-[#1f2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0AA34F] transition-all ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all ${errors.email ? "border-destructive" : "border-border"}`}
                   />
-                  {errors.email && <p className="text-red-500 text-[12px] mt-1.5 font-medium px-1">{errors.email}</p>}
+                  {errors.email && <p className="text-destructive text-[12px] mt-1.5 font-medium px-1">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <div className={`w-full border rounded-md px-4 py-4 bg-white transition-all focus-within:ring-2 focus-within:ring-[#0AA34F] ${errors.phone ? "border-red-500" : "border-gray-300"}`}>
+                  <div className={`w-full border rounded-md px-4 py-4 bg-background transition-all focus-within:ring-2 focus-within:ring-primary ${errors.phone ? "border-destructive" : "border-border"}`}>
                     <PhoneInput
                       key={userCountryCode}
                       international
@@ -282,7 +319,7 @@ export default function CorporateTestimonialForm() {
                       className="corporate-phone-input"
                     />
                   </div>
-                  {errors.phone && <p className="text-red-500 text-[12px] mt-1.5 font-medium px-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-destructive text-[12px] mt-1.5 font-medium px-1">{errors.phone}</p>}
                 </div>
 
                 <div>
@@ -292,26 +329,29 @@ export default function CorporateTestimonialForm() {
                     onChange={handleChange}
                     placeholder="Message Details" 
                     rows={4}
-                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-[#1f2937] placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0AA34F] transition-all resize-none ${errors.message ? "border-red-500" : "border-gray-300"}`}
+                    className={`w-full border rounded-md px-4 py-4 text-[16px] md:text-[18px] text-foreground bg-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary transition-all resize-none ${errors.message ? "border-destructive" : "border-border"}`}
                   ></textarea>
-                  {errors.message && <p className="text-red-500 text-[12px] mt-1.5 font-medium px-1">{errors.message}</p>}
+                  {errors.message && <p className="text-destructive text-[12px] mt-1.5 font-medium px-1">{errors.message}</p>}
                 </div>
 
                 <button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full mt-2 border-[2px] border-[#0AA34F] text-[#0AA34F] hover:bg-[#0AA34F] hover:text-white bg-transparent py-4 text-[18px] md:text-[20px] font-bold rounded-md transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+                  className="relative overflow-hidden group w-full mt-2 bg-btn-gradient text-primary-foreground py-4 text-[18px] md:text-[20px] font-bold rounded-md transition-all duration-300 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed shadow-md"
                 >
-                  {isSubmitting ? "Submitting..." : "Contact Us"}
+                  <span className="relative z-10">
+                    {isSubmitting ? "Submitting..." : "Contact Us"}
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
                 </button>
 
-                <p className="text-[14px] md:text-[16px] text-gray-500 mt-2 leading-relaxed">
+                <p className="text-[14px] md:text-[16px] text-muted-foreground mt-2 leading-relaxed">
                   By registering here, I agree to Mildain Trainings{' '}
-                  <Link href="/terms-and-conditions" className="text-[#0AA34F] underline hover:text-[#088a42] transition-colors">
+                  <Link href="/terms-and-conditions" className="text-primary underline hover:text-primary/80 transition-colors">
                     Terms & Condition
                   </Link>
                   {' '}and{' '}
-                  <Link href="/privacy-policy" className="text-[#0AA34F] underline hover:text-[#088a42] transition-colors">
+                  <Link href="/privacy-policy" className="text-primary underline hover:text-primary/80 transition-colors">
                     Privacy Policy
                   </Link>
                 </p>
@@ -335,7 +375,7 @@ export default function CorporateTestimonialForm() {
           outline: none;
           background: transparent;
           font-size: 16px;
-          color: #1f2937;
+          color: inherit;
         }
         @media (min-width: 768px) {
           .corporate-phone-input input {
@@ -343,11 +383,12 @@ export default function CorporateTestimonialForm() {
           }
         }
         .corporate-phone-input input::placeholder {
-          color: #9ca3af;
+          color: var(--muted-foreground);
+          opacity: 0.9;
         }
         .PhoneInputCountry {
           padding-right: 12px;
-          border-right: 1px solid #e5e7eb;
+          border-right: 1px solid var(--border);
         }
       ` }} />
     </section>

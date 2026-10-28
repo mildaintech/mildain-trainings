@@ -32,6 +32,7 @@ export default function EditCoursePage() {
     title: "",
     slug: "",
     category: "",
+    subcategory: "",
     inrPrice: "",
     usdPrice: "",
     provider: "",
@@ -133,6 +134,7 @@ export default function EditCoursePage() {
             title: data.title || "",
             slug: data.slug || "",
             category: data.category || "",
+            subcategory: data.subcategory || "",
             inrPrice: data.inrPrice || "",
             usdPrice: data.usdPrice || "",
             provider: data.provider || "",
@@ -248,6 +250,7 @@ export default function EditCoursePage() {
         },
         body: JSON.stringify({
           ...formData, 
+          subcategory: formData.subcategory,
           inrPrice: Number(formData.inrPrice),
           usdPrice: Number(formData.usdPrice),
           cpeCredits: formData.cpeCredits ? Number(formData.cpeCredits) : undefined,
@@ -420,20 +423,21 @@ export default function EditCoursePage() {
           ))}
         </div>
 
-        <div className="flex-1 min-h-[500px]">
+<div className="flex-1 min-h-[500px]">
           {activeTab === "basic" && <BasicInfoTab formData={formData} setFormData={setFormData} setError={setError} />}
           {activeTab === "seo" && <SeoTab formData={formData} setFormData={setFormData} />}
           {activeTab === "hero" && <HeroSectionTab formData={formData} setFormData={setFormData} />}
           {activeTab === "overview" && <OverviewTab formData={formData} setFormData={setFormData} />}
-          {activeTab === "curriculum" && <CurriculumTab formData={formData} setFormData={setFormData} />}
+          {activeTab === "curriculum" && <CurriculumTab formData={formData} />}
           {activeTab === "options" && <TrainingOptionsTab formData={formData} setFormData={setFormData} />}
           {activeTab === "exam" && <ExamDetailsTab formData={formData} setFormData={setFormData} />}
           {activeTab === "benefits" && <BenefitsTab formData={formData} setFormData={setFormData} />}
-          {activeTab === "tools" && <ToolsTab formData={formData} setFormData={setFormData} />}
-          {activeTab === "advisors" && <AdvisorTab formData={formData} setFormData={setFormData} />}
-          {activeTab === "careerSupport" && <CareerSupportTab formData={formData} setFormData={setFormData} />}
+          {activeTab === "tools" && <ToolsTab formData={formData} />}
+          {activeTab === "advisors" && <AdvisorTab formData={formData} />}
+          {activeTab === "careerSupport" && <CareerSupportTab formData={formData} />}        
           {activeTab === "pathSalaries" && <PathSalariesTab formData={formData} setFormData={setFormData} />}
-          {activeTab === "reviews" && <ReviewsTab formData={formData} setFormData={setFormData} />}
+          {/* {activeTab === "reviews" && <ReviewsTab formData={formData} setFormData={setFormData} />} */}
+          {activeTab === "reviews" && <ReviewsTab formData={formData} />}
           {activeTab === "faqs" && <FaqTab formData={formData} setFormData={setFormData} />}
         </div>
       </div>

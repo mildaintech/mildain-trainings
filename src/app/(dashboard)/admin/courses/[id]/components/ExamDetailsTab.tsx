@@ -1,12 +1,21 @@
 "use client";
 
-import { Upload, X } from "lucide-react";
+import React, { useState } from "react";
+import { Upload, X, AlertCircle } from "lucide-react";
 
 export default function ExamDetailsTab({ formData, setFormData }: { formData: any, setFormData: any }) {
+  const [error, setError] = useState("");
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const file = e.target.files?.[0];
     if (file) {
+      // Limit file size to 1MB to prevent Vercel Payload Too Large error
+      if (file.size > 1 * 1024 * 1024) {
+        setError("Image size must be less than 1MB");
+        return;
+      }
+      
+      setError(""); // Clear error if size is valid
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData({ ...formData, [field]: reader.result as string });
@@ -17,11 +26,21 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
 
   const removeImage = (field: string) => {
     setFormData({ ...formData, [field]: "" });
+    setError(""); // Clear error when removing
   };
 
   return (
     <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
       
+      {/* Global Error Display for Image Uploads */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
+          <AlertCircle size={16} />
+          {error}
+          <button onClick={() => setError("")} className="ml-auto"><X size={14}/></button>
+        </div>
+      )}
+
       <div className="border-b border-gray-100 pb-6">
         <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider mb-4">
           Exam Header Settings
@@ -111,7 +130,7 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
         </div>
       </div>
 
-      <div className="border-b border-gray-100 pb-6">
+      <div>
         <h3 className="text-[13px] font-bold text-gray-700 mb-3">Certificate Image Setup</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div className="md:col-span-1">
@@ -124,7 +143,7 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 />
                 <Upload size={20} className="text-gray-400 mb-2" />
-                <p className="text-[11px] font-bold text-gray-600">Upload Image</p>
+                <p className="text-[11px] font-bold text-gray-600">Upload Image (Max 1MB)</p>
               </div>
             ) : (
               <div className="relative w-full rounded-sm overflow-hidden border border-gray-200 shadow-sm group">
@@ -160,73 +179,6 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
                />
              </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="space-y-4">
-          <h3 className="text-[13px] font-bold text-gray-700 bg-gray-50 p-2 rounded-sm border border-gray-100">Score Settings</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Passing Score (e.g. 450)</label>
-              <input 
-                type="text" 
-                value={formData.examPassingScore || ""}
-                onChange={(e) => setFormData({ ...formData, examPassingScore: e.target.value })}
-                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
-              />
-            </div>
-            <div>
-              <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Total Score (e.g. 800)</label>
-              <input 
-                type="text" 
-                value={formData.examTotalScore || ""}
-                onChange={(e) => setFormData({ ...formData, examTotalScore: e.target.value })}
-                className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
-              />
-            </div>
-          </div>
-          <div>
-            <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Score Description</label>
-            <textarea 
-              rows={3}
-              value={formData.examScoreDescription || ""}
-              onChange={(e) => setFormData({ ...formData, examScoreDescription: e.target.value })}
-              placeholder="To pass, you need at least..."
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px] resize-y"
-            />
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-[13px] font-bold text-gray-700 bg-gray-50 p-2 rounded-sm border border-gray-100">Guarantee Box</h3>
-          <div>
-            <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Title (e.g. 100% exam-pass)</label>
-            <input 
-              type="text" 
-              value={formData.examGuaranteeTitle || ""}
-              onChange={(e) => setFormData({ ...formData, examGuaranteeTitle: e.target.value })}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
-            />
-          </div>
-          <div>
-            <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Subtitle (e.g. guarantee)</label>
-            <input 
-              type="text" 
-              value={formData.examGuaranteeSubtitle || ""}
-              onChange={(e) => setFormData({ ...formData, examGuaranteeSubtitle: e.target.value })}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
-            />
-          </div>
-          <div>
-            <label className="block text-[12px] font-semibold text-gray-600 mb-1.5">Footer Text (e.g. with every enrollment.)</label>
-            <input 
-              type="text" 
-              value={formData.examGuaranteeFooter || ""}
-              onChange={(e) => setFormData({ ...formData, examGuaranteeFooter: e.target.value })}
-              className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition-all text-[13px]"
-            />
           </div>
         </div>
       </div>

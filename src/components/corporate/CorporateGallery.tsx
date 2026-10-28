@@ -55,14 +55,14 @@ export default function CorporateGallery() {
   }, []);
 
   return (
-    <section className="py-16 md:py-24 bg-[#0FA753] w-full overflow-hidden">
+    <section className="py-16 md:py-24 bg-btn-gradient border-t border-border w-full overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
-        <h2 className="text-[36px] md:text-[44px] lg:text-[48px] font-bold text-white text-center mb-10 tracking-wide">
+        <h2 className="text-primary-foreground text-center mb-10">
           Training Gallery
         </h2>
 
-        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] rounded-2xl overflow-hidden shadow-2xl group">
+        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] rounded-2xl overflow-hidden shadow-2xl group border border-border bg-muted/30">
           
           <img 
             src={galleryData[currentIndex].image} 
@@ -74,21 +74,21 @@ export default function CorporateGallery() {
             <h3 className="text-[28px] sm:text-[36px] md:text-[44px] lg:text-[48px] font-bold text-white mb-2 leading-tight">
               {galleryData[currentIndex].title}
             </h3>
-            <p className="text-[18px] md:text-[22px] text-gray-200 font-bold">
+            <p className="text-[18px] md:text-[22px] text-gray-200 font-bold mb-0">
               {galleryData[currentIndex].subtitle}
             </p>
           </div>
 
           <button 
             onClick={prevSlide}
-            className="absolute top-1/2 left-4 md:left-8 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white backdrop-blur-md transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+            className="absolute top-1/2 left-4 md:left-8 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white backdrop-blur-md transition-all cursor-pointer opacity-0 group-hover:opacity-100 border border-white/20"
           >
             <ArrowLeft className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2.5} />
           </button>
 
           <button 
             onClick={nextSlide}
-            className="absolute top-1/2 right-4 md:right-8 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white backdrop-blur-md transition-all cursor-pointer opacity-0 group-hover:opacity-100"
+            className="absolute top-1/2 right-4 md:right-8 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white backdrop-blur-md transition-all cursor-pointer opacity-0 group-hover:opacity-100 border border-white/20"
           >
             <ArrowRight className="w-6 h-6 md:w-8 md:h-8" strokeWidth={2.5} />
           </button>
@@ -99,9 +99,9 @@ export default function CorporateGallery() {
             <div 
               key={item.id}
               onClick={() => setCurrentIndex(index)}
-              className={`relative w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 ${
+              className={`relative w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] rounded-xl overflow-hidden cursor-pointer transition-all duration-300 border border-border ${
                 currentIndex === index 
-                  ? 'ring-4 ring-white scale-[1.02] shadow-xl opacity-100 z-10' 
+                  ? 'ring-4 ring-primary scale-[1.02] shadow-xl opacity-100 z-10' 
                   : 'opacity-60 hover:opacity-100'
               }`}
             >

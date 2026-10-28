@@ -27,9 +27,9 @@ export default function StickyBottomBar() {
         isVisible ? 'bottom-0 translate-y-0 opacity-100' : '-bottom-20 translate-y-full opacity-0'
       }`}
     >
-      <div className="w-full max-w-screen-xl h-full flex justify-between items-center overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+      <div className="w-full max-w-[1440px] h-full flex justify-between items-center overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         
-        <div className="flex items-center h-full gap-4 md:gap-8 px-4 md:px-6 shrink-0">
+        <div className="flex items-center h-full gap-4 md:gap-8 px-4 sm:px-6 lg:px-12 xl:px-16 shrink-0">
           
           <a 
             href="tel:+918929199704"  
@@ -65,7 +65,7 @@ export default function StickyBottomBar() {
           href="mailto:info@mildaintrainings.com" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="bg-primary text-primary-foreground h-full flex items-center justify-center gap-2 px-6 md:px-10 hover:bg-primary/90 transition-colors shrink-0"
+          className="bg-btn-gradient text-primary-foreground h-full flex items-center justify-center gap-2 px-6 md:px-10 hover:opacity-90 transition-opacity shrink-0 shadow-sm"
         >
           <div className="bg-background rounded-full w-5 h-5 md:w-6 md:h-6 flex items-center justify-center shrink-0">
             <MessageCircle className="text-primary w-3 h-3 md:w-3.5 md:h-3.5" fill="currentColor" />

@@ -39,14 +39,14 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
   };
 
   return (
-    <div className="w-full bg-[#f4faf8] py-12 lg:py-16">
+    <div className="w-full bg-primary/5 py-12 lg:py-16">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div className="mb-6">
-          <h2 className="text-[32px] md:text-[36px] font-bold text-[#1f2937] mb-3">
+          <h2 className="mb-3">
             {heading}
           </h2>
-          <p className="text-[#4b5563] text-[14px] md:text-[15px] max-w-4xl leading-relaxed">
+          <p className=" text-[18px] sm:text-[20px] font-medium max-w-4xl">
             {desc}
           </p>
         </div>
@@ -56,10 +56,10 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
             <button
               key={`tab-${index}`}
               onClick={() => setActiveTabIndex(index)}
-              className={`px-4 py-2 rounded-full text-[13px] md:text-[14px] font-bold transition-all ${
+              className={`px-4 py-2 rounded-full text-[13px] md:text-[14px] font-bold transition-all border ${
                 safeTabIndex === index 
-                  ? 'bg-[#e2f0e9] text-[#1f2937]' 
-                  : 'bg-[#ebf5f0] text-[#6b7280] hover:text-[#374151]'
+                  ? 'bg-primary/10 text-primary border-primary/20' 
+                  : 'bg-background text-muted-foreground hover:text-foreground border-transparent'
               }`}
             >
               {tab.tabName || `Role ${index + 1}`}
@@ -67,13 +67,13 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
           ))}
         </div>
 
-        <div className="w-full bg-white rounded-xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] border border-slate-100 p-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200 gap-8 md:gap-0">
+        <div className="w-full bg-card rounded-xl shadow-md border border-border p-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border gap-8 md:gap-0">
             
             <div className="flex flex-col items-center md:px-6">
-              <h3 className="text-[15px] font-bold text-[#1f2937] mb-8">Annual Salary</h3>
+              <h3 className="text-[18px] font-bold text-[#1f2937] mb-8">Annual Salary</h3>
               
-              <div className="flex items-end justify-center gap-1.5 h-[120px] w-full max-w-[260px]">
+              <div className="flex items-end justify-center gap-1.5 h-[170px] w-full max-w-[260px]">
                 <div className="flex flex-col items-center gap-2">
                   <span className="text-[12px] font-bold text-[#374151]">{formatVal(currentMin)}</span>
                   <div className="w-[35px] md:w-[40px] bg-[#faebd7] h-[25px] transition-all duration-500 ease-in-out"></div>
@@ -103,7 +103,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
             </div>
 
             <div className="flex flex-col items-center justify-center md:px-6 pt-8 md:pt-0">
-              <h3 className="text-[15px] font-bold text-[#1f2937] mb-8">Hiring Companies</h3>
+              <h3 className="text-[18px] font-bold text-[#1f2937] mb-8">Hiring Companies</h3>
               <div className="flex flex-col gap-6 w-full max-w-[200px]">
                 {(activeData.companies || []).map((company: any, index: number) => (
                   <div key={`comp-${index}`} className="flex items-center justify-center h-[36px]">
@@ -112,7 +112,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
                         src={company.logo} 
                         alt={company.logoAlt || company.name} 
                         title={company.logoTitle || company.name} 
-                        className="max-h-[36px] max-w-[150px] object-contain"
+                        className="max-h-[40px] max-w-[180px] object-contain"
                       />
                     ) : (
                       <span className="text-[20px] font-bold text-gray-800 tracking-tight">{company.name}</span>
@@ -123,7 +123,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
             </div>
 
             <div className="flex flex-col items-center text-center md:px-6 pt-8 md:pt-0">
-              <h3 className="text-[15px] font-bold text-[#1f2937] mb-6">Demand</h3>
+              <h3 className="text-[18px] font-bold text-[#1f2937] mb-6">Demand</h3>
               
               <div className="relative mb-5 flex justify-center items-center">
                 <svg width="70" height="60" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -136,7 +136,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
               </div>
 
               <div className="text-[18px] font-extrabold text-[#1f2937] mb-1.5">{activeData.demandValue || "0"}</div>
-              <p className="text-[12px] text-[#4b5563] font-medium leading-relaxed max-w-[200px]">
+              <p className="text-[16px] text-[#4b5563] font-medium leading-relaxed max-w-[300px] mb-0">
                 {activeData.demandText}
               </p>
             </div>

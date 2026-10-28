@@ -32,22 +32,22 @@ const steps = [
 
 export default function CorporateHowItWorks() {
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section className="py-16 md:py-24 bg-secondary/5 overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mb-12 md:mb-16">
           <div className="lg:col-span-6 flex flex-col items-start">
-            <div className="inline-block border-[1.5px] border-[#0AA34F] text-[#0AA34F] px-4 py-1.5 rounded-sm text-sm md:text-base font-bold mb-6 bg-white">
+            <div className="inline-block border-[1.5px] border-primary text-primary px-4 py-1.5 rounded-sm text-sm md:text-base font-bold mb-6 bg-card shadow-sm">
               How it works
             </div>
             
-            <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-bold text-[#1f2937] leading-[1.2] tracking-tight">
+            <h2 className="mb-0">
               We Build Skills That Drive Business Impact
             </h2>
           </div>
           
           <div className="lg:col-span-6 flex items-end lg:pt-16">
-            <p className="text-[18px] md:text-[20px] lg:text-[22px] text-[#6b7280] leading-relaxed font-medium">
+            <p className="mb-0">
               From skills gap assessment to measurable business impact, a structured approach to drive outcome-driven learning for AI and digital skills across your workforce.
             </p>
           </div>
@@ -57,9 +57,11 @@ export default function CorporateHowItWorks() {
           {steps.map((item) => (
             <div 
               key={item.id} 
-              className="bg-[#f6fdf9] rounded-xl p-8 flex flex-col items-start transition-shadow duration-300 hover:shadow-md border border-transparent hover:border-[#0AA34F]/20"
+              className="relative overflow-hidden group bg-card rounded-xl p-8 flex flex-col items-start transition-all duration-300 hover:shadow-lg border border-border hover:border-primary/50 hover:bg-btn-gradient hover:text-primary-foreground"
             >
-              <div className="mb-6 text-[#0AA34F]">
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
+
+              <div className="mb-6 text-primary group-hover:text-primary-foreground transition-colors relative z-10">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
                   <line x1="2" y1="17" x2="22" y2="17"></line>
@@ -69,15 +71,15 @@ export default function CorporateHowItWorks() {
                 </svg>
               </div>
 
-              <div className="inline-block border border-[#0AA34F] text-[#0AA34F] px-3 py-1 rounded-sm text-xs md:text-sm font-bold mb-6 bg-white">
+              <div className="inline-block border border-primary text-primary group-hover:border-primary-foreground group-hover:text-primary-foreground px-3 py-1 rounded-sm text-xs md:text-sm font-bold mb-6 bg-background group-hover:bg-background/10 shadow-sm transition-colors relative z-10">
                 {item.step}
               </div>
 
-              <h3 className="text-[20px] md:text-[22px] font-bold text-[#1f2937] mb-4 leading-tight">
+              <h3 className="text-[20px] md:text-[22px] font-bold text-foreground group-hover:text-primary-foreground mb-4 leading-tight transition-colors relative z-10">
                 {item.title}
               </h3>
 
-              <p className="text-[16px] md:text-[18px] text-[#6b7280] font-medium leading-snug">
+              <p className="text-[16px] md:text-[18px] text-muted-foreground group-hover:text-primary-foreground/90 font-medium leading-snug mb-0 transition-colors relative z-10">
                 {item.description}
               </p>
             </div>

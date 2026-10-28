@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -132,18 +132,18 @@ export default function InquiryForm() {
   };
 
   return (
-    <div className="sticky top-[160px] bg-white border border-slate-200 rounded-xl shadow-lg overflow-hidden flex flex-col">
-      <div className="bg-primary text-white p-5 flex items-center justify-between">
+    <div className="bg-card border border-border rounded-xl shadow-md overflow-hidden flex flex-col relative z-20">
+      <div className="bg-btn-gradient text-primary-foreground p-5 flex items-center justify-between">
         <div>
-          <p className="text-[13px] font-medium text-white/90 mb-1">Get Free Career Guidance</p>
-          <p className="text-2xl lg:text-3xl font-bold text-white tracking-tight">+91 <span className="ml-2">892-919-9704</span></p>
+          <p className="text-[13px] font-medium text-primary-foreground/90 mb-1">Get Free Career Guidance</p>
+          <p className="text-2xl lg:text-3xl font-bold text-primary-foreground tracking-tight">+91 <span className="ml-2">892-919-9704</span></p>
         </div>
-        <PhoneCall className="w-8 h-8 text-white opacity-90" strokeWidth={2} />
+        <PhoneCall className="w-8 h-8 text-primary-foreground opacity-90" strokeWidth={2} />
       </div>
 
       <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4">
         {errors.global && (
-          <div className="bg-red-50 border border-red-200 text-red-600 text-xs p-3 rounded-md font-medium">
+          <div className="bg-destructive/10 border border-destructive/20 text-destructive text-xs p-3 rounded-md font-medium">
             {errors.global}
           </div>
         )}
@@ -155,25 +155,25 @@ export default function InquiryForm() {
             value={formData.fullName}
             onChange={handleChange}
             placeholder="Full Name*"
-            className={`w-full border p-3.5 rounded-md text-[14px] outline-none transition-all ${errors.fullName ? "border-red-500 focus:ring-red-500/20" : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
+            className={`w-full border bg-background text-foreground placeholder:text-muted-foreground p-3.5 rounded-md text-[14px] outline-none transition-all ${errors.fullName ? "border-destructive focus:ring-destructive/20" : "border-border focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
           />
-          {errors.fullName && <p className="text-red-500 text-[11px] mt-1 font-medium px-1">{errors.fullName}</p>}
+          {errors.fullName && <p className="text-destructive text-[11px] mt-1 font-medium px-1">{errors.fullName}</p>}
         </div>
 
         <div>
           <input
-            type="text"
+            type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="Email Address*"
-            className={`w-full border p-3.5 rounded-md text-[14px] outline-none transition-all ${errors.email ? "border-red-500 focus:ring-red-500/20" : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
+            className={`w-full border bg-background text-foreground placeholder:text-muted-foreground p-3.5 rounded-md text-[14px] outline-none transition-all ${errors.email ? "border-destructive focus:ring-destructive/20" : "border-border focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
           />
-          {errors.email && <p className="text-red-500 text-[11px] mt-1 font-medium px-1">{errors.email}</p>}
+          {errors.email && <p className="text-destructive text-[11px] mt-1 font-medium px-1">{errors.email}</p>}
         </div>
 
         <div>
-          <div className={`w-full border p-3 rounded-md transition-all bg-white ${errors.phone ? "border-red-500 focus-within:ring-red-500/20" : "border-slate-200 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20"}`}>
+          <div className={`w-full border bg-background p-3 rounded-md transition-all ${errors.phone ? "border-destructive focus-within:ring-destructive/20" : "border-border focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20"}`}>
             <PhoneInput
               key={userCountryCode}
               international
@@ -183,7 +183,7 @@ export default function InquiryForm() {
               className="custom-phone-input"
             />
           </div>
-          {errors.phone && <p className="text-red-500 text-[11px] mt-1 font-medium px-1">{errors.phone}</p>}
+          {errors.phone && <p className="text-destructive text-[11px] mt-1 font-medium px-1">{errors.phone}</p>}
         </div>
 
         <div>
@@ -192,27 +192,27 @@ export default function InquiryForm() {
             value={formData.message}
             onChange={handleChange}
             placeholder="Message Details"
-            className={`w-full border p-3.5 rounded-md text-[14px] outline-none transition-all h-[100px] resize-none ${errors.message ? "border-red-500 focus:ring-red-500/20" : "border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
+            className={`w-full border bg-background text-foreground placeholder:text-muted-foreground p-3.5 rounded-md text-[14px] outline-none transition-all h-[100px] resize-none ${errors.message ? "border-destructive focus:ring-destructive/20" : "border-border focus:border-primary focus:ring-1 focus:ring-primary/20"}`}
           ></textarea>
-          {errors.message && <p className="text-red-500 text-[11px] mt-1 font-medium px-1">{errors.message}</p>}
+          {errors.message && <p className="text-destructive text-[11px] mt-1 font-medium px-1">{errors.message}</p>}
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full mt-2 border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold text-[14px] py-3.5 rounded-md transition-all tracking-wide disabled:opacity-70 disabled:cursor-not-allowed"
+          className="w-full mt-2 bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold text-[14px] py-3.5 rounded-md transition-all tracking-wide disabled:opacity-70 disabled:cursor-not-allowed shadow-sm"
         >
           {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
         </button>
 
-        <p className="text-[11px] text-slate-500 mt-2 leading-relaxed text-center">
+        <p className="text-[11px] text-muted-foreground mt-2 leading-relaxed text-center mb-0">
           By registering here, I agree to Mildain Trainings
           <Link href="/terms" className="text-primary hover:underline ml-1">Terms & Condition</Link> and
           <Link href="/privacy-policy" className="text-primary hover:underline ml-1">Privacy Policy</Link>
         </p>
       </form>
 
-      <style dangerouslySetInnerHTML={{ __html: ` .custom-phone-input {display: flex;align-items: center;gap: 8px;} .custom-phone-input input { width: 100%; border: none; outline: none; background: transparent; font-size: 14px; } .PhoneInputCountry { padding-left: 4px; } ` }} />
+      <style dangerouslySetInnerHTML={{ __html: ` .custom-phone-input {display: flex;align-items: center;gap: 8px;} .custom-phone-input input { width: 100%; border: none; outline: none; background: transparent; color: inherit; font-size: 14px; } .PhoneInputCountry { padding-left: 4px; } ` }} />
     </div>
   );
 }
