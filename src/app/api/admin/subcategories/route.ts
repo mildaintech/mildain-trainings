@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server';
 import SubCategory from '@/models/SubCategory';
+import Category from '@/models/Category';
 import { connectToDatabase } from '@/lib/db';
 
 export async function GET(req: Request) {
   try {
     await connectToDatabase();
+    
+    if (!Category) {
+      console.log("Category model initialized");
+    }
     
     const { searchParams } = new URL(req.url);
     const parentId = searchParams.get('parent');
@@ -55,7 +60,9 @@ export async function POST(req: Request) {
       successVideoImageAlt: data.successVideoImageAlt || "",
       successVideoImageTitle: data.successVideoImageTitle || "",
       reviews: data.reviews || [],
-
+      pathSalariesHeading: data.pathSalariesHeading || "",
+      pathSalariesDescription: data.pathSalariesDescription || "",
+      pathRoles: data.pathRoles || [],
       isActive: true
     });
 

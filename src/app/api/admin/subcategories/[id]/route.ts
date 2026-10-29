@@ -38,6 +38,9 @@ export async function PUT(req: Request, context: { params: Promise<{ id: string 
           successVideoImage: data.successVideoImage,
           successVideoImageAlt: data.successVideoImageAlt,
           successVideoImageTitle: data.successVideoImageTitle,
+          pathSalariesHeading: data.pathSalariesHeading,
+          pathSalariesDescription: data.pathSalariesDescription,
+          pathRoles: data.pathRoles,
           reviews: data.reviews,
 
         }

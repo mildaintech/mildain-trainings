@@ -24,6 +24,10 @@ const subCategorySchema = new mongoose.Schema({
   successVideoImageAlt: { type: String, default: "" },
   successVideoImageTitle: { type: String, default: "" },
   reviews: [{ name: { type: String }, role: { type: String }, quote: { type: String }, text: { type: String }, image: { type: String }, imageAlt: { type: String }, imageTitle: { type: String }, logo: { type: String }, logoAlt: { type: String }, logoTitle: { type: String } }],
+  pathSalariesHeading: { type: String, default: "" },
+  pathSalariesDescription: { type: String, default: "" },
+  pathRoles: [{ roleName: { type: String }, salaryInr: { type: String }, salaryUsd: { type: String } }],
+
   isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 

@@ -10,11 +10,14 @@ export default function AddCoursePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [categories, setCategories] = useState<any[]>([]);
+  const [subcategories, setSubcategories] = useState<any[]>([]);
+  const [filteredSubcategories, setFilteredSubcategories] = useState<any[]>([]);
 
   const [formData, setFormData] = useState({
     title: "",
     slug: "",
     category: "",
+    subcategory: "",
     inrPrice: "",
     usdPrice: "",
     provider: "",
@@ -31,17 +34,40 @@ export default function AddCoursePage() {
   });
 
   useEffect(() => {
-    async function fetchCategories() {
+    async function fetchData() {
       try {
-        const res = await fetch("/api/admin/categories");
-        if (res.ok) {
-          const data = await res.json();
-          setCategories(data);
+        const catRes = await fetch("/api/admin/categories");
+        if (catRes.ok) {
+          const catData = await catRes.json();
+          setCategories(catData);
+        }
+
+        const subRes = await fetch("/api/admin/subcategories");
+        if (subRes.ok) {
+          const subData = await subRes.json();
+          setSubcategories(subData);
         }
       } catch (err) {}
     }
-    fetchCategories();
+    fetchData();
   }, []);
+
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedCategoryName = e.target.value;
+    setFormData({ ...formData, category: selectedCategoryName, subcategory: "" });
+
+    const selectedCatObj = categories.find((c: any) => (c.name || c.title) === selectedCategoryName);
+    if (selectedCatObj) {
+      const catId = selectedCatObj._id;
+      const filtered = subcategories.filter((sub: any) => {
+        const parentId = typeof sub.parentCategory === 'object' ? sub.parentCategory?._id : sub.parentCategory;
+        return parentId === catId;
+      });
+      setFilteredSubcategories(filtered);
+    } else {
+      setFilteredSubcategories([]);
+    }
+  };
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const title = e.target.value;
@@ -181,12 +207,26 @@ export default function AddCoursePage() {
                 <select
                   required
                   value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  onChange={handleCategoryChange}
                   className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
                 >
                   <option value="">Select Category</option>
                   {categories.map((cat: any, index: number) => (
                     <option key={index} value={cat.name || cat.title}>{cat.name || cat.title}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Subcategory</label>
+                <select
+                  value={formData.subcategory}
+                  onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
+                  className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
+                >
+                  <option value="">Select Subcategory</option>
+                  {filteredSubcategories.map((sub: any, index: number) => (
+                    <option key={index} value={sub.name || sub.title}>{sub.name || sub.title}</option>
                   ))}
                 </select>
               </div>
@@ -390,7 +430,7 @@ export default function AddCoursePage() {
                       value={formData.logoImageTitle}
                       onChange={(e) => setFormData({ ...formData, logoImageTitle: e.target.value })}
                       placeholder="Logo Title Text"
-                      className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 outline-none text-[13px]"
+                      className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm outline-none text-[13px]"
                     />
                   </div>
                 </div>

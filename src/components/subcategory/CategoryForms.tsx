@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Save, AlertCircle, X, ArrowLeft, FileText, BookOpen, Wrench, Briefcase, Users, Star } from "lucide-react";
+import { Save, AlertCircle, X, ArrowLeft, FileText, BookOpen, Wrench, Briefcase, Users, Star, TrendingUp } from "lucide-react";
 import * as XLSX from "xlsx";
 import SubcategoryBasicInfoTab from "./SubcategoryBasicInfoTab";
 import SubcategoryCurriculumTab from "./SubcategoryCurriculumTab";
@@ -9,6 +9,7 @@ import SubcategoryToolsTab from "./SubcategoryToolsTab";
 import SubcategoryCareerSupportTab from "./SubcategoryCareerSupportTab";
 import SubcategoryAdvisorTab from "./SubcategoryAdvisorTab";
 import SubcategoryReviewsTab from "./SubcategoryReviewsTab";
+import SubcategoryPathSalariesTab from "./SubcategoryPathSalariesTab";
 
 const handleNameSlug = (name: string) => ({
   name,
@@ -69,7 +70,8 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
     toolsHeading: "", toolsList: [] as any[],
     careerSupportTitle: "", careerSupportDescription: "", careerSupportBrochurePdf: "", careerSupportBgImage: "", careerSupportItems: [] as any[],
     advisorHeading: "", advisors: [] as any[],
-    successVideoUrl: "", successVideoImage: "", successVideoImageAlt: "", successVideoImageTitle: "", reviews: [] as any[]
+    successVideoUrl: "", successVideoImage: "", successVideoImageAlt: "", successVideoImageTitle: "", reviews: [] as any[],
+    pathSalariesHeading: "", pathSalariesDescription: "", pathRoles: [] as any[]
   });
 
   useEffect(() => {
@@ -96,7 +98,10 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
         successVideoImage: initialData.successVideoImage || "",
         successVideoImageAlt: initialData.successVideoImageAlt || "",
         successVideoImageTitle: initialData.successVideoImageTitle || "",
-        reviews: initialData.reviews || []
+        reviews: initialData.reviews || [],
+        pathSalariesHeading: initialData.pathSalariesHeading || "",
+        pathSalariesDescription: initialData.pathSalariesDescription || "",
+        pathRoles: initialData.pathRoles || []
       });
     }
   }, [initialData]);
@@ -224,7 +229,8 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
     { id: "tools", label: "Tools Covered", icon: Wrench },
     { id: "careerSupport", label: "Career Support", icon: Briefcase },
     { id: "advisors", label: "Course Advisors", icon: Users },
-    { id: "reviews", label: "Student Reviews", icon: Star }
+    { id: "reviews", label: "Student Reviews", icon: Star },
+    { id: "pathSalaries", label: "Path & Salaries", icon: TrendingUp }
   ];
 
   return (
@@ -279,7 +285,6 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
               handleImageUpload={handleImageUpload} 
             />
           )}
-
           {activeTab === "curriculum" && (
             <SubcategoryCurriculumTab 
               formData={formData} 
@@ -288,14 +293,12 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
               handleBulkExcelUpload={handleBulkExcelUpload}
             />
           )}
-
           {activeTab === "tools" && (
             <SubcategoryToolsTab 
               formData={formData} 
               setFormData={setFormData} 
             />
           )}
-
           {activeTab === "careerSupport" && (
             <SubcategoryCareerSupportTab 
               formData={formData} 
@@ -303,16 +306,20 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
               handleBrochurePdfUpload={handleBrochurePdfUpload}
             />
           )}
-
           {activeTab === "advisors" && (
             <SubcategoryAdvisorTab 
               formData={formData} 
               setFormData={setFormData} 
             />
           )}
-
           {activeTab === "reviews" && (
             <SubcategoryReviewsTab 
+              formData={formData} 
+              setFormData={setFormData} 
+            />
+          )}
+          {activeTab === "pathSalaries" && (
+            <SubcategoryPathSalariesTab 
               formData={formData} 
               setFormData={setFormData} 
             />

@@ -57,27 +57,7 @@ export default function CourseCurriculum({ course }: { course?: any }) {
       document.body.removeChild(link);
     }
   };
-
-  if (modules.length === 0) {
-    return (
-      <div id="curriculum" className="w-full bg-background py-12 lg:py-16 border-t border-border">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 flex justify-center">
-          <div className="bg-card p-8 rounded-md shadow-sm border border-destructive/30 text-left w-full max-w-2xl">
-            <h3 className="text-xl font-bold text-destructive mb-4 border-b border-border pb-3">Curriculum Connection Missing</h3>
-            <div className="space-y-3 text-[15px] mb-6">
-              <div className="flex items-center justify-between p-3 bg-muted rounded-sm border border-border">
-                <strong className="text-foreground">Linked Subcategory in Course:</strong>
-                <span className={course?.subcategory ? "text-primary font-bold" : "text-destructive font-bold"}>
-                  {course?.subcategory || "None"}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
+  
   return (
     <div id="curriculum" className="w-full bg-background py-12 lg:py-16 border-t border-border">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">

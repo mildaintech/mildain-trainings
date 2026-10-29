@@ -131,7 +131,7 @@ export default function PMPHeroSection({ course, formattedCategory }: { course?:
                   <span>Rated the best</span>
                   <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FFB800] fill-current" />
                   <span className="font-bold text-foreground">Trustpilot {course.trustpilotRating}/5</span>
-                  <Link href="/reviews" className="text-primary hover:underline hidden sm:inline-block">Read Reviews</Link>
+                  <div  className="text-primary hover:underline hidden sm:inline-block">Read Reviews</div>
                 </div>
               )}
 

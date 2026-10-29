@@ -207,7 +207,7 @@ export default function InquiryForm() {
 
         <p className="text-[11px] text-muted-foreground mt-2 leading-relaxed text-center mb-0">
           By registering here, I agree to Mildain Trainings
-          <Link href="/terms" className="text-primary hover:underline ml-1">Terms & Condition</Link> and
+          <Link href="/terms-and-conditions" className="text-primary hover:underline ml-1">Terms & Condition</Link> and
           <Link href="/privacy-policy" className="text-primary hover:underline ml-1">Privacy Policy</Link>
         </p>
       </form>

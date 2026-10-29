@@ -168,8 +168,7 @@ export default async function CourseDetailPage({
         <CourseTools course={plainCourse} />
         <CoursePathSalaries course={plainCourse} isIndia={isIndia} />
         <CourseCareerSupport course={plainCourse}  />
-        <RelatedPrograms category={plainCourse.category} currentSlug={plainCourse.slug} isIndia={isIndia} />
-        <CourseFAQ course={plainCourse} />
+        <RelatedPrograms category={plainCourse.category} subcategory={plainCourse.subcategory} currentSlug={plainCourse.slug} isIndia={isIndia} />        <CourseFAQ course={plainCourse} />
         <InsightsCarousel />
         <ScrollButton />
       </div>
