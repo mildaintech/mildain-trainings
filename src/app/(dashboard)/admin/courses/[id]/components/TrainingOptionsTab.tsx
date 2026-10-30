@@ -29,9 +29,7 @@ export default function TrainingOptionsTab({ formData, setFormData }: { formData
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
-      
-      {/* Error Message Display */}
+    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">     
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
           <AlertCircle size={16} />

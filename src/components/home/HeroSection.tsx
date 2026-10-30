@@ -78,7 +78,7 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="relative w-full h-auto lg:h-[calc(100vh-76px)] lg:min-h-[480px] lg:max-h-[600px] mt-[64px] lg:mt-[76px] bg-background lg:bg-gradient-to-r lg:from-primary/10 lg:via-primary/5 lg:to-background overflow-hidden flex flex-col">
+    <div className="relative w-full h-auto lg:h-[calc(100vh-76px)] lg:min-h-[480px] lg:max-h-[600px] mt-[20px] lg:mt-[30px] bg-background lg:bg-gradient-to-r lg:from-primary/10 lg:via-primary/5 lg:to-background overflow-hidden flex flex-col">
       
       <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/10 to-transparent lg:hidden pointer-events-none"></div>
 

@@ -57,8 +57,6 @@ export default function CourseCareerSupport({ course }: { course?: any }) {
   const title = subcategoryData?.careerSupportTitle || course.careerSupportTitle || "";
   const description = subcategoryData?.careerSupportDescription || course.careerSupportDescription || "";
   const pdfUrl = subcategoryData?.careerSupportBrochurePdf || course.careerSupportBrochurePdf || "";
-  // const bgImage = subcategoryData?.careerSupportBgImage || course.careerSupportBgImage || "";
-  // const bgImage = "https://plus.unsplash.com/premium_photo-1658506712625-62e671f7de91?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D";
 
   const bgImage =
     subcategoryData?.careerSupportBgImage ||

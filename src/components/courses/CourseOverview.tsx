@@ -14,8 +14,6 @@ export default function CourseOverview({ course }: { course?: any }) {
   const description = course.overviewDescription || "";
   const keyPoints = course.overviewKeyPoints || [];
   const skillsCovered = course.overviewSkillsCovered || [];
-  
-  // Default fallback image if admin doesn't upload one
   const image = course.overviewImage || "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&auto=format&fit=crop&q=80";
   const imageAlt = course.overviewImageAlt || heading;
   const imageTitle = course.overviewImageTitle || heading;

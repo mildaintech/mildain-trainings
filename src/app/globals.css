@@ -41,11 +41,13 @@
   }
 
   h1 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-foreground leading-tight;
+    @apply text-4xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-foreground leading-tight;
+    font-family: 'Satoshi', sans-serif;
   }
 
   h2 {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-snug;
+     font-family: 'Satoshi', sans-serif;
   }
 
   h3 {

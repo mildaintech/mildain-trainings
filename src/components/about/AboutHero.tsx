@@ -3,9 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import { ChevronRight, MapPin } from 'lucide-react';
-
-// const locations = ['Bengaluru', 'Noida', 'Austin'];
-
 export default function AboutHero() {
   return (
     <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] mt-[64px] lg:mt-[76px] overflow-hidden flex items-center bg-[#04140c]">

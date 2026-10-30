@@ -9,13 +9,12 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Limit file size to 1MB to prevent Vercel Payload Too Large error
       if (file.size > 1 * 1024 * 1024) {
         setError("Image size must be less than 1MB");
         return;
       }
       
-      setError(""); // Clear error if size is valid
+      setError("");
       const reader = new FileReader();
       reader.onloadend = () => {
         setFormData({ ...formData, [field]: reader.result as string });
@@ -26,14 +25,12 @@ export default function ExamDetailsTab({ formData, setFormData }: { formData: an
 
   const removeImage = (field: string) => {
     setFormData({ ...formData, [field]: "" });
-    setError(""); // Clear error when removing
+    setError("");
   };
 
   return (
     <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
-      
-      {/* Global Error Display for Image Uploads */}
-      {error && (
+            {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
           <AlertCircle size={16} />
           {error}

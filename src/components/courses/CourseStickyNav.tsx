@@ -81,8 +81,14 @@ export default function CourseStickyNav() {
               ))}
             </nav>
             <div className="shrink-0 ml-6">
-              <button 
+              {/* <button 
                 onClick={(e) => scrollToSection(e, 'options')}
+                className="bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold px-8 py-3 rounded-md shadow-sm transition-all"
+              >
+                Enroll Now
+              </button> */}
+              <button 
+                onClick={() => window.open('/login', '_blank', 'noopener,noreferrer')}
                 className="bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold px-8 py-3 rounded-md shadow-sm transition-all"
               >
                 Enroll Now
@@ -98,8 +104,14 @@ export default function CourseStickyNav() {
               {activeItem.label}
               {isMobileMenuOpen ? <ChevronUp size={20} className="text-muted-foreground" /> : <ChevronDown size={20} className="text-muted-foreground" />}
             </button>
-            <button
+            {/* <button
               onClick={(e) => scrollToSection(e, 'options')}
+              className="bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold px-6 py-2.5 rounded-md text-[15px] transition-all shadow-sm"
+            >
+              Enroll Now
+            </button> */}
+            <button 
+              onClick={() => window.open('/login', '_blank', 'noopener,noreferrer')}
               className="bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold px-6 py-2.5 rounded-md text-[15px] transition-all shadow-sm"
             >
               Enroll Now

@@ -1,11 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Plus, Minus, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 
 export default function CourseCurriculum({ course }: { course?: any }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [subcategoryData, setSubcategoryData] = useState<any>(null);
+  const [visibleCount, setVisibleCount] = useState(5);
 
   useEffect(() => {
     if (course?.subcategory) {
@@ -57,6 +58,12 @@ export default function CourseCurriculum({ course }: { course?: any }) {
       document.body.removeChild(link);
     }
   };
+
+  const handleLoadMore = () => {
+    setVisibleCount(prev => prev + 5);
+  };
+
+  const visibleModules = modules.slice(0, visibleCount);
   
   return (
     <div id="curriculum" className="w-full bg-background py-12 lg:py-16 border-t border-border">
@@ -70,34 +77,35 @@ export default function CourseCurriculum({ course }: { course?: any }) {
           </p>
         </div>
 
-        <div className="flex flex-col gap-3.5 mb-10">
-          {modules.map((item: any, index: number) => {
+        <div className="flex flex-col gap-4 mb-6">
+          {visibleModules.map((item: any, index: number) => {
             const isOpen = openIndex === index;
 
             return (
               <div 
                 key={index} 
-                className={`w-full rounded-lg overflow-hidden transition-all duration-300 border ${
+                className={`w-full rounded-lg overflow-hidden transition-all duration-300 border shadow-sm group ${
                   isOpen 
-                    ? 'bg-btn-gradient border-primary shadow-md text-primary-foreground' 
-                    : 'bg-card border-border text-foreground hover:border-primary/50'
+                    ? 'bg-btn-gradient border-primary text-primary-foreground' 
+                    : 'bg-card border-border text-foreground hover:border-primary/40'
                 }`}
               >
                 <button 
                   onClick={() => toggleSection(index)}
-                  className="w-full flex items-center justify-between p-2 md:p-3 text-left transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-between p-3 md:p-3 text-left transition-colors cursor-pointer"
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 pr-4">
-                    <span className={`font-bold text-[14px] md:text-[15px] ${
+                    <span className={`font-bold text-[15px] md:text-[17px] ${
                       isOpen ? 'text-primary-foreground' : 'text-foreground'
                     }`}>
                       {item.title}
                     </span>
                   </div>
-                  <div className={`shrink-0 w-8 h-8 rounded-full flex items-center justify-center ml-4 transition-colors ${
-                    isOpen ? 'bg-transparent border border-primary-foreground text-primary-foreground' : 'bg-primary text-primary-foreground'
+                  
+                  <div className={`shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-transform duration-300 ${
+                    isOpen ? 'bg-primary-foreground/20 text-primary-foreground rotate-180' : 'bg-muted text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary'
                   }`}>
-                    {isOpen ? <Minus size={18} strokeWidth={2.5} /> : <Plus size={18} strokeWidth={2.5} />}
+                    <ChevronDown size={20} strokeWidth={2.5} />
                   </div>
                 </button>
                 
@@ -107,7 +115,7 @@ export default function CourseCurriculum({ course }: { course?: any }) {
                   }`}
                 >
                   <div 
-                    className="p-5 bg-card text-foreground text-[14px] leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:marker:text-primary [&_li]:mb-1.5 [&_p]:mb-2"
+                    className="p-5 bg-card text-foreground text-[15px] leading-relaxed [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:marker:text-primary [&_li]:mb-2 [&_p]:mb-3"
                     dangerouslySetInnerHTML={{ __html: item.contentHtml }}
                   />
                 </div>
@@ -116,16 +124,29 @@ export default function CourseCurriculum({ course }: { course?: any }) {
           })}
         </div>
 
-        {pdfLink && (
-          <button 
-            onClick={handleDownload}
-            className="relative overflow-hidden group flex items-center gap-2 px-6 py-3.5 bg-btn-gradient text-primary-foreground font-bold text-[14px] rounded-md shadow-sm hover:opacity-90 transition-all cursor-pointer"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              Download Curriculum <ArrowRight size={18} strokeWidth={2.5} />
+        {modules.length > visibleCount && (
+          <div className="flex justify-center mb-8">
+            <span 
+              onClick={handleLoadMore}
+              className="text-primary font-bold text-[15px] hover:underline cursor-pointer flex items-center gap-1.5 transition-all"
+            >
+              View More <ChevronDown size={16} strokeWidth={3} className="mt-0.5" />
             </span>
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
-          </button>
+          </div>
+        )}
+
+        {pdfLink && (
+          <div className="flex justify-start border-t border-border pt-6">
+            <button 
+              onClick={handleDownload}
+              className="relative overflow-hidden group flex items-center justify-center gap-2 px-8 py-3.5 bg-btn-gradient text-primary-foreground font-bold text-[15px] rounded-md shadow-sm hover:opacity-90 transition-all cursor-pointer w-full sm:w-auto"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Download Curriculum <ArrowRight size={18} strokeWidth={2.5} />
+              </span>
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
+            </button>
+          </div>
         )}
 
       </div>

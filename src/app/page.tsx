@@ -12,7 +12,6 @@ import StickyBottomBar from "@/components/shared/StickyBottomBar";
 import TrustSection from "@/components/shared/TrustSection";
 import ExplorePrograms from "@/components/courses/ExplorePrograms";
 import EnterpriseLogos from "@/components/shared/EnterpriseLogos";
-// import DiscountBadge from "@/components/shared/DiscountBadge";
 
 export default function Home() {
   return (

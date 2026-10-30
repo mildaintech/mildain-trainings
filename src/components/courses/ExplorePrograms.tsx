@@ -212,7 +212,6 @@ export default function ExplorePrograms() {
             ))
           )}
         </div>
-{/* gap: 2.5rem; */}
         <div className="hidden lg:flex flex-row gap-6  ">
           <div className="w-[280px] shrink-0 flex flex-col gap-3">
             {isLoading ? (

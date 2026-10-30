@@ -226,11 +226,12 @@ export function SubcategoryForm({ parentCategory, initialData, onSave, onCancel,
   const tabs = [
     { id: "basic", label: "Basic Info", icon: FileText },
     { id: "curriculum", label: "Curriculum Syllabus", icon: BookOpen },
-    { id: "tools", label: "Tools Covered", icon: Wrench },
-    { id: "careerSupport", label: "Career Support", icon: Briefcase },
     { id: "advisors", label: "Course Advisors", icon: Users },
     { id: "reviews", label: "Student Reviews", icon: Star },
-    { id: "pathSalaries", label: "Path & Salaries", icon: TrendingUp }
+    { id: "tools", label: "Tools Covered", icon: Wrench },
+    { id: "pathSalaries", label: "Path & Salaries", icon: TrendingUp },
+    { id: "careerSupport", label: "Career Support", icon: Briefcase },
+
   ];
 
   return (

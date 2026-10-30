@@ -51,19 +51,18 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
     const updatedTabs = [...(formData.benefitsTabs || [])];
     updatedTabs[tabIndex].companies.splice(compIndex, 1);
     setFormData({ ...formData, benefitsTabs: updatedTabs });
-    setError(""); // Clear error on removal
+    setError("");
   };
 
   const handleCompanyLogo = (e: React.ChangeEvent<HTMLInputElement>, tIndex: number, cIndex: number) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Limit file size to 1MB to prevent Vercel Payload Too Large error
       if (file.size > 1 * 1024 * 1024) {
         setError(`Logo for Company ${cIndex + 1} must be less than 1MB`);
         return;
       }
       
-      setError(""); // Clear error if size is valid
+      setError("");
       const reader = new FileReader();
       reader.onloadend = () => {
         updateCompany(tIndex, cIndex, "logo", reader.result as string);
@@ -73,9 +72,7 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">
-      
-      {/* Global Error Display for Image Uploads */}
+    <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-8">    
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-sm flex items-center gap-2 text-[13px] font-medium">
           <AlertCircle size={16} />
@@ -196,9 +193,6 @@ export default function BenefitsTab({ formData, setFormData }: { formData: any, 
           ))}
         </div>
       </div>
-      <h1 className="bg-background/5 text-stone-700 text-3xl sm-text-4xl font-bold py-16 mt-6 width-[1400] text-justify ">
-       CISA
-      </h1>
     </div>
   );
 }

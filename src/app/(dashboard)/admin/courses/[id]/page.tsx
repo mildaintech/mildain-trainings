@@ -435,9 +435,7 @@ export default function EditCoursePage() {
           {activeTab === "tools" && <ToolsTab formData={formData} />}
           {activeTab === "advisors" && <AdvisorTab formData={formData} />}
           {activeTab === "careerSupport" && <CareerSupportTab formData={formData} />}        
-          {/* {activeTab === "pathSalaries" && <PathSalariesTab formData={formData} setFormData={setFormData} />} */}
           {activeTab === "pathSalaries" && <PathSalariesTab formData={formData} />}
-          {/* {activeTab === "reviews" && <ReviewsTab formData={formData} setFormData={setFormData} />} */}
           {activeTab === "reviews" && <ReviewsTab formData={formData} />}
           {activeTab === "faqs" && <FaqTab formData={formData} setFormData={setFormData} />}
         </div>

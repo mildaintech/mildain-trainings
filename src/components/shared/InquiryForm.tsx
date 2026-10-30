@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { PhoneCall } from "lucide-react";
+import { PhoneCall, Phone, MessageCircle } from "lucide-react";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 export default function InquiryForm() {
@@ -13,6 +13,8 @@ export default function InquiryForm() {
   });
   const [phone, setPhone] = useState<string | undefined>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showCallOptions, setShowCallOptions] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   
   const [userCountryCode, setUserCountryCode] = useState<any>("IN");
   const [userCountryName, setUserCountryName] = useState<string>("India");
@@ -47,6 +49,16 @@ export default function InquiryForm() {
           setUserCountryName("India");
         });
     }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setShowCallOptions(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -133,12 +145,44 @@ export default function InquiryForm() {
 
   return (
     <div className="bg-card border border-border rounded-xl shadow-md overflow-hidden flex flex-col relative z-20">
-      <div className="bg-btn-gradient text-primary-foreground p-5 flex items-center justify-between">
-        <div>
-          <p className="text-[13px] font-medium text-primary-foreground/90 mb-1">Get Free Career Guidance</p>
-          <p className="text-2xl lg:text-3xl font-bold text-primary-foreground tracking-tight">+91 <span className="ml-2">892-919-9704</span></p>
+      <div ref={dropdownRef} className="relative">
+        <div 
+          onClick={() => setShowCallOptions(!showCallOptions)}
+          className="bg-btn-gradient text-primary-foreground p-5 flex items-center justify-between cursor-pointer select-none"
+        >
+          <div>
+            <p className="text-[13px] font-medium text-primary-foreground/90 mb-1">Get Free Career Guidance</p>
+            <p className="text-2xl lg:text-3xl font-bold text-primary-foreground tracking-tight">+91 <span className="ml-2">892-919-9704</span></p>
+          </div>
+          <PhoneCall className="w-8 h-8 text-primary-foreground opacity-90 vibrate-phone-icon" strokeWidth={2} />
         </div>
-        <PhoneCall className="w-8 h-8 text-primary-foreground opacity-90" strokeWidth={2} />
+
+        {showCallOptions && (
+          <div className="absolute right-4 top-[88%] mt-1 w-52 bg-card border border-border rounded-lg shadow-xl z-50 overflow-hidden py-1.5">
+            <a
+              href="tel:+918929199704"
+              onClick={() => setShowCallOptions(false)}
+              className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-foreground hover:bg-muted transition-colors"
+            >
+              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                <Phone className="w-4 h-4" />
+              </div>
+              <span> Call</span>
+            </a>
+            <a
+              href="https://wa.me/918929199704"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setShowCallOptions(false)}
+              className="flex items-center gap-3 px-4 py-2.5 text-[14px] font-semibold text-foreground hover:bg-muted transition-colors"
+            >
+              <div className="w-8 h-8 rounded-full bg-[#25D366]/10 flex items-center justify-center text-[#25D366] shrink-0">
+                <MessageCircle className="w-4 h-4" />
+              </div>
+              <span>Chat Us</span>
+            </a>
+          </div>
+        )}
       </div>
 
       <form onSubmit={handleSubmit} className="p-6 flex flex-col gap-4">
@@ -212,7 +256,39 @@ export default function InquiryForm() {
         </p>
       </form>
 
-      <style dangerouslySetInnerHTML={{ __html: ` .custom-phone-input {display: flex;align-items: center;gap: 8px;} .custom-phone-input input { width: 100%; border: none; outline: none; background: transparent; color: inherit; font-size: 14px; } .PhoneInputCountry { padding-left: 4px; } ` }} />
+      <style dangerouslySetInnerHTML={{ __html: `
+        .custom-phone-input { display: flex; align-items: center; gap: 8px; }
+        .custom-phone-input input { width: 100%; border: none; outline: none; background: transparent; color: inherit; font-size: 14px; }
+        .PhoneInputCountry { padding-left: 4px; }
+        @keyframes phoneVibrateCycle {
+          0% { transform: rotate(0deg) scale(1); }
+          2.5% { transform: rotate(-15deg) scale(1.1); }
+          5% { transform: rotate(15deg) scale(1.1); }
+          7.5% { transform: rotate(-15deg) scale(1.1); }
+          10% { transform: rotate(15deg) scale(1.1); }
+          12.5% { transform: rotate(-15deg) scale(1.1); }
+          15% { transform: rotate(15deg) scale(1.1); }
+          17.5% { transform: rotate(-15deg) scale(1.1); }
+          20% { transform: rotate(15deg) scale(1.1); }
+          22.5% { transform: rotate(-15deg) scale(1.1); }
+          25% { transform: rotate(15deg) scale(1.1); }
+          27.5% { transform: rotate(-15deg) scale(1.1); }
+          30% { transform: rotate(15deg) scale(1.1); }
+          32.5% { transform: rotate(-15deg) scale(1.1); }
+          35% { transform: rotate(15deg) scale(1.1); }
+          37.5% { transform: rotate(-15deg) scale(1.1); }
+          40% { transform: rotate(15deg) scale(1.1); }
+          42.5% { transform: rotate(-15deg) scale(1.1); }
+          45% { transform: rotate(15deg) scale(1.1); }
+          47.5% { transform: rotate(-15deg) scale(1.1); }
+          50% { transform: rotate(0deg) scale(1); }
+          100% { transform: rotate(0deg) scale(1); }
+        }
+        .vibrate-phone-icon {
+          animation: phoneVibrateCycle 4s infinite ease-in-out;
+          transform-origin: center;
+        }
+      ` }} />
     </div>
   );
 }

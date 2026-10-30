@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, ChevronRight, Menu, X, LayoutGrid, ChevronDown, UserCircle, LayoutDashboard, LogOut, ShieldCheck } from 'lucide-react';
+import { Search, ChevronRight, Menu, X, LayoutGrid, ChevronDown, User, LayoutDashboard, LogOut } from 'lucide-react';
 
 interface Course {
   _id: string;
@@ -222,9 +222,9 @@ export default function Navbar() {
                   className="flex items-center gap-2 focus:outline-none transition-transform hover:scale-105"
                 >
                   {user.role === "admin" ? (
-                    <ShieldCheck className="w-8 h-8 xl:w-9 xl:h-9 text-primary" strokeWidth={1.5} />
+                    <User className="w-8 h-8 xl:w-9 xl:h-9 fill-current text-primary" strokeWidth={1.5} />
                   ) : (
-                    <UserCircle className="w-8 h-8 xl:w-9 xl:h-9 text-primary" strokeWidth={1.5} />
+                    <User className="w-8 h-8 xl:w-9 xl:h-9 fill-current text-primary" strokeWidth={1.5} />
                   )}
                 </button>
 
@@ -393,9 +393,9 @@ export default function Navbar() {
               <div className="flex flex-col gap-2 border border-border rounded-lg p-3 bg-secondary/20">
                 <div className="flex items-center gap-3 pb-3 border-b border-border">
                   {user.role === "admin" ? (
-                    <ShieldCheck className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                    <User className="w-8 h-8 fill-current text-primary" strokeWidth={1.5} />
                   ) : (
-                    <UserCircle className="w-8 h-8 text-primary" strokeWidth={1.5} />
+                    <User className="w-8 h-8 fill-current text-primary" strokeWidth={1.5} />
                   )}
                   <div>
                     <p className="text-[14px] font-bold text-foreground truncate">{user.name}</p>
