@@ -8,8 +8,8 @@ const locations = ['Bengaluru', 'Noida', 'Austin'];
 
 export default function ContactHero() {
   return (
-    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] mt-[64px] lg:mt-[76px] overflow-hidden flex items-center bg-[#04140c]">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#04140c] via-[#0a3a21] to-[#0AA34F] opacity-95" />
+    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] mt-[64px] lg:mt-[76px] overflow-hidden flex items-center bg-[#0f2623]">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0f2623] via-[#183631] to-[#2e6157] opacity-95" />
 
       <img
         src="/images/home/hero1.png"
@@ -29,8 +29,8 @@ export default function ContactHero() {
         }}
       />
 
-      <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[#22e07a]/25 blur-[110px] pointer-events-none" />
-      <div className="absolute -bottom-32 left-1/4 w-[360px] h-[360px] rounded-full bg-[#0AA34F]/30 blur-[120px] pointer-events-none" />
+      <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[#2e7373]/25 blur-[110px] pointer-events-none" />
+      <div className="absolute -bottom-32 left-1/4 w-[360px] h-[360px] rounded-full bg-[#2e6157]/30 blur-[120px] pointer-events-none" />
 
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
 
@@ -50,13 +50,13 @@ export default function ContactHero() {
             <span className="text-[13px] md:text-[14px] text-white font-semibold">Contact Us</span>
           </nav>
 
-          <span className="text-[12px] md:text-[13px] font-semibold tracking-[0.22em] uppercase text-[#7ef0b0] mb-4">
+          <span className="text-[12px] md:text-[13px] font-semibold tracking-[0.22em] uppercase text-[#8fd4c8] mb-4">
             We'd love to hear from you
           </span>
 
           <h1 className="text-[42px] sm:text-[52px] md:text-[60px] lg:text-[68px] font-extrabold leading-[1.05] tracking-tight mb-6 text-white">
             Get in{' '}
-            <span className="bg-gradient-to-r from-[#9bf5c1] via-white to-[#9bf5c1] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#a8e0d6] via-white to-[#a8e0d6] bg-clip-text text-transparent">
               Touch
             </span>
           </h1>
@@ -72,7 +72,7 @@ export default function ContactHero() {
                 key={loc}
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/15 backdrop-blur-md text-white/90 text-[13px] md:text-[14px] font-medium"
               >
-                <MapPin className="w-3.5 h-3.5 text-[#7ef0b0]" />
+                <MapPin className="w-3.5 h-3.5 text-[#8fd4c8]" />
                 {loc}
               </span>
             ))}

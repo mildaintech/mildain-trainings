@@ -118,7 +118,7 @@ export default function InsightsCarousel() {
             {articles.map((article) => (
               <div 
                 key={article.id} 
-                className="w-full sm:w-1/2 lg:w-1/3 flex-none relative h-[26rem] md:h-[30rem] overflow-hidden group border-r border-border/20 last:border-r-0 text-white"
+                className="w-full sm:w-1/2 lg:w-1/3 flex-none relative h-[20rem] md:h-[26rem] overflow-hidden group border-r border-border/20 last:border-r-0 text-white"
               >
                 <Image
                   src={article.image}
@@ -132,18 +132,18 @@ export default function InsightsCarousel() {
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 
                 <div className="absolute inset-0 p-6 md:p-10 flex flex-col z-10 w-full md:w-11/12">
-                  <h3 className="mb-4 line-clamp-3 text-white">
+                  <h3 className=" text-xl sm:text-2xl lg:text-3xl mb-4 line-clamp-3 text-white">
                     {article.title}
                   </h3>
                   
                   <div className="w-16 h-1 bg-[#199d5a] mb-5" />
                   
-                  <p className="line-clamp-4 mb-6 text-white/90">
+                  <p className=" text-lg sm:text-xl lg:text-xl line-clamp-4 mb-6 text-white/90">
                     {article.description}
                   </p>
                   
                   <div className="mt-auto">
-                    <button className="bg-btn-gradient text-primary-foreground hover:opacity-95 transition-all px-6 py-3.5 rounded-sm flex items-center justify-center gap-2 shadow-sm w-[220px]">
+                    <button className="bg-btn-gradient text-primary-foreground hover:opacity-95 transition-all px-2 py-2.5 rounded-sm flex items-center justify-center gap-2 shadow-sm w-[150px]">
                       Read More <ArrowRight size={20} strokeWidth={2.5} />
                     </button>
                   </div>

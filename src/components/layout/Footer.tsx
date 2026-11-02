@@ -19,7 +19,7 @@ export default function Footer() {
                 alt="Mildain Logo"
                 width={160}
                 height={45}
-                className="h-9 w-auto object-contain brightness-0 invert"
+                className="h-12 w-auto object-contain"
               />
             </Link>
             
@@ -117,6 +117,7 @@ export default function Footer() {
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Newsletters</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Blog</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Career</Link></li>
+              <li><Link href="about" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">About Us</Link></li>
               <li><Link href="contact-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Contact Us</Link></li>
               <li><Link href="terms-and-conditions" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Terms & Conditions</Link></li>
               <li><Link href="privacy-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>

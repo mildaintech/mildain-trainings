@@ -15,6 +15,7 @@ import CorporateFAQ from '@/components/corporate/CorporateFAQ';
 import StickyBottomBar from '@/components/shared/StickyBottomBar';
 import Footer from '@/components/layout/Footer';
 import CorporateTestimonialForm from '@/components/corporate/CorporateTestimonialForm';
+import { ScrollButton } from '@/components/layout/ScrollButton';
 
 export const metadata: Metadata = {
   title: 'Corporate Training Solutions | Mildain Trainings',
@@ -39,7 +40,7 @@ export default function CorporatePage() {
       <CorporateFAQ />
       <Footer />
       <StickyBottomBar />
-
+      <ScrollButton />
     </main>
   );
 }

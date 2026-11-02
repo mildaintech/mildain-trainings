@@ -7,6 +7,8 @@ import AboutStats from '@/components/about/AboutStats';
 import MissionVision from '@/components/about/MissionVision';
 import WhyChooseUs from '@/components/about/WhyChooseUs';
 import AboutCTA from '@/components/about/Aboutcta';
+import { ScrollButton } from '@/components/layout/ScrollButton';
+import StickyBottomBar from '@/components/shared/StickyBottomBar';
 
 export default function AboutPage() {
   return (
@@ -19,6 +21,8 @@ export default function AboutPage() {
       <WhyChooseUs />
       <AboutCTA />
       <Footer />
+      <ScrollButton />
+      <StickyBottomBar />
     </main>
   );
 }

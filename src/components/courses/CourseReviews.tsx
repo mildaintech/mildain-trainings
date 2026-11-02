@@ -122,13 +122,14 @@ export default function CourseReviews({ course }: { course?: any }) {
               Success story
             </div>
 
-            <div className="absolute top-6 right-8 z-10 flex items-center gap-2">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" className="text-primary-foreground"/>
-                <path d="M2 17L12 22L22 17" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M2 12L12 17L22 12" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <span className="text-primary-foreground font-extrabold text-xl md:text-2xl tracking-widest drop-shadow-md">MILDAIN</span>
+            <div className="absolute top-6 right-8 z-10 flex items-center">
+              <Image
+                src="/images/logo/logo.webp"
+                alt="Mildain Logo"
+                width={140}
+                height={40}
+                className="h-7 md:h-9 w-auto object-contain drop-shadow-md"
+              />
             </div>
 
             {embedUrl && (

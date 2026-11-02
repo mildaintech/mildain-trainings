@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Eye, EyeOff, Info } from "lucide-react";
+import Image from "next/image";
+import { Eye, EyeOff, Info, ArrowLeft } from "lucide-react";
 import PhoneInput, { isValidPhoneNumber } from "react-phone-number-input";
 
 export default function RegisterPage() {
@@ -111,46 +112,70 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-white">
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 overflow-y-auto">
-        <div className="w-full max-w-md">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-secondary/5">
+      <div className="w-full lg:w-[45%] flex flex-col p-4 sm:p-10 overflow-y-auto relative">
+        
+        <Link 
+          href="/" 
+          className="absolute top-6 left-6 sm:top-10 sm:left-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-background hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Back to Home"
+        >
+          <ArrowLeft size={20} strokeWidth={2} />
+        </Link>
+
+        <div className="w-full max-w-md mx-auto my-auto pt-16 lg:pt-0">
+          <div className="flex justify-center mb-8">
+            <Image
+              src="/images/logo/mildain training logo.png"
+              alt="Mildain Logo"
+              width={180}
+              height={45}
+              className="h-9 w-auto object-contain"
+              priority
+            />
+          </div>
+
           <div className="text-center mb-8">
-            <h1 className="text-[28px] font-bold text-gray-900">Create your account</h1>
+            <h1 className="text-[24px] sm:text-[28px] font-bold text-foreground leading-tight mb-2">Create your account</h1>
           </div>
           
-          {error && <div className="bg-red-50 border border-red-200 text-red-600 p-3 rounded-md text-sm mb-5 font-medium">{error}</div>}
+          {error && (
+            <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-md text-sm mb-5 font-medium text-center">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-[13px] text-gray-600 mb-1.5">First name<span className="text-red-500">*</span></label>
+                <label className="block text-[13px] text-muted-foreground/80 font-medium mb-1.5">First name<span className="text-destructive">*</span></label>
                 <input 
                   type="text" 
                   placeholder="First name"
                   value={formData.firstName}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[14px]"
+                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
                   onChange={(e) => handleNameChange(e, "firstName")}
                 />
               </div>
               <div>
-                <label className="block text-[13px] text-gray-600 mb-1.5">Last name<span className="text-red-500">*</span></label>
+                <label className="block text-[13px] text-muted-foreground/80 font-medium mb-1.5">Last name<span className="text-destructive">*</span></label>
                 <input 
                   type="text" 
                   placeholder="Last name"
                   value={formData.lastName}
-                  className="w-full p-2.5 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[14px]"
+                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
                   onChange={(e) => handleNameChange(e, "lastName")}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[13px] text-gray-600 mb-1.5">Email<span className="text-red-500">*</span></label>
+              <label className="block text-[13px] text-muted-foreground/80 font-medium mb-1.5">Email<span className="text-destructive">*</span></label>
               <input 
                 type="email" 
                 placeholder="Email address"
                 value={formData.email}
-                className="w-full p-2.5 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[14px]"
+                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
                 onChange={(e) => {
                   setFormData({...formData, email: e.target.value});
                   setError("");
@@ -159,50 +184,52 @@ export default function RegisterPage() {
             </div>
 
             <div>
-              <label className="block text-[13px] text-gray-600 mb-1.5">Country & Contact number<span className="text-red-500">*</span></label>
-              <div className="w-full border border-gray-300 rounded p-2.5 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all bg-white flex items-center">
+              <label className="block text-[13px] text-muted-foreground/80 font-medium mb-1.5">
+                Country & Contact number<span className="text-destructive">*</span>
+              </label>
+              <div className="w-full bg-background  border-border rounded-md p-3.5 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all flex items-center">
                 <PhoneInput
                   international
                   defaultCountry="IN"
                   value={phone}
                   onChange={handlePhoneChange}
-                  className="w-full text-[14px] outline-none bg-transparent"
+                  className="w-full text-[15px] text-foreground bg-transparent [&_input]:border-none [&_input]:outline-none [&_input]:bg-transparent [&_input]:shadow-none"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[13px] text-gray-600 mb-1.5">Password<span className="text-red-500">*</span></label>
+              <label className="block text-[13px] text-muted-foreground/80 font-medium mb-1.5">Password<span className="text-destructive">*</span></label>
               <div className="relative">
                 <input 
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   value={formData.password}
-                  className="w-full p-2.5 pr-20 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[14px]"
+                  className="w-full p-3.5 pr-20 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
                   onChange={(e) => {
                     setFormData({...formData, password: e.target.value});
                     setError("");
                   }}
                 />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 gap-2">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-4 gap-2">
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-gray-400 hover:text-gray-600 focus:outline-none"
+                    className="text-muted-foreground/70 hover:text-foreground focus:outline-none transition-colors"
                   >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                   <div 
                     className="relative flex items-center"
                     onMouseEnter={() => setShowTooltip(true)}
                     onMouseLeave={() => setShowTooltip(false)}
                   >
-                    <Info size={16} className="text-gray-400 hover:text-gray-600 cursor-help" />
+                    <Info size={18} className="text-muted-foreground/70 hover:text-foreground cursor-help" />
                     
                     {showTooltip && (
-                      <div className="absolute right-0 top-full mt-2 w-72 bg-[#2d2d2d] text-white p-4 rounded shadow-xl z-50 text-[13px]">
+                      <div className="absolute right-0 bottom-full mb-2 w-72 bg-card text-foreground border border-border p-4 rounded-md shadow-xl z-50 text-[13px]">
                         <h4 className="font-bold mb-2 text-[14px]">Password Criteria:</h4>
-                        <ul className="list-disc pl-5 space-y-1.5 text-gray-200">
+                        <ul className="list-disc pl-5 space-y-1.5 text-muted-foreground">
                           <li>Password must be at least 8 characters long</li>
                           <li>Password cannot be longer than 128 characters</li>
                           <li>It should contain at least one lowercase letter</li>
@@ -219,26 +246,33 @@ export default function RegisterPage() {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full bg-primary text-white py-3 rounded font-medium hover:opacity-90 transition disabled:opacity-70 mt-2 text-[15px]"
+              className="relative overflow-hidden group w-full bg-btn-gradient text-primary-foreground py-3.5 rounded-md font-bold transition-all disabled:opacity-70 mt-4 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
             >
-              {loading ? "Creating Account..." : "Create Account"}
+              <span className="relative z-10">{loading ? "Creating Account..." : "Create Account"}</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
             </button>
           </form>
           
-          <div className="mt-8 text-center border-t border-gray-200 pt-6">
-            <Link href="/login" className="text-[14px] text-primary hover:underline font-medium">
+          <div className="mt-8 text-center border-t border-border pt-6">
+            <Link href="/login" className="text-[14px] text-primary hover:underline font-semibold">
                Already have an account? Sign in here!
             </Link>
-            <p className="text-[13px] text-gray-500 mt-6">
+            <p className="text-[12px] text-muted-foreground/70 mt-6">
               © 2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline text-primary">Privacy Policy</Link>
             </p>
           </div>
         </div>
       </div>
 
-      <div className="hidden lg:flex w-1/2 bg-slate-900 relative items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        <div className="absolute inset-0 bg-[url('/bg-banner.jpg')] bg-cover bg-center bg-no-repeat opacity-50"></div>
+      <div className="hidden lg:flex lg:w-[55%] bg-muted relative items-center justify-center overflow-hidden border-l border-border">
+        <div className="absolute inset-0 bg-primary/10 z-10 mix-blend-multiply"></div>
+        <Image 
+          src="/images/workteam.png"
+          alt="Registration Background"
+          fill
+          className="object-cover opacity-90"
+          priority
+        />
       </div>
     </div>
   );
