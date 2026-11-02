@@ -153,7 +153,7 @@ export default function RegisterPage() {
                   type="text" 
                   placeholder="First name"
                   value={formData.firstName}
-                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-primary transition-all"
                   onChange={(e) => handleNameChange(e, "firstName")}
                 />
               </div>
@@ -163,7 +163,7 @@ export default function RegisterPage() {
                   type="text" 
                   placeholder="Last name"
                   value={formData.lastName}
-                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                  className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-primary transition-all"
                   onChange={(e) => handleNameChange(e, "lastName")}
                 />
               </div>
@@ -175,7 +175,7 @@ export default function RegisterPage() {
                 type="email" 
                 placeholder="Email address"
                 value={formData.email}
-                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-primary transition-all"
                 onChange={(e) => {
                   setFormData({...formData, email: e.target.value});
                   setError("");
@@ -205,7 +205,7 @@ export default function RegisterPage() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   value={formData.password}
-                  className="w-full p-3.5 pr-20 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                  className="w-full p-3.5 pr-20 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-primary transition-all"
                   onChange={(e) => {
                     setFormData({...formData, password: e.target.value});
                     setError("");

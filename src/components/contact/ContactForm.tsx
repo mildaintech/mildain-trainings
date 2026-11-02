@@ -150,7 +150,7 @@ export default function ContactForm() {
   };
 
   const inputBase =
-    "w-full bg-muted/30 border rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all duration-200";
+    "w-full bg-muted/30 border rounded-xl px-5 py-4 text-[15px] md:text-[16px] text-primary focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary focus:bg-background transition-all duration-200";
   const labelBase = "block text-[13px] font-semibold text-foreground/80 mb-2 px-1";
 
   return (

@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const country = request.headers.get('x-vercel-ip-country') || 'US';
-  const region = country === 'IN' ? 'IN' : 'US';
+  let region = request.cookies.get('userRegion')?.value;
+
+  if (!region) {
+    const country = request.headers.get('x-vercel-ip-country') || 'US';
+    region = country === 'IN' ? 'IN' : 'US';
+  }
 
   const token = request.cookies.get('token')?.value;
   const userRole = request.cookies.get('role')?.value;

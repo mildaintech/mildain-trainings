@@ -207,7 +207,7 @@ export default function Navbar() {
           </nav>
 
           <div className="hidden lg:flex items-center gap-3 xl:gap-4 h-full">
-            <Link href="/corporate" className="flex items-center justify-center bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground px-4 xl:px-6 h-[38px] xl:h-[42px] rounded-sm font-bold text-[13px] xl:text-[14px] transition-all whitespace-nowrap shrink-0">
+            <Link href="/corporate-training" className="flex items-center justify-center bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground px-4 xl:px-6 h-[38px] xl:h-[42px] rounded-sm font-bold text-[13px] xl:text-[14px] transition-all whitespace-nowrap shrink-0">
               Corporate
             </Link>
 
@@ -382,7 +382,7 @@ export default function Navbar() {
           
           <div className="flex flex-col gap-3 mt-2">
             <Button asChild className="bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground font-bold text-[14px] rounded-lg w-full h-[42px]">
-              <Link href="/corporate">Corporate</Link>
+              <Link href="/corporate-training">Corporate</Link>
             </Button>
 
             {!user ? (

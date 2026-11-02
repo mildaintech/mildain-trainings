@@ -85,7 +85,7 @@ export default function LoginPage() {
                 type="email" 
                 required 
                 placeholder="Email address*"
-                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                className="w-full p-3.5 bg-background border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
                 onChange={(e) => {
                   setFormData({...formData, email: e.target.value});
                   setError("");
@@ -98,7 +98,7 @@ export default function LoginPage() {
                 type={showPassword ? "text" : "password"}
                 required 
                 placeholder="Password*"
-                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-all"
+                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
                 onChange={(e) => {
                   setFormData({...formData, password: e.target.value});
                   setError("");
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-muted-foreground/70 hover:text-foreground focus:outline-none transition-colors"
+                  className="text-muted-foreground/90 hover:text-foreground focus:outline-none transition-colors"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -116,7 +116,7 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-end mt-2 mb-4">
-              <Link href="/forgot-password" className="text-[13px] text-primary hover:underline font-semibold">
+              <Link href="/forgot-password" className="text-[13px] placeholder:text-muted-foreground/90 hover:underline font-semibold">
                 Forgot Password?
               </Link>
             </div>
@@ -124,7 +124,7 @@ export default function LoginPage() {
             <button 
               type="submit" 
               disabled={loading}
-              className="relative overflow-hidden group w-full bg-btn-gradient text-primary-foreground py-3.5 rounded-md font-bold transition-all disabled:opacity-70 mt-2 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
+              className="relative overflow-hidden group w-full bg-btn-gradient placeholder:text-muted-foreground/90-foreground py-3.5 rounded-md font-bold transition-all disabled:opacity-70 mt-2 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
             >
               <span className="relative z-10">{loading ? "Logging in..." : "Login"}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
@@ -133,10 +133,10 @@ export default function LoginPage() {
 
           <div className="mt-8 text-center">
             <p className="text-[14px] text-muted-foreground mb-6">
-              Don't have an account? <Link href="/register" className="text-primary font-semibold hover:underline">Sign Up</Link>
+              Don't have an account? <Link href="/register" className="placeholder:text-muted-foreground/90 font-semibold hover:underline">Sign Up</Link>
             </p>
-            <p className="text-[12px] text-muted-foreground/70 pt-4 border-t border-border">
-              ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline text-primary">Privacy Policy</Link>
+            <p className="text-[12px] text-muted-foreground/90 pt-4 border-t border-border">
+              ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline placeholder:text-muted-foreground/90">Privacy Policy</Link>
             </p>
           </div>
         </div>
