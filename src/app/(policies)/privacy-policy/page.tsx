@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function PrivacyPolicy() {
   return (
-        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden animate-in fade-in duration-500 slide-in-from-bottom-4">
+        <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden animate-in fade-in duration-500 slide-in-from-bottom-4">
           
           <div className="bg-slate-900 px-8 py-12 md:px-12 md:py-16 relative overflow-hidden">
             <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-primary/20 rounded-full blur-3xl"></div>
@@ -14,7 +14,7 @@ export default function PrivacyPolicy() {
               </h1>
               <div className="flex items-center gap-2 text-slate-300 text-sm font-medium">
                 <span>Last Updated:</span>
-                <span className="text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">16 October 2026</span>
+                <span className=" font-bold bg-primary/10 px-2 py-1 rounded-md">16 October 2026</span>
               </div>
             </div>
           </div>

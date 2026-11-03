@@ -5,28 +5,22 @@ import { Toaster } from '@/components/ui/toaster';
 import { generateOrganizationSchema } from '@/lib/schema';
 import { connectToDatabase } from '@/lib/db';
 import Seo from '@/models/Seo';
+import { SiteLayout } from '@/components/layout/SiteLayout';
 
 export const metadata: Metadata = {
   title: 'Mildain Trainings - Learn Smarter, Achieve Knowledge',
   description: 'Expand your knowledge and open doors to exciting careers with our online education platform.',
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const orgSchema = generateOrganizationSchema();
-  let globalSchemaData = "";
+  let globalSchemaData = '';
 
   try {
     await connectToDatabase();
-    const globalSeo = await Seo.findOne({ pageUrl: "GLOBAL_SCHEMA" }).lean() as any;
-    if (globalSeo && globalSeo.schemaData) {
-      globalSchemaData = globalSeo.schemaData;
-    }
-  } catch (error) {
-  }
+    const globalSeo = await Seo.findOne({ pageUrl: 'GLOBAL_SCHEMA' }).lean() as { schemaData?: string } | null;
+    if (globalSeo?.schemaData) globalSchemaData = globalSeo.schemaData;
+  } catch (error) {}
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -34,19 +28,11 @@ export default async function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: orgSchema }} 
-        />
-        {globalSchemaData && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: globalSchemaData }}
-          />
-        )}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: orgSchema }} />
+        {globalSchemaData && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: globalSchemaData }} />}
       </head>
-      <body className="antialiased min-h-screen bg-background">
-        {children}
+      <body className="antialiased min-h-screen bg-white overflow-x-hidden m-0 p-0">
+        <SiteLayout>{children}</SiteLayout>
         <Toaster />
       </body>
     </html>

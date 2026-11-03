@@ -105,8 +105,6 @@ export default function Footer() {
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISM Training</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CRISC Training</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISO Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CCISO Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CEH Training</Link></li>
             </ul>
           </div>
 
@@ -116,7 +114,6 @@ export default function Footer() {
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Healthcare Cybersecurity</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Financial Services Security</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Manufacturing & OT Security</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors leading-snug block pr-4">Government & Federal Security Compliance</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Retail & PCI Security</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Critical Infrastructure Security</Link></li>
             </ul>
@@ -131,9 +128,6 @@ export default function Footer() {
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Career</Link></li>
               <li><Link href="about-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">About Us</Link></li>
               <li><Link href="contact-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Contact Us</Link></li>
-              <li><Link href="terms-and-conditions" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Terms & Conditions</Link></li>
-              <li><Link href="privacy-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
-              <li><Link href="refund-privacy-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Return Policy</Link></li>
             </ul>
           </div>
           
@@ -145,7 +139,7 @@ export default function Footer() {
             <span className="w-1 h-1 rounded-full bg-primary-foreground/30 hidden md:block"></span>
             <Link href="/privacy-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Privacy Policy</Link>
             <span className="w-1 h-1 rounded-full bg-primary-foreground/30 hidden md:block"></span>
-            <Link href="/refund-privacy-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Refund Policy</Link>
+            <Link href="/refund-policy" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Refund Policy</Link>
             <span className="w-1 h-1 rounded-full bg-primary-foreground/30 hidden md:block"></span>
             
             <div className="flex items-center gap-2 relative mt-2 md:mt-0">

@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   let region = request.cookies.get('userRegion')?.value;
 
   if (!region) {
-    const country = request.headers.get('x-vercel-ip-country') || 'US';
+    const country = request.headers.get('x-vercel-ip-country') || 'IN';
     region = country === 'IN' ? 'IN' : 'US';
   }
 

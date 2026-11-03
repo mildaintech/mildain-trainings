@@ -11,12 +11,12 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
   const [promoCode, setPromoCode] = useState("");
   const [isPromoApplied, setIsPromoApplied] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [discountAmount, setDiscountAmount] = useState(0);
+  const [promoError, setPromoError] = useState("");
 
   const baseAmount = isIndia ? (course.inrPrice || 0) : (course.usdPrice || 0);
   const symbol = isIndia ? '₹' : '$';
   const originalAmount = Math.ceil(baseAmount * 1.2);
-  
-  const discountAmount = isPromoApplied ? Math.floor(baseAmount * 0.1) : 0;
   const finalAmount = baseAmount - discountAmount;
 
   const handleProceed = (e: React.FormEvent) => {
@@ -26,9 +26,31 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
     }
   };
 
-  const handleApplyPromo = () => {
+  const handleApplyPromo = async () => {
     if (promoCode.trim().length > 3) {
-      setIsPromoApplied(true);
+      try {
+        const res = await fetch('/api/coupons/validate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: promoCode })
+        });
+        const data = await res.json();
+
+        if (data.valid) {
+          setIsPromoApplied(true);
+          setPromoError("");
+          const calcDiscount = Math.floor((baseAmount * data.discountPercent) / 100);
+          setDiscountAmount(calcDiscount);
+        } else {
+          setPromoError("Invalid or expired coupon code");
+          setIsPromoApplied(false);
+          setDiscountAmount(0);
+        }
+      } catch (err) {
+        setPromoError("Verification failed");
+        setIsPromoApplied(false);
+        setDiscountAmount(0);
+      }
     }
   };
 
@@ -211,10 +233,6 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
                   <span className="text-muted-foreground">Program Fees</span>
                   <span className="font-bold text-foreground">{symbol}{baseAmount}</span>
                 </div>
-                <div className="flex justify-between items-center text-lg">
-                  <span className="text-muted-foreground">Default Discount</span>
-                  <span className="font-bold text-primary">-{symbol}{originalAmount - baseAmount}</span>
-                </div>
                 {isPromoApplied && (
                   <div className="flex justify-between items-center text-lg bg-primary/10 p-2 rounded text-primary font-medium">
                     <span>Coupon Discount</span>
@@ -237,21 +255,24 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
             </div>
             <div className="p-6">
               {!isPromoApplied ? (
-                <div className="flex gap-2">
-                  <input 
-                    type="text" 
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
-                    placeholder="Enter code here" 
-                    className="flex-1 border border-border bg-background rounded-md px-3 py-2 outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 text-sm uppercase font-medium tracking-wide text-foreground"
-                  />
-                  <button 
-                    type="button"
-                    onClick={handleApplyPromo}
-                    className="bg-muted hover:bg-muted/80 text-foreground font-bold px-4 py-2 rounded-md text-sm transition-colors cursor-pointer"
-                  >
-                    APPLY
-                  </button>
+                <div className="flex flex-col gap-2">
+                  <div className="flex gap-2">
+                    <input 
+                      type="text" 
+                      value={promoCode}
+                      onChange={(e) => setPromoCode(e.target.value.toUpperCase())}
+                      placeholder="Enter code here" 
+                      className="flex-1 border border-border bg-background rounded-md px-3 py-2 outline-none focus:border-primary focus:ring-1 focus:ring-primary/50 text-sm uppercase font-medium tracking-wide text-foreground"
+                    />
+                    <button 
+                      type="button"
+                      onClick={handleApplyPromo}
+                      className="bg-muted hover:bg-muted/80 text-foreground font-bold px-4 py-2 rounded-md text-sm transition-colors cursor-pointer"
+                    >
+                      APPLY
+                    </button>
+                  </div>
+                  {promoError && <p className="text-sm text-destructive mt-1">{promoError}</p>}
                 </div>
               ) : (
                 <div className="flex items-center justify-between bg-primary/10 border border-primary/30 p-3 rounded-md">
@@ -261,7 +282,7 @@ export default function CheckoutForm({ course, isIndia }: { course: any, isIndia
                   </div>
                   <button 
                     type="button"
-                    onClick={() => { setIsPromoApplied(false); setPromoCode(""); }}
+                    onClick={() => { setIsPromoApplied(false); setPromoCode(""); setDiscountAmount(0); setPromoError(""); }}
                     className="text-sm font-bold text-muted-foreground hover:text-destructive transition-colors cursor-pointer"
                   >
                     REMOVE

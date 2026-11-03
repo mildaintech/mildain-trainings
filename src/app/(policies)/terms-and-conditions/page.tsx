@@ -14,7 +14,7 @@ export default function TermsConditions() {
           </h1>
           <div className="flex items-center gap-2 text-slate-300 text-sm font-medium">
             <span>Last Updated:</span>
-            <span className="text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">16 October 2026</span>
+            <span className=" font-bold bg-primary/10 px-2 py-1 rounded-md">16 October 2026</span>
           </div>
         </div>
       </div>

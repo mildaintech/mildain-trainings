@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Search, ChevronRight, Menu, X, LayoutGrid, ChevronDown, User, LayoutDashboard, LogOut } from 'lucide-react';
+import SearchBar from './SearchBar';
+import MegaMenu from './MegaMenu';
 
 interface Course {
   _id: string;
@@ -30,31 +31,39 @@ export default function Navbar() {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const [promoHeight, setPromoHeight] = useState(48);
+  const [isFixed, setIsFixed] = useState(false);
+  const lastScrollY = useRef(0);
 
   const [user, setUser] = useState<{ name: string; role: string } | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   
-  const headerRef = useRef<HTMLHeadingElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-        setLastScrollY(currentScrollY);
-      }
-    };
+    const promo = document.querySelector<HTMLElement>('[data-promo-banner]');
+    if (!promo) return;
+    const observer = new ResizeObserver(() => setPromoHeight(promo.getBoundingClientRect().height));
+    observer.observe(promo);
+    setPromoHeight(promo.getBoundingClientRect().height);
+    return () => observer.disconnect();
+  }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const current = window.scrollY;
+      setIsFixed(current > 100);
+      if (current <= 100) setIsVisible(true);
+      else if (current > lastScrollY.current + 1) setIsVisible(false);
+      else if (current < lastScrollY.current - 1) setIsVisible(true);
+      lastScrollY.current = current;
+    };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -62,7 +71,6 @@ export default function Navbar() {
         setIsMegaMenuOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -73,7 +81,6 @@ export default function Navbar() {
         setIsProfileOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutsideProfile);
     return () => document.removeEventListener('mousedown', handleClickOutsideProfile);
   }, []);
@@ -81,7 +88,19 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchCourses() {
       try {
-        const res = await fetch("/api/admin/courses");
+        const cachedData = sessionStorage.getItem("nav_courses_cache");
+        if (cachedData) {
+          const { cachedCourses, cachedCategories } = JSON.parse(cachedData);
+          setCourses(cachedCourses);
+          setCategories(cachedCategories);
+          if (cachedCategories.length > 0) setActiveCategory(cachedCategories[0]);
+        }
+      } catch (e) {
+        console.warn("Session storage error", e);
+      }
+
+      try {
+        const res = await fetch("/api/admin/courses", { cache: 'force-cache' });
         const contentType = res.headers.get("content-type");
 
         if (contentType && contentType.includes("application/json")) {
@@ -90,7 +109,14 @@ export default function Navbar() {
             setCourses(data);
             const uniqueCategories = Array.from(new Set(data.map((c: Course) => c.category))) as string[];
             setCategories(uniqueCategories);
-            if (uniqueCategories.length > 0) setActiveCategory(uniqueCategories[0]);
+            if (uniqueCategories.length > 0 && !activeCategory) setActiveCategory(uniqueCategories[0]);
+            
+            try {
+              sessionStorage.setItem("nav_courses_cache", JSON.stringify({
+                cachedCourses: data,
+                cachedCategories: uniqueCategories
+              }));
+            } catch(err) { console.warn(err); }
           }
         }
       } catch (err) {}
@@ -130,13 +156,13 @@ export default function Navbar() {
   };
 
   return (
-    <header 
+    <header
       ref={headerRef}
-      className={`fixed top-0 left-0 z-50 w-full bg-background border-b border-border h-[64px] lg:h-[76px] flex items-center transition-transform duration-300 ease-in-out ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+      style={isFixed ? { top: promoHeight } : undefined}
+      className={`${isFixed ? 'fixed left-0' : 'relative'} z-[150] w-full bg-background border-b border-border h-[64px] lg:h-[76px] flex items-center transition-opacity duration-150 ${
+        isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
     >
-      
       <div className="w-full h-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between bg-secondary/5 z-50">
         
         <div className="flex items-center gap-3 sm:gap-5 lg:gap-4 xl:gap-5 h-full shrink-0">
@@ -169,14 +195,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="relative hidden lg:flex items-center w-[260px] xl:w-[300px]">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-[16px] w-[16px] text-muted-foreground stroke-[1.5]" />
-            <Input
-              type="text"
-              placeholder="What do you want to learn?"
-              className="pl-10 pr-4 h-[38px] lg:h-[42px] text-[13px] lg:text-[14px] rounded-sm bg-primary/5 border border-primary/20 focus:bg-primary/10 focus:ring-1 focus:ring-primary/30 transition-all text-foreground placeholder:text-muted-foreground w-full shadow-none"
-            />
-          </div>
+          <SearchBar courses={courses} />
         </div>
 
         <div className="flex items-center gap-3 sm:gap-4 lg:gap-6 xl:gap-8 h-full shrink-0">
@@ -221,11 +240,7 @@ export default function Navbar() {
                   onClick={() => setIsProfileOpen(!isProfileOpen)}
                   className="flex items-center gap-2 focus:outline-none transition-transform hover:scale-105"
                 >
-                  {user.role === "admin" ? (
-                    <User className="w-8 h-8 xl:w-9 xl:h-9 fill-current text-primary" strokeWidth={1.5} />
-                  ) : (
-                    <User className="w-8 h-8 xl:w-9 xl:h-9 fill-current text-primary" strokeWidth={1.5} />
-                  )}
+                  <User className="w-8 h-8 xl:w-9 xl:h-9 fill-current text-primary" strokeWidth={1.5} />
                 </button>
 
                 {isProfileOpen && (
@@ -259,108 +274,20 @@ export default function Navbar() {
         </div>
       </div>
 
-      {isMegaMenuOpen && (
-        <div 
-          className="absolute top-[64px] lg:top-[76px] left-0 w-full px-0 sm:px-6 lg:px-16 flex justify-center shadow-sm z-40 bg-black/40 lg:bg-transparent h-[calc(100vh-64px)] lg:h-auto"
-          onMouseEnter={() => { if (window.innerWidth >= 1024) setIsMegaMenuOpen(true); }}
-          onMouseLeave={() => { if (window.innerWidth >= 1024) setIsMegaMenuOpen(false); }}
-        >
-          <div className="w-full max-w-[1300px] bg-background lg:rounded-b-2xl shadow-[0_24px_48px_rgba(0,0,0,0.08)] border-t lg:border-x lg:border-b border-border flex flex-col lg:flex-row overflow-hidden h-full lg:h-auto lg:min-h-[500px] lg:max-h-[85vh]">
-            
-            <div className="w-full lg:w-[320px] bg-background border-b lg:border-b-0 lg:border-r border-border flex flex-col py-4 shrink-0 shadow-none lg:shadow-[4px_0_24px_rgba(0,0,0,0.02)] z-10 max-h-[35vh] lg:max-h-none overflow-y-auto">
-              <h3 className="px-6 py-3 lg:py-2 text-[18px] lg:text-[22px] font-bold text-foreground tracking-wider uppercase">
-                CATEGORIES
-              </h3>
-              <ul className="flex-1">
-                {categories.map((cat) => (
-                  <li 
-                    key={cat}
-                    onMouseEnter={() => { if (window.innerWidth >= 1024) setActiveCategory(cat); }}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-6 py-3 lg:py-2.5 cursor-pointer flex justify-between items-center text-[14px] lg:text-[13.5px] transition-all ${
-                      activeCategory === cat 
-                        ? 'bg-primary/10 text-primary font-bold border-l-[3px] border-primary' 
-                        : 'text-muted-foreground hover:text-primary hover:bg-primary/5 border-l-[3px] border-transparent font-medium'
-                    }`}
-                  >
-                    <span className="capitalize">{cat}</span>
-                    {activeCategory === cat && <ChevronRight size={16} className="text-primary" />}
-                  </li>
-                ))}
-                {categories.length === 0 && (
-                  <li className="px-6 py-4 text-sm text-muted-foreground">No categories found</li>
-                )}
-              </ul>
-            </div>
-
-            <div className="flex-1 p-4 lg:p-8 overflow-y-auto bg-secondary/30 h-full">
-              <div className="mb-2 lg:mb-3">
-                <h3 className="text-[18px] lg:text-[20px] font-bold text-foreground">Career Aligned Learning Paths</h3>
-                <p className="text-[13px] text-muted-foreground mt-0.5">Master essential skills for your dream career</p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 pb-8 lg:pb-0">
-                {activeCourses.map(course => (
-                  <Link 
-                    href={`/courses/${course.slug}`} 
-                    key={course._id} 
-                    className="group block border border-border rounded-xl p-4 bg-background hover:shadow-lg transition-all relative min-h-[140px] flex flex-col hover:border-primary/30"
-                  >
-                    <div className="h-[30px] min-h-[30px] mb-[12px] max-w-full flex items-center justify-start">
-                      {(course.logoImage || course.image) ? (
-                        <img 
-                          src={course.logoImage || course.image} 
-                          alt={course.provider || "Provider"} 
-                          className="h-full w-auto object-contain max-w-full"
-                        />
-                      ) : (
-                        <span className="text-[15px] font-bold text-muted-foreground uppercase tracking-wider">
-                          {course.provider || "MILDAN ED-TECH"}
-                        </span>
-                      )}
-                    </div>
-                    
-                    <h4 className="font-semibold text-foreground text-[16px] leading-[1.4] line-clamp-2 group-hover:text-primary transition-colors">
-                      {course.title}
-                    </h4>
-                    
-                    <div className="mt-auto pt-3 flex justify-between items-center">
-                      <p className="text-[12px] font-medium text-muted-foreground">
-                        {course.duration || "Self-Paced"}
-                      </p>
-                    </div>
-
-                    {course.badge && (
-                      <div className={`absolute bottom-0 right-0 ${getBadgeColor(course.badge)} text-white text-[11px] font-bold px-3 py-1.5 rounded-tl-xl rounded-br-xl shadow-sm`}>
-                        {course.badge}
-                      </div>
-                    )}
-                  </Link>
-                ))}
-                
-                {activeCourses.length === 0 && (
-                  <div className="col-span-full py-10 text-muted-foreground text-center text-sm">
-                    No courses available in this category.
-                  </div>
-                )}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      )}
+      {/* Extracted Mega Menu Component */}
+      <MegaMenu 
+        isMegaMenuOpen={isMegaMenuOpen}
+        setIsMegaMenuOpen={setIsMegaMenuOpen}
+        categories={categories}
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+        activeCourses={activeCourses}
+        getBadgeColor={getBadgeColor}
+      />
 
       {isMobileSearchOpen && (
         <div className="lg:hidden absolute inset-0 bg-background z-[60] flex items-center justify-between px-4 sm:px-6 border-b border-border h-full gap-3">
-          <div className="relative w-full">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-[18px] w-[18px] text-primary stroke-[2]" />
-            <Input
-              type="text"
-              placeholder="What do you want to learn?"
-              className="pl-10 pr-4 h-[42px] text-[14px] rounded-lg bg-primary/10 border border-primary/20 focus:bg-primary/10 focus:ring-1 focus:ring-primary/30 transition-all text-foreground placeholder:text-muted-foreground w-full shadow-none"
-              autoFocus
-            />
-          </div>
+          <SearchBar courses={courses} isMobile onClose={() => setIsMobileSearchOpen(false)} />
           <button
             onClick={() => setIsMobileSearchOpen(false)}
             className="p-1 text-muted-foreground hover:text-foreground shrink-0"
@@ -373,30 +300,26 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-[64px] left-0 w-full bg-background border-b border-border shadow-lg py-4 px-6 flex flex-col gap-4 z-40">
           <div className="flex flex-col gap-4 border-b border-border pb-4">
-            <Link href="/more" className="text-[14px] font-bold text-foreground flex justify-between items-center">
+            <Link href="/more" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground flex justify-between items-center">
               More <ChevronRight size={16} className="text-muted-foreground" />
             </Link>
-            <Link href="/blogs" className="text-[14px] font-bold text-foreground">Blogs</Link>
-            <Link href="/careers" className="text-[14px] font-bold text-foreground">Careers</Link>
+            <Link href="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">Blogs</Link>
+            <Link href="/careers" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">Careers</Link>
           </div>
           
           <div className="flex flex-col gap-3 mt-2">
             <Button asChild className="bg-btn-gradient hover:opacity-95 shadow-md shadow-primary/20 text-primary-foreground font-bold text-[14px] rounded-lg w-full h-[42px]">
-              <Link href="/corporate-training">Corporate</Link>
+              <Link href="/corporate-training" onClick={() => setIsMobileMenuOpen(false)}>Corporate</Link>
             </Button>
 
             {!user ? (
               <Button asChild className="bg-transparent hover:bg-primary/10 text-primary border-[1.5px] border-primary font-bold text-[14px] rounded-lg w-full h-[42px]">
-                <Link href="/login">Login</Link>
+                <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
               </Button>
             ) : (
               <div className="flex flex-col gap-2 border border-border rounded-lg p-3 bg-secondary/20">
                 <div className="flex items-center gap-3 pb-3 border-b border-border">
-                  {user.role === "admin" ? (
-                    <User className="w-8 h-8 fill-current text-primary" strokeWidth={1.5} />
-                  ) : (
-                    <User className="w-8 h-8 fill-current text-primary" strokeWidth={1.5} />
-                  )}
+                  <User className="w-8 h-8 fill-current text-primary" strokeWidth={1.5} />
                   <div>
                     <p className="text-[14px] font-bold text-foreground truncate">{user.name}</p>
                     <p className="text-[11px] font-bold text-primary uppercase tracking-wider">{user.role}</p>

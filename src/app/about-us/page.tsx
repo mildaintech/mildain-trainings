@@ -1,6 +1,5 @@
+
 import React from 'react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 import AboutHero from '@/components/about/AboutHero';
 import AboutStory from '@/components/about/AboutStory';
 import AboutStats from '@/components/about/AboutStats';
@@ -12,17 +11,15 @@ import StickyBottomBar from '@/components/shared/StickyBottomBar';
 
 export default function AboutPage() {
   return (
-    <main className="w-full min-h-screen flex flex-col bg-white">
-      <Navbar />
+    <div className="w-full min-h-screen flex flex-col bg-white">
       <AboutHero />
       <AboutStory />
       <AboutStats />
       <MissionVision />
       <WhyChooseUs />
       <AboutCTA />
-      <Footer />
       <ScrollButton />
       <StickyBottomBar />
-    </main>
+    </div>
   );
 }

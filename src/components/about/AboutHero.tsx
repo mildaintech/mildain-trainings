@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -6,14 +7,13 @@ import { ChevronRight } from 'lucide-react';
 
 export default function AboutHero() {
   return (
-    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] mt-[64px] lg:mt-[76px] overflow-hidden flex items-center bg-[#0f2623]">
+    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] overflow-hidden flex items-center bg-[#0f2623]">
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f2623] via-[#183631] to-[#2e6157] opacity-95" />
 
       <div
         className="absolute inset-0 opacity-[0.12] pointer-events-none"
         style={{
-          backgroundImage:
-            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
           backgroundSize: '56px 56px',
           maskImage: 'radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%)',
           WebkitMaskImage: 'radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%)',
@@ -26,10 +26,7 @@ export default function AboutHero() {
 
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-20 py-16">
         <div className="w-full max-w-[760px] flex flex-col items-start text-left">
-          <nav
-            aria-label="Breadcrumb"
-            className="inline-flex items-center gap-2 mb-7"
-          >
+          <nav aria-label="Breadcrumb" className="inline-flex items-center gap-2 mb-7">
             <Link href="/" className="text-[13px] md:text-[14px] text-white/80 font-medium hover:text-white transition-colors">
               Home
             </Link>
@@ -49,10 +46,8 @@ export default function AboutHero() {
           </h1>
 
           <p className="text-[17px] md:text-[19px] lg:text-[21px] text-white/85 leading-relaxed max-w-[640px]">
-            We help professionals and organizations build in-demand skills with industry-aligned training, delivered by
-            a global team.
+            We help professionals and organizations build in-demand skills with industry-aligned training, delivered by a global team.
           </p>
-
         </div>
       </div>
     </div>

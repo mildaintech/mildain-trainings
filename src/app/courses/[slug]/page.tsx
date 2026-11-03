@@ -6,8 +6,6 @@ import { connectToDatabase } from "@/lib/db";
 import Course from "@/models/Course";
 import { generateCourseProductSchema } from '@/lib/schema';
 import PMPHeroSection from "@/components/courses/PMPHeroSection";
-import Navbar from "@/components/layout/Navbar"; 
-import Footer from "@/components/layout/Footer";
 import CourseStickyNav from '@/components/courses/CourseStickyNav';
 import CourseOverview from '@/components/courses/CourseOverview';
 import CourseCurriculum from '@/components/courses/CourseCurriculum';
@@ -138,9 +136,7 @@ export default async function CourseDetailPage({
   const courseProductSchema = generateCourseProductSchema(plainCourse, currentPath, isIndia);
 
   return (
-    <div className="w-full bg-white min-h-screen flex flex-col">
-      <Navbar />
-      
+    <div className="w-full bg-white min-h-screen flex flex-col">      
       {courseProductSchema && (
         <script 
           type="application/ld+json" 
@@ -155,7 +151,7 @@ export default async function CourseDetailPage({
         />
       )}
       
-      <div className="flex-grow bg-gradient-to-r from-[#ebf7f3] to-white pt-[64px] lg:pt-[76px]">
+      <div className="flex-grow bg-gradient-to-r from-[#ebf7f3]">
         <PMPHeroSection course={plainCourse} formattedCategory={plainCourse.category} />
         <CourseStickyNav />
         <CourseOverview course={plainCourse} /> 
@@ -172,7 +168,6 @@ export default async function CourseDetailPage({
         <InsightsCarousel />
         <ScrollButton />
       </div>
-      <Footer />
     </div>
   );
 }

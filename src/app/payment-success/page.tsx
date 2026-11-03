@@ -3,9 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { CheckCircle, Home } from 'lucide-react';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-
 export default function PaymentSuccessPage() {
   const [mounted, setMounted] = useState(false);
 
@@ -17,8 +14,6 @@ export default function PaymentSuccessPage() {
 
   return (
     <div className="w-full bg-[#F5FBF8] min-h-screen flex flex-col font-sans">
-      <Navbar />
-      
       <div className="flex-grow flex items-center justify-center px-4 sm:px-6 py-24">
         <div className="max-w-xl w-full bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden text-center animate-in zoom-in-95 duration-500">
           
@@ -48,8 +43,6 @@ export default function PaymentSuccessPage() {
           
         </div>
       </div>
-      
-      <Footer />
     </div>
   );
 }

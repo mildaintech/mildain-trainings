@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -8,7 +9,7 @@ const locations = ['Bengaluru', 'Noida', 'Austin'];
 
 export default function ContactHero() {
   return (
-    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] mt-[64px] lg:mt-[76px] overflow-hidden flex items-center bg-[#0f2623]">
+    <div className="relative w-full min-h-[380px] sm:min-h-[420px] lg:min-h-[500px] overflow-hidden flex items-center bg-[#0f2623]">
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f2623] via-[#183631] to-[#2e6157] opacity-95" />
 
       <img
@@ -21,8 +22,7 @@ export default function ContactHero() {
       <div
         className="absolute inset-0 opacity-[0.12] pointer-events-none"
         style={{
-          backgroundImage:
-            'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)',
           backgroundSize: '56px 56px',
           maskImage: 'radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%)',
           WebkitMaskImage: 'radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%)',
@@ -31,19 +31,12 @@ export default function ContactHero() {
 
       <div className="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-[#2e7373]/25 blur-[110px] pointer-events-none" />
       <div className="absolute -bottom-32 left-1/4 w-[360px] h-[360px] rounded-full bg-[#2e6157]/30 blur-[120px] pointer-events-none" />
-
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
 
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-20 py-16">
         <div className="w-full max-w-[720px] flex flex-col items-start text-left">
-          <nav
-            aria-label="Breadcrumb"
-            className="inline-flex items-center gap-2 mb-7"
-          >
-            <Link
-              href="/"
-              className="text-[13px] md:text-[14px] text-white/80 font-medium hover:text-white transition-colors"
-            >
+          <nav aria-label="Breadcrumb" className="inline-flex items-center gap-2 mb-7">
+            <Link href="/" className="text-[13px] md:text-[14px] text-white/80 font-medium hover:text-white transition-colors">
               Home
             </Link>
             <ChevronRight className="w-3.5 h-3.5 text-white/50" />
@@ -62,8 +55,7 @@ export default function ContactHero() {
           </h1>
 
           <p className="text-[17px] md:text-[19px] lg:text-[21px] text-white/85 leading-relaxed font-normal max-w-[600px]">
-            We're here to help. No matter your requirement, there's a team ready to help you connect and move
-            forward.
+            We're here to help. No matter your requirement, there's a team ready to help you connect and move forward.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 mt-9">

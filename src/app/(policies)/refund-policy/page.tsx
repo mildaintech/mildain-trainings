@@ -9,11 +9,11 @@ export default function RefundPolicy() {
 
         <div className="relative z-10">
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Cancellation &amp; Refund Policy
+            Refunds and Rescheduling Policy
           </h1>
           <div className="flex items-center gap-2 text-slate-300 text-sm font-medium">
             <span>Last Updated:</span>
-            <span className="text-primary font-bold bg-primary/10 px-2 py-1 rounded-md">16 October 2026</span>
+            <span className="font-bold bg-primary/10 px-2 py-1 rounded-md">October 16, 2026</span>
           </div>
         </div>
       </div>
@@ -22,12 +22,11 @@ export default function RefundPolicy() {
         
         <section className="space-y-4">
           <p>
-            Thank you for buying our courses. We ensure that our users have a rewarding experience while they discover, assess, and purchase our courses, whether it is an instructor-led or self-paced training.
+            At Mildain Trainings, we aim to provide a valuable and satisfactory learning experience for all participants. Some circumstances may change after enrollment; therefore, we have established this policy to explain the conditions under which refunds and batch rescheduling may be considered.
           </p>
           <p>
-            As with any online purchase experience, there are terms and conditions that govern the Refund Policy. When you buy a training course on Mildain Trainings, you agree to our Privacy Policy, Terms of Use and refund policy.
+            We advise you to carefully read this policy before enrolling and paying for a course. By enrolling in a training program through Mildain Trainings, it is considered that you have agreed to the applicable terms mentioned below, subject to your rights under applicable law.
           </p>
-          <p className="font-bold text-slate-800">Our refund policy is as follows:</p>
         </section>
 
         <div className="w-full h-px bg-slate-100"></div>
@@ -35,71 +34,31 @@ export default function RefundPolicy() {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">1</span>
-            For Self Paced Learning
+            Refund Eligibility for Instructor-Led Online Training
           </h2>
           <p>
-            Raise refund request within 7 days of purchase of course. Money back guarantee is void if the participant has accessed more than 25% content or downloaded the E-Book. Any refund request beyond 7 days of purchasing the course will not be accepted and no refund will be provided.
+            Refund requests for courses offered online by virtual instructors shall be considered only if all of the following conditions are met:
           </p>
-        </section>
-
-        <div className="w-full h-px bg-slate-100"></div>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">2</span>
-            For Instructor Led Training
-          </h2>
-          <p>
-            Raise refund request within 7 days of purchase of course. Money back guarantee is void if the participant has accessed more than 25% content of any e-learning course or has attended Online Classrooms/received recordings for more than 1 day.
-          </p>
-          <p>
-            Also, In case a user downloads the E-Book for the course the money back guarantee will be void. Any refund request beyond 7 days of purchasing the course will not be accepted and no refund will be provided.
-          </p>
-        </section>
-
-        <div className="w-full h-px bg-slate-100"></div>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">3</span>
-            For Post Graduate Programs
-          </h2>
-          <p>
-            Raise refund requests within 7 days of purchase of the postgraduate program. The Money-back guarantee is void if the participant raises any refund request beyond 7 days of purchasing the course. Refund requests after the 7 day period will not be accepted and no refund will be provided. Notwithstanding the above, the booking fee paid by the participant towards securing his/her seat in a program shall be non-refundable under all circumstances.
-          </p>
-        </section>
-
-        <div className="w-full h-px bg-slate-100"></div>
-
-        <section className="space-y-4">
-          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">4</span>
-            Cancellation &amp; Refunds: For CSM, CSPO, PSM, PSPO programs
-          </h2>
-          <ul className="space-y-3 pl-2">
+          <ul className="space-y-3 pl-2 mt-4">
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>Mildain Trainings, reserves the right to postpone/cancel an event, or change the location of an event because of insufficient enrollments, instructor illness or force majeure events (like floods, earthquakes, political instability, etc)</span>
+              <span className="font-bold text-slate-800 shrink-0">1.</span>
+              <span>The refund request should be submitted within 7 days of purchasing the course.</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>In case Mildain Trainings cancels an event, 100% of course fees will be refunded to the delegate if the refund raise request is within 10 days of purchase of course. However travel, logistics or any personal expense incurred by learners/participants will not be refunded.</span>
+              <span className="font-bold text-slate-800 shrink-0">2.</span>
+              <span>The participating learner should not have watched beyond 25% of the online classes.</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>In case Mildain Trainings cancels/postpones an event, the participants who are ahead of 10 days of purchase, of course, will be rescheduled to any upcoming batch without any extra charges.</span>
+              <span className="font-bold text-slate-800 shrink-0">3.</span>
+              <span>The applicant should have attended only one (1) live online class.</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>If a cancellation is done by a delegate 10 business days (or more) prior to the event, 10% of the total paid fee will be deducted and the remaining amount will be refunded to the delegate.</span>
+              <span className="font-bold text-slate-800 shrink-0">4.</span>
+              <span>The applicant shouldn’t have received any exam voucher or course kit from the organization.</span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>If a cancellation is done by a delegate within 10 business days (or less) of the event, no refunds will be made.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
-              <span>No refunds or credits will be available for participants who fail to attend both days of the course.</span>
+              <span className="font-bold text-slate-800 shrink-0">5.</span>
+              <span>Courses bought under special discounts, offers, or promotions fall under the categories of “non-refundable” courses that do not qualify for a refund.</span>
             </li>
           </ul>
         </section>
@@ -108,18 +67,99 @@ export default function RefundPolicy() {
 
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">5</span>
-            How to Initiate a Refund Request
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">2</span>
+            Refund Terms for Collaborative Certification Programs
           </h2>
-          <p>Refund request can be initiated in two ways:</p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <li className="bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-primary transition-colors">
-              <span className="block font-bold text-slate-800 mb-1">Method 1</span>
-              <span>From my orders section, by clicking on &ldquo;Initiate Refund&rdquo; against specific item of an order. This will work when item quantity is one.</span>
+          <p>
+            Courses providing certification in collaboration between educational institutes or organisations are usually not eligible for refunds. Nevertheless, refund requests are considered in exceptional circumstances if all the following conditions are satisfied:
+          </p>
+          <ul className="space-y-3 pl-2 mt-4">
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">1.</span>
+              <span>The refund request should be submitted within 7 days from the day the course is purchased.</span>
             </li>
-            <li className="bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-primary transition-colors">
-              <span className="block font-bold text-slate-800 mb-1">Method 2</span>
-              <span>In case item quantity is more than one, please reach out to our support team through our Help &amp; Support section on the website.</span>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">2.</span>
+              <span>You can attend no more than one live class session online and not download any materials from the course.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">3.</span>
+              <span>You have not requested a voucher or a kit for the course exam.</span>
+            </li>
+          </ul>
+          <p className="mt-4">
+            Any exception is subject to review and approval by Mildain Trainings, and where applicable, the relevant partner institution, subject to the applicable law.
+          </p>
+        </section>
+
+        <div className="w-full h-px bg-slate-100"></div>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">3</span>
+            Refund Conditions for Self-Paced Courses
+          </h2>
+          <p>
+            For self-paced training programs, refund requests will be processed only in case all of the criteria below are satisfied:
+          </p>
+          <ul className="space-y-3 pl-2 mt-4">
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">1.</span>
+              <span>The request is made within 7 days starting from the date of enrolment.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">2.</span>
+              <span>You have studied less than 25% of the offered material.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <span className="font-bold text-slate-800 shrink-0">3.</span>
+              <span>You have not requested exam vouchers.</span>
+            </li>
+          </ul>
+          <p className="mt-4">
+            If your request does not align with the scenarios mentioned under this policy, it will not be considered for refund except where otherwise may be needed by applicable law.
+          </p>
+        </section>
+
+        <div className="w-full h-px bg-slate-100"></div>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">4</span>
+            Refund Policy for University-Associated Programs
+          </h2>
+          <p>
+            The conditions for refunds related to degree programs affiliated with a university will depend on the refund policy in place at the relevant university or college, and the applicable signed agreement or admission letter. Learners should understand these terms before confirming their enrollment.
+          </p>
+        </section>
+
+        <div className="w-full h-px bg-slate-100"></div>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">5</span>
+            Batch Transfer and Training Rescheduling
+          </h2>
+          <p>
+            If you would like to get trained in an alternative batch or continue your training in another available batch, then you should write to Mildain Trainings at info@mildaintrainings.com to make your request.
+          </p>
+          <p className="mt-2 font-medium text-slate-700">The following conditions are applicable for batch transfers and rescheduling:</p>
+          <ul className="space-y-3 pl-2 mt-4">
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>One (1) batch deferral/postponement is allowed per student as long as there is availability and approval.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>The new batch should start within the next 3 months from the start date of the original batch you enrolled in.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>Deferral requests can only be accepted if less than 20% of the program has already been completed.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>All requests will be reviewed and then approved by Mildain Trainings.</span>
             </li>
           </ul>
         </section>
@@ -129,10 +169,47 @@ export default function RefundPolicy() {
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">6</span>
-            Refunds: Duplicate payment
+            General Conditions for Refunds and Rescheduling
           </h2>
-          <div className="bg-blue-50 border border-blue-100 p-4 rounded-lg text-blue-800 text-sm">
-            Refund of the duplicate payment made by the delegate will be processed via the same source (original method of payment) in 10 working days post intimation by the customer.
+          <ul className="space-y-3 pl-2 mt-4">
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>If the refund request does not satisfy the required eligibility requirements mentioned in this policy will not be accepted, except where the refund is required by applicable law.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>Refund requests will be processed within 30 days after they have been accepted. The time it takes for the payment to show up in your account may depend on your bank and/or payment provider.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>In case a loan has been used to pay for the course, any fees charged for cancellation or processing of the loan will be as per the financing agreement and applicable law.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>Mildain Trainings may postpone or cancel a training or event due to instructor’s illness, operational issues, or force majeure events like floods, earthquakes, wars, pandemics, etc. In such situations, Mildain Trainings will inform affected learners about alternatives and offer remedies in accordance with applicable law.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2 shrink-0"></div>
+              <span>It is the responsibility of learners to submit refund and rescheduling requests using the right communication tool and giving as much information as reasonably necessary to consider the request.</span>
+            </li>
+          </ul>
+        </section>
+
+        <div className="w-full h-px bg-slate-100"></div>
+
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-3">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 text-primary text-sm">7</span>
+            Policy Updates
+          </h2>
+          <p>
+            Mildain Trainings may revise this policy from time to time to reflect changes in its services, business practices, or applicable legal requirements. Any updates will be promptly published on this policy page itself with the relevant revision date. Learners should review the policy applicable to their purchase.
+          </p>
+          
+          <div className="bg-blue-50 border border-blue-100 p-5 rounded-xl text-blue-900 mt-6 shadow-sm">
+            <p className="font-medium">
+              For refund-related questions or batch rescheduling requests, please contact <strong>info@mildaintrainings.com</strong> or visit <a href="https://mildaintrainings.com/" className="text-blue-600 hover:underline">https://mildaintrainings.com/</a>.
+            </p>
           </div>
         </section>
 

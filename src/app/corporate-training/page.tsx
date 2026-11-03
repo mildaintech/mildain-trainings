@@ -1,7 +1,6 @@
 import React from 'react';
 import CorporateHero from '@/components/corporate/CorporateHero';
 import { Metadata } from 'next';
-import Navbar from '@/components/layout/Navbar';
 import CorporatePartnerLogos from '@/components/corporate/CorporatePartnerLogos';
 import CorporateSkillUp from '@/components/corporate/CorporateSkillUp';
 import CorporateWhyChooseUs from '@/components/corporate/CorporateWhyChooseUs';
@@ -13,7 +12,6 @@ import CorporateAwards from '@/components/corporate/CorporateAwards';
 import CorporateLearningImpact from '@/components/corporate/CorporateLearningImpact';
 import CorporateFAQ from '@/components/corporate/CorporateFAQ';
 import StickyBottomBar from '@/components/shared/StickyBottomBar';
-import Footer from '@/components/layout/Footer';
 import CorporateTestimonialForm from '@/components/corporate/CorporateTestimonialForm';
 import { ScrollButton } from '@/components/layout/ScrollButton';
 
@@ -25,7 +23,6 @@ export const metadata: Metadata = {
 export default function CorporatePage() {
   return (
     <main className="w-full min-h-screen flex flex-col bg-background">
-      <Navbar />
       <CorporateHero />
       <CorporatePartnerLogos />
       <CorporateSkillUp />
@@ -38,7 +35,6 @@ export default function CorporatePage() {
       <CorporateAwards />
       <CorporateLearningImpact />
       <CorporateFAQ />
-      <Footer />
       <StickyBottomBar />
       <ScrollButton />
     </main>

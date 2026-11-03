@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 
 export default function CorporateHero() {
   return (
-    <div className="relative w-full h-auto min-h-[350px] lg:h-[calc(100vh-76px)] lg:min-h-[500px] lg:max-h-[500px] mt-[64px] lg:mt-[76px] bg-muted overflow-hidden flex flex-col justify-center">
+    <div className="relative w-full h-auto min-h-[350px] lg:h-[calc(100vh-76px)] lg:min-h-[500px] lg:max-h-[500px] bg-muted overflow-hidden flex flex-col justify-center">
       
       <div className="absolute top-0 right-0 w-full h-full lg:w-[50%] z-0">
         <img 

@@ -27,8 +27,25 @@ export default function ExplorePrograms() {
 
   useEffect(() => {
     async function fetchCourses() {
+      // 1. FAST LOAD: Check session storage to render instantly in ms
       try {
-        const res = await fetch("/api/admin/courses");
+        const cachedData = sessionStorage.getItem("explore_programs_cache");
+        if (cachedData) {
+          const { cachedCourses, cachedCategories } = JSON.parse(cachedData);
+          setCourses(cachedCourses);
+          setCategories(cachedCategories);
+          setIsLoading(false);
+        }
+      } catch (e) {
+        console.warn("Could not read from session storage", e);
+      }
+
+      try {
+        // 2. Fetch with 'force-cache' for lightning fast network response
+        const res = await fetch("/api/admin/courses", { 
+          cache: 'force-cache',
+          next: { revalidate: 60 } // optional: revalidates data every 60 seconds silently
+        });
         const data = await res.json();
         if (res.ok) {
           const formattedData = data.map((c: Course) => ({
@@ -36,12 +53,24 @@ export default function ExplorePrograms() {
             category: (c.category || "").replace(/\b\w/g, char => char.toUpperCase())
           }));
 
-          setCourses(formattedData);
-          
           const uniqueCategories = Array.from(new Set(formattedData.map((c: Course) => c.category))) as string[];
-          setCategories(["Most Popular", ...uniqueCategories]);
+          const finalCategories = ["Most Popular", ...uniqueCategories];
+
+          setCourses(formattedData);
+          setCategories(finalCategories);
+
+          // 3. Save data to browser memory safely (prevents QuotaExceededError crash)
+          try {
+            sessionStorage.setItem("explore_programs_cache", JSON.stringify({
+              cachedCourses: formattedData,
+              cachedCategories: finalCategories
+            }));
+          } catch (storageError) {
+            console.warn("Session storage quota exceeded, skipping local cache saving.", storageError);
+          }
         }
       } catch (err) {
+        console.error("Failed to fetch courses:", err);
       } finally {
         setIsLoading(false);
       }
