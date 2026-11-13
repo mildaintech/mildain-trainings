@@ -8,25 +8,25 @@ const features = [
     id: 1,
     title: "Industry-specific Curriculum",
     description: "Built with top corporations and tech giants",
-    image: "https://plus.unsplash.com/premium_photo-1683121716061-3faddf4dc504?w=1200&auto=format&fit=crop&q=80"
+    image: "/images/home/industry-specific-curriculum.webp", 
   },
   {
     id: 2,
     title: "Specialized Trained Professionals",
     description: "Hands-on Training with Experts with 15+ Years of Experience",
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8dGVjaHxlbnwwfHwwfHx8MA%3D%3D"
+    image: "/images/home/specialized-trained-professionals.webp",
   },
   {
     id: 3,
     title: "Trainings Across Sectors",
     description: "Specialized training across government, defense, and corporate sectors",
-    image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlY2h8ZW58MHx8MHx8fDA%3D"
+    image: "/images/home/carrer-guidance.webp",
   },
   {
     id: 4,
     title: "Career Guidance",
     description: "Mock interview preparations with 100% engagement support",
-    image: "https://plus.unsplash.com/premium_photo-1683120972279-87efe2ba252f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjl8fHRlY2h8ZW58MHx8MHx8fDA%3D",
+    image: "/images/home/trainings-across-sectors.webp",
   },
 ];
 

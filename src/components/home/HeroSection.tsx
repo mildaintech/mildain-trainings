@@ -1,10 +1,8 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { BookOpen } from 'lucide-react';
 
 const slides = [
   {
@@ -93,20 +91,17 @@ export default function HeroSection() {
             isTransitioning ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <div className="relative flex justify-center lg:justify-end items-end w-full h-full min-h-[350px] sm:min-h-[450px] lg:min-h-full order-1 lg:order-2 pt-4 lg:pt-0">
-
+          <div className="relative flex justify-center lg:justify-end items-end w-full h-full min-h-[280px] sm:min-h-[450px] lg:min-h-full order-1 lg:order-2 pt-0 lg:pt-0">
             <div className="relative w-full h-full z-10 flex justify-center lg:justify-end items-end">
-
               <img
                 src={slides[current].image}
                 alt="Student"
-                className="w-full h-[340px] sm:h-[420px] lg:h-full object-contain object-bottom drop-shadow-xl lg:scale-[1.12] xl:scale-[1.20] origin-bottom transition-transform duration-500"
+                className="w-full h-[280px] sm:h-[420px] lg:h-full object-contain object-bottom drop-shadow-xl lg:scale-[1.12] xl:scale-[1.20] origin-bottom transition-transform duration-500"
               />
-
-            </div>
+          <div className="absolute -bottom-4 left-0 w-full h-32 bg-gradient-to-t from-background via-background/80 to-transparent lg:hidden pointer-events-none z-20"></div>            </div>
           </div>
-          <div className="flex flex-col justify-center items-start text-left w-full max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1 relative z-30 pb-10 lg:pb-0 px-2 sm:px-0 h-full lg:-translate-y-10">
-            <h1 className="mb-4 sm:mb-6">
+          
+          <div className="flex flex-col justify-center items-start text-left w-full max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1 relative z-30 pb-10 lg:pb-0 px-2 sm:px-0 h-full lg:-translate-y-2">            <h1 className="mb-4 sm:mb-6 mt-2 lg:mt-0">
               <span className="whitespace-pre-line">
                 {slides[current].title}
               </span>

@@ -6,20 +6,20 @@ import Image from 'next/image';
 const platforms = [
   {
     id: 1,
-    rating: "4.9",
-    logo: "/images/justdial.png",
-    alt: "Justdial"
-  },
-  {
-    id: 2,
-    rating: "4.9",
-    logo: "/images/google.png",
+    rating: "4.6",
+    logo: "/images/home/review/google-rating.png",
     alt: "Google"
   },
   {
+    id: 2,
+    rating: "4.8",
+    logo: "/images/home/review/trustpilot-rating.png",
+    alt: "Trustpilot"
+  },
+  {
     id: 3,
-    rating: "4.9",
-    logo: "/images/justdial.png",
+    rating: "4.7",
+    logo: "/images/home/review/justdial-rating.png",
     alt: "Justdial"
   }
 ];
@@ -44,7 +44,7 @@ export default function TrustSection() {
                 </svg>
               </div>
               
-              <div className="bg-background rounded-lg shadow-sm shadow-primary/10 border border-border w-[100px] sm:w-32 h-12 md:w-44 md:h-16 flex items-center justify-center px-3 md:px-5 group-hover:shadow-md group-hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-1">
+              <div className="bg-background rounded-lg shadow-sm shadow-primary/10 sm:w-32 h-12 md:w-44 md:h-16 flex items-center justify-center px-3 md:px-5 group-hover:shadow-md group-hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-1">
                 <img 
                   src={platform.logo} 
                   alt={platform.alt} 

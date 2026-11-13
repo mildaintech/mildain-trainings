@@ -10,8 +10,13 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Filename and file body are required' }, { status: 400 });
     }
 
-    const blob = await put(filename, request.body, {
+    const sanitizedName = filename.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+    const uniqueFileName = `${Date.now()}-${sanitizedName}`;
+    const contentType = request.headers.get('content-type') || 'application/octet-stream';
+
+    const blob = await put(uniqueFileName, request.body, {
       access: 'public',
+      contentType: contentType,
     });
 
     return NextResponse.json(blob);
