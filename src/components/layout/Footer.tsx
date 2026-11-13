@@ -59,13 +59,49 @@ export default function Footer() {
 
             <div className="flex flex-col gap-5">
               <div className="flex items-start gap-4">
-                <MapPin className="text-primary-foreground/90 w-5 h-5 shrink-0 mt-0.5" strokeWidth={2} />
+                <MapPin
+                  className="text-primary-foreground/90 w-5 h-5 shrink-0 mt-0.5"
+                  strokeWidth={2}
+                />
                 <p className="text-primary-foreground/70 text-[14px] leading-relaxed mb-0">
-                  Noida Branch : Plot. No - 1, Film City, Sector-16A<br />
-                  Noida. Uttar Pradesh Pin-201301
+                  <span className="font-semibold text-primary-foreground">
+                    Bengaluru, India
+                  </span>
+                  <br />
+                  Unit No - 2245, 22nd Floor, World Trade Centre (WTC),
+                  Brigade Gateway Campus, Dr Rajkumar Road, Rajajinagar,
+                  Bengaluru, Karnataka 560055
                 </p>
               </div>
-              
+              <div className="flex items-start gap-4">
+                <MapPin
+                  className="text-primary-foreground/90 w-5 h-5 shrink-0 mt-0.5"
+                  strokeWidth={2}
+                />
+                <p className="text-primary-foreground/70 text-[14px] leading-relaxed mb-0">
+                  <span className="font-semibold text-primary-foreground">
+                    Noida, India
+                  </span>
+                  <br />
+                  Plot No - 1, Film City, Sector-16A, Noida,
+                  Uttar Pradesh 201301
+                </p>
+              </div>
+              <div className="flex items-start gap-4">
+                <MapPin
+                  className="text-primary-foreground/90 w-5 h-5 shrink-0 mt-0.5"
+                  strokeWidth={2}
+                />
+                <p className="text-primary-foreground/70 text-[14px] leading-relaxed mb-0">
+                  <span className="font-semibold text-primary-foreground">
+                    Austin, USA
+                  </span>
+                  <br />
+                  5900 Balcones Drive, Suite 100,
+                  Austin, Texas 78731,
+                  Travis County, United States
+                </p>
+              </div>
               <div className="flex items-center gap-4">
                 <Mail className="text-primary-foreground/90 w-5 h-5 shrink-0" strokeWidth={2} />
                 <a href="mailto:info@mildaintrainings.com" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">
@@ -98,7 +134,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2 flex flex-col">
-            <h5 className="text-primary-foreground font-bold mb-6">Popular Trainings</h5>
+            <h5 className="text-primary-foreground font-bold mb-6">Trainings</h5>
             <ul className="flex flex-col gap-3.5">
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISSP Training</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISA Training</Link></li>
@@ -123,7 +159,6 @@ export default function Footer() {
             <h5 className="text-primary-foreground font-bold mb-6">Company</h5>
             <ul className="flex flex-col gap-3.5">
               <li><Link href="corporate-training" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Corporate</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Newsletters</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Blog</Link></li>
               <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Career</Link></li>
               <li><Link href="about-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">About Us</Link></li>

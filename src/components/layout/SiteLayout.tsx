@@ -1,4 +1,3 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -6,6 +5,7 @@ import PromoBanner from '@/components/layout/PromoBanner';
 import SnowEffect from '@/components/SnowEffect';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import WhatsAppWidget from '../shared/WhatsAppWidget';
 
 export function SiteLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -22,6 +22,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
       </div>
       <Navbar />
       <main className="relative z-10 w-full bg-white m-0 p-0">{children}</main>
+      <WhatsAppWidget />
       <Footer />
     </>
   );

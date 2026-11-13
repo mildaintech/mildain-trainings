@@ -40,10 +40,15 @@
     scroll-behavior: smooth;
   }
 
-  h1 {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-tight;
+  /* h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-tight;
     font-family: 'Satoshi', sans-serif;
-  }
+  } */
+
+  h1 {
+  @apply text-[32px] sm:text-[44px] lg:text-[54px] font-semibold tracking-tight text-foreground leading-tight;
+  font-family: 'Satoshi', sans-serif;
+}
 
   h2 {
     @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground leading-snug;

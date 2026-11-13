@@ -33,6 +33,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  // async rewrites() {
+  //   return {
+  //     fallback: [
+  //       {
+  //         source: '/:path*',
+  //         destination: 'https://old.mildaintrainings.com/:path*', 
+  //       },
+  //     ],
+  //   };
+  // },
 };
 
 export default nextConfig;
