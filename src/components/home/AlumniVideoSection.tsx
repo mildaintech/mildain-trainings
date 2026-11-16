@@ -10,7 +10,7 @@ const testimonials = [
     name: "Ramesh Pattnaik",
     role: "Program Manager, Microsoft",
     logo: "/images/home/partner/google.png",
-    image: "/images/home/hero1.png",
+    image: "/images/home/ramesh.webp",
     quote: '"Mentors guide so well, and the post-training revision and mock interview preparation are bonuses."',
     text: "The professionally structured curriculum was amazing, and instructors guided so well with the intricate concepts and provided post-training revisions alongside mock interview preparations."
   },
@@ -19,7 +19,7 @@ const testimonials = [
     name: "Tina",
     role: "Cybersecurity Analyst Level -2, Amazon",
     logo: "/images/home/partner/amazon.png",
-    image: "/images/home/hero2.png",
+    image: "/images/home/tina.webp",
     quote: '"Learning with AI-blend modules offered me a personalized path that filled my skill gaps."',
     text: "The AI-driven learning path has completely transformed the way I work now. It has boosted my efficiency of work and built my true efficiency."
   },
@@ -64,6 +64,7 @@ const testimonials = [
 export default function AlumniVideoSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false); // Nayi state video track karne ke liye
 
   useEffect(() => {
     const handleResize = () => {
@@ -95,34 +96,52 @@ export default function AlumniVideoSection() {
           Real Stories of <span className="text-primary">Mildain Learners</span> at Top Corporations
         </h2>
 
-        <div className="relative w-full aspect-video lg:aspect-[2.5/1] rounded-2xl overflow-hidden cursor-pointer group shadow-xl bg-muted border border-border/50">
-          <Image
-             src="https://plus.unsplash.com/premium_photo-1661963085061-5068e4e73cc6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="Mildain Alumni Success Story"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-          />
+        <div 
+          className="relative w-full aspect-video lg:aspect-[2.5/1] rounded-2xl overflow-hidden cursor-pointer group shadow-xl bg-muted border border-border/50"
+          onClick={() => setIsVideoPlaying(true)} // Click karne par video play hoga
+        >
+          {isVideoPlaying ? (
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/lzjsnbXhTII?autoplay=1" 
+              title="YouTube video player" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowFullScreen
+              className="absolute top-0 left-0 w-full h-full z-30"
+            ></iframe>
+          ) : (
+            <>
+              <Image
+                src="/images/home/success-story.webp"
+                alt="Mildain Alumni Success Story"
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
 
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-colors duration-500"></div>
 
-          <div className="absolute top-6 left-0 bg-btn-gradient text-primary-foreground px-6 py-2.5 rounded-r-md font-bold tracking-wide shadow-md z-10 uppercase text-sm md:text-base">
-            Success story
-          </div>
+              <div className="absolute top-6 left-0 bg-btn-gradient text-primary-foreground px-6 py-2.5 rounded-r-md font-bold tracking-wide shadow-md z-10 uppercase text-sm md:text-base">
+                Success story
+              </div>
 
-          <div className="absolute top-6 right-8 z-10 flex items-center gap-2">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" className="text-primary-foreground"/>
-              <path d="M2 17L12 22L22 17" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 12L12 17L22 12" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span className="text-primary-foreground font-extrabold text-xl md:text-2xl tracking-widest drop-shadow-md">MILDAIN</span>
-          </div>
+              <div className="absolute top-6 right-8 z-10 flex items-center gap-2">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" className="text-primary-foreground"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-primary-foreground font-extrabold text-xl md:text-2xl tracking-widest drop-shadow-md">MILDAIN</span>
+              </div>
 
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(46,97,87,0.5)] transition-all duration-300 group-hover:scale-110 group-hover:bg-primary border border-primary-foreground/20">
-              <Play className="text-primary-foreground w-8 h-8 md:w-10 md:h-10 ml-1.5" fill="currentColor" strokeWidth={0} />
-            </div>
-          </div>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(46,97,87,0.5)] transition-all duration-300 group-hover:scale-110 group-hover:bg-primary border border-primary-foreground/20">
+                  <Play className="text-primary-foreground w-8 h-8 md:w-10 md:h-10 ml-1.5" fill="currentColor" strokeWidth={0} />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="relative mt-16 md:mt-24 w-full group/slider">

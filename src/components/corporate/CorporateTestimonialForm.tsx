@@ -10,43 +10,21 @@ import 'react-phone-number-input/style.css';
 const testimonials = [
   {
     id: 1,
-    logo: "/images/home/partner/microsoft.png",
-    quoteHeading: "Our partnership with Mildain has been an amazing one.",
-    quoteBody: "They have been able to understand and enable our vision for helping African organizations build capability and capacity for digital transformation. The hands-on, interactive training programs have led to excellent learner feedback and engagement.",
-    authorImage: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop",
-    authorName: "Ramesh Pattnaik",
-    authorTitle: "Program Manager",
-    authorCompany: "Microsoft"
+    quoteHeading: "First-Attempt Certification Clearance and Training Support ",
+    quoteBody: "We chose Mildain Trainings and opted for CISA and CISM certification for our team of employees. During the training, the team gained access to an ISACA-aligned curriculum, learning kit, and expert supervision that guided them throughout until passing the exam. All our employees excelled in their particular training and got certified on their first attempt.",
+    authorImage: "/images/corporate/testimonial-2.webp",
+    authorName: "~Ximpa Liung",
+    authorTitle: "Technical Head ",
+    authorCompany: "(Eminence Tech Solutions)"
   },
   {
     id: 2,
-    logo: "/images/home/partner/google.png",
-    quoteHeading: "Exceptional quality and seamless execution across all tracks.",
-    quoteBody: "Working with Mildain has significantly accelerated our internal tech readiness. Their expert instructors and structured programs ensure our engineers stay ahead of industry demands.",
-    authorImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
-    authorName: "Sarah Jenkins",
-    authorTitle: "Director of Talent Development",
-    authorCompany: "Google"
-  },
-  {
-    id: 3,
-    logo: "/images/home/partner/amazon.png",
-    quoteHeading: "The best enterprise learning platform we have integrated.",
-    quoteBody: "The custom learning paths and hands-on cloud labs provided robust upskilling for our engineering teams, resulting in much higher certification success rates.",
-    authorImage: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
-    authorName: "David Miller",
-    authorTitle: "Cloud Solutions Architect",
-    authorCompany: "Amazon"
-  },
-  {
-    id: 4,
-    logo: "/images/home/partner/comptia.png",
-    quoteHeading: "Unmatched expertise in security and compliance training.",
-    quoteBody: "Mildain's comprehensive curriculum on cybersecurity and risk management has empowered our workforce to maintain elite security standards globally.",
-    authorImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop",
-    authorName: "Ananya Sharma",
-    authorTitle: "Head of Global Compliance",
-    authorCompany: "CompTIA Partner Network"
+    quoteHeading: "A Truly Worthwhile Investment in the Development of our Employees.",
+    quoteBody: "We found out about Mildain Trainings from a top Tech giant. The training equipped our team with job-ready AI and cybersecurity skills. The training services that they provided to us offered a unique combination of theory and practice. Through their in-depth industry expertise, our staff gained high-tech, job-ready skills valuable for their jobs.",
+    authorImage: "/images/corporate/testimonial-2.webp",
+    authorName: "~Vijay Bhandari",
+    authorTitle: " Chief Technology Officer",
+    authorCompany: "(WeNexaWay Global)"
   }
 ];
 
@@ -210,20 +188,13 @@ export default function CorporateTestimonialForm() {
           
           <div className="lg:col-span-7 flex flex-col w-full">
             <h2 className="mb-4">
-              Hear It From Our Customers
+              Client Stories: Review & Impact
             </h2>
             <p className="mb-10 max-w-[500px]">
               See how leading organizations upskill their workforce with Mildain.
             </p>
 
             <div className="bg-card border border-border rounded-xl p-8 md:p-12 shadow-sm relative w-full mb-8">
-              <div className="h-12 mb-8">
-                <img 
-                  src={testimonials[currentIndex].logo} 
-                  alt="Company Logo" 
-                  className="h-full w-auto object-contain"
-                />
-              </div>
 
               <h3 className="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-foreground leading-tight mb-6">
                 {testimonials[currentIndex].quoteHeading}

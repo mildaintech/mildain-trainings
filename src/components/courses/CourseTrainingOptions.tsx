@@ -96,7 +96,7 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
           <div className="bg-card rounded-2xl overflow-hidden border border-border flex flex-col shadow-sm">
             <div className="relative h-[240px] w-full overflow-hidden border-b border-border">
               <img 
-                src="/images/home/hero2.png" 
+                src="/images/courses/enterprise-b2b-training.webp" 
                 alt="Enterprise B2B Training" 
                 className="w-full h-full object-cover"
               />

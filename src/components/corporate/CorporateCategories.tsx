@@ -23,12 +23,11 @@ export default function CorporateCategories() {
   const [activeId, setActiveId] = useState<number>(1);
 
   return (
-    <section className="py-8 md:py-16 bg-background overflow-hidden">
+<section id="explore-skillup" className="py-8 md:py-16 bg-background overflow-hidden">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
-        
         <div className="text-center mb-12 md:mb-16">
           <h2 className="mb-0">
-            Explore Courses by <span className="text-primary">Category</span>
+            Explore Your <span className="text-primary">Career Path</span>
           </h2>
         </div>
 

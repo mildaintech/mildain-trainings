@@ -26,16 +26,16 @@ const roles = [
   },
   {
     id: 2,
-    title: "Joana Sampson",
-    subtitle: "10+ Years in Cybersecurity GRC | CISM | CISSP | CRISC Certified",
-    description: "“Technological skills will open doors for growth, but constant learning can create better career pathways.”",
-    image: "/images/home/hero1.png"
+    title: "Lavina Mathews",
+    subtitle: "Professional Trainer",
+    description: "“FDE certification transforms you into a calm, capable professional bridging the gap between complex human problems and reliable technical solutions.”",
+    image: "/images/trainer/Lavina Mathews.webp"
   },
   {
     id: 3,
-    title: "Joana Sampson",
-    subtitle: "10+ Years in Cybersecurity GRC | CISM | CISSP | CRISC Certified",
-    description: "“Technological skills will open doors for growth, but constant learning can create better career pathways.”",
+    title: "Vibha Chudhary",
+    subtitle: "20 Years in Enterprise Information Systems and Risk Auditing",
+    description: "“Technical skills open doors, but a risk-focused mindset drives security. Go beyond memorizing CISA—become a trusted enterprise advisor.”",
     image: "/images/home/hero2.png"
   }
 ];

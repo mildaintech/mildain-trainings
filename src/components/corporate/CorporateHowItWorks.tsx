@@ -7,26 +7,26 @@ const steps = [
   {
     id: 1,
     step: "Step 1",
-    title: "Assess Skills Gaps",
-    description: "Assess skill gaps aligned to business goals, and assign licenses to targeted learner groups."
+    title: "Assessment of Requirements",
+    description: "We set up the business requirements and determine training programs for the workforce,"
   },
   {
     id: 2,
     step: "Step 2",
-    title: "Learning Journeys by Role",
-    description: "Unlimited access to curated courses and structured paths"
+    title: "Customization of Skills",
+    description: "Our team understands and pinpoints the skill set required to fulfill the business requirements."
   },
   {
     id: 3,
     step: "Step 3",
-    title: "Enable Learning at Scale",
-    description: "Blended learning across live sessions, async content, and certification prep."
+    title: "Ongoing Skill Development",
+    description: "We finalize the best trainer with industry experience for your team, using simulations and case studies."
   },
   {
     id: 4,
     step: "Step 4",
-    title: "See the impact",
-    description: "Track engagement, completion, and adoption through dashboards and reports"
+    title: "Post-training Extended Support",
+    description: "At last, we conduct mock interviews, interview preparation, certifications, and career guidance."
   }
 ];
 
@@ -38,17 +38,17 @@ export default function CorporateHowItWorks() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mb-12 md:mb-16">
           <div className="lg:col-span-6 flex flex-col items-start">
             <div className="inline-block border-[1.5px] border-primary text-primary px-4 py-1.5 rounded-sm text-sm md:text-base font-bold mb-6 bg-card shadow-sm">
-              How it works
+              Our Proven Training Process
             </div>
             
             <h2 className="mb-0">
-              We Build Skills That Drive Business Impact
+              Upskill Your Team For Smart Business Growth
             </h2>
           </div>
           
           <div className="lg:col-span-6 flex items-end lg:pt-16">
             <p className="mb-0">
-              From skills gap assessment to measurable business impact, a structured approach to drive outcome-driven learning for AI and digital skills across your workforce.
+              From detecting skill gaps to preparing teams for the new age, we are here to assist you not only with learning but also with a comprehensive strategy for business growth. 
             </p>
           </div>
         </div>

@@ -46,7 +46,7 @@
   } */
 
   h1 {
-  @apply text-[32px] sm:text-[44px] lg:text-[54px] font-semibold tracking-tight text-foreground leading-tight;
+  @apply text-[30px] sm:text-[42px] lg:text-[54px] font-semibold tracking-tight text-foreground leading-tight;
   font-family: 'Satoshi', sans-serif;
 }
 
@@ -71,9 +71,13 @@
     @apply text-base sm:text-lg lg:text-xl font-semibold text-foreground leading-normal;
   }
 
-  p {
+  /* p {
     @apply text-xl sm:text-2xl leading-relaxed text-foreground/80 font-medium;
-  }
+  } */
+
+  p {
+  @apply text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] leading-relaxed text-foreground/80 font-medium;
+}
 
   a {
     @apply text-primary transition-opacity hover:opacity-80 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;

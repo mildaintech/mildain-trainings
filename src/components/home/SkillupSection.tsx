@@ -36,14 +36,14 @@ export default function SkillupSection() {
             </p>
             
             <Button asChild className="bg-background text-primary hover:bg-background/90 px-10 h-[52px] rounded-sm font-bold text-[18px] transition-all shadow-md">
-              <Link href="/get-started">Get Started</Link>
+              <Link href="/corporate-training">Get Started</Link>
             </Button>
           </div>
 
           <div className="relative w-full flex justify-center lg:justify-end">
             <div className="relative w-full max-w-2xl aspect-video bg-muted overflow-hidden shadow-2xl rounded-sm border border-primary/20">
               <Image
-                src="https://images.unsplash.com/photo-1622676017526-4a8e99f5fdf3?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src="/images/home/leadership-skillup.webp"
                 alt="Mildain Skillup Business Team"
                 fill
                 className="object-cover"

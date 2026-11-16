@@ -66,33 +66,29 @@ export default function CommitmentSection() {
             <p className="my-6">
               Make the most out of our training options, which include online, offline, and fly-me-a-trainer. Enjoy full assistance in the preparation for certification and post-training revisions.
             </p>
-
-            <div className="flex items-center gap-4 sm:gap-6 mb-6">
-              <div className="bg-background rounded-lg w-[80px] sm:w-[100px] h-[55px] sm:h-[65px] flex items-center justify-center px-2 hover:shadow-md hover:shadow-primary/20 transition-all duration-300">
-                <img 
-                  src="/images/home/partner/isaca.png" 
-                  alt="ISACA Partner" 
-                  className="max-h-12 sm:max-h-14 max-w-[90%] object-contain"
+            <div className="flex items-center gap-4 sm:gap-6 mb-2">
+              <div className="flex items-center justify-center">
+                <img
+                  src="/images/home/partner/isaca.png"
+                  alt="ISACA Partner"
+                  className="block w-[120px] sm:w-[150px] h-[65px] sm:h-[75px] object-contain mix-blend-multiply"
                 />
               </div>
-              <div className="bg-background rounded-lg w-[120px] sm:w-[150px] h-[55px] sm:h-[65px] flex items-center justify-center px-2 hover:shadow-md hover:shadow-primary/20 transition-all duration-300">
-                <img 
-                  src="/images/home/partner/comptia.png" 
-                  alt="Comptia" 
-                  className="max-h-12 sm:max-h-14 max-w-[90%] object-contain"
+              <div className="flex items-center justify-center">
+                <img
+                  src="/images/home/partner/comptia.png"
+                  alt="CompTIA Partner"
+                  className="block w-[150px] sm:w-[170px] h-[65px] sm:h-[75px] object-contain mix-blend-multiply"
                 />
               </div>
             </div>
-
             <div>
               <Button asChild className="px-8 h-[52px] sm:h-[56px] rounded-md transition-all cursor-pointer w-full sm:w-auto font-bold tracking-wide">
                 <Link href="/get-started">Begin Your Journey</Link>
               </Button>
             </div>
-
           </div>
         </div>
-        
       </div>
     </section>
   );

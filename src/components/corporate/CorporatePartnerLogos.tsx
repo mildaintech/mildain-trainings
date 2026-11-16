@@ -3,23 +3,20 @@
 const logos = [
   "/images/home/partner/amazon.png",
   "/images/home/partner/comptia.png",
-  "/images/home/partner/ec-council.png",
   "/images/home/partner/google.png",
   "/images/home/partner/isaca.png",
   "/images/home/partner/isc2.png",
-  "/images/home/partner/microsoft.png",
-  "/images/home/partner/pecb.png",
-  "/images/home/partner/pmxs.png",
-  "/images/home/partner/isc-2.png",
+  "/images/home/partner/pmi.png",
+  "/images/home/partner/redhat.png",
+  "/images/home/partner/isc2.png",
 ];
-
 export default function CorporatePartnerLogos() {
   return (
     <section className="pt-10 md:pt-12 pb-4 md:pb-6 bg-background overflow-hidden border-t border-border">
       
       <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 md:mb-10">
         <h2 className="text-center text-2xl md:text-3xl font-semibold text-foreground tracking-wide">
-          Trusted by Global Enterprises and Industry Leaders
+          Recognized and Trusted by Global Industry Leaders
         </h2>
       </div>
       

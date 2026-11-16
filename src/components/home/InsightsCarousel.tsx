@@ -10,63 +10,62 @@ const articles = [
     title: "Cyber Security Interview Questions and Answers",
     description: "A decade ago, if someone had told you that your online shopping history or the way you scroll through Instagram was worth millions, you'd probably laugh it off. Yet here we are where data is as valuable as gold.",
     bgOverlay: "from-[#005A9C] via-[#005A9C]/90 to-transparent",
-    image: "/images/home/hero.png"
+    image: "/images/blog/blog-1.webp"
   },
   {
     id: 2,
     title: "Workday Interview Questions and Answers",
     description: "A decade ago, if someone had told you that your online shopping history or the way you scroll through Instagram was worth millions, you'd probably laugh it off. Yet here we are where data is as valuable as gold.",
     bgOverlay: "from-[#7A1F3D] via-[#7A1F3D]/90 to-transparent",
-    image: "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHRlY2h8ZW58MHx8MHx8fDA%3D"
-  },
+    image: "/images/blog/blog-2.webp"  },
   {
     id: 3,
     title: "Guidewire Interview Questions and Answers",
     description: "A decade ago, if someone had told you that your online shopping history or the way you scroll through Instagram was worth millions, you'd probably laugh it off. Yet here we are where data is as valuable as gold.",
     bgOverlay: "from-[#8B6508] via-[#8B6508]/90 to-transparent",
-    image: "/images/home/hero2.png"
+    image: "/images/blog/blog-3.webp"
   },
   {
     id: 4,
     title: "Mastering Cloud Architecture: AWS vs Azure vs Google Cloud.",
     description: "Navigate the cloud computing ecosystem. Understand the core differences, pricing models, and specific enterprise use cases for the big three cloud providers in today's market.",
     bgOverlay: "from-[#005A9C] via-[#005A9C]/90 to-transparent",
-    image: "/images/home/hero1.png"
+    image: "/images/blog/blog-4.webp"
   },
   {
     id: 5,
     title: "The Future of AI in Enterprise Software Development.",
     description: "Explore how generative AI and machine learning models are fundamentally changing the software development life cycle, from automated testing to intelligent code generation.",
     bgOverlay: "from-[#7A1F3D] via-[#7A1F3D]/90 to-transparent",
-    image: "/images/home/hero2.png"
+    image: "/images/blog/blog-5.webp"
   },
   {
     id: 6,
     title: "Building Resilient Data Pipelines with Modern Big Data Tools.",
     description: "Learn the best practices for structuring, transforming, and managing large-scale data systems to ensure high availability and actionable insights for your business intelligence teams.",
     bgOverlay: "from-[#8B6508] via-[#8B6508]/90 to-transparent",
-    image: "/images/home/hero1.png"
+    image: "/images/blog/blog-6.webp"
   },
   {
     id: 7,
     title: "Agile Leadership: Navigating Remote and Hybrid Teams.",
     description: "Discover proven strategies and agile methodologies that empower engineering managers to maintain high productivity and team morale in distributed work environments.",
     bgOverlay: "from-[#005A9C] via-[#005A9C]/90 to-transparent",
-    image: "/images/home/hero.png"
+    image: "/images/blog/blog-7.webp"
   },
   {
     id: 8,
     title: "Zero Trust Security Model: Implementation Strategies for 2026.",
     description: "Break down the core pillars of the Zero Trust framework. Learn how to secure your enterprise networks against sophisticated modern cyber threats and internal vulnerabilities.",
     bgOverlay: "from-[#7A1F3D] via-[#7A1F3D]/90 to-transparent",
-    image: "https://images.unsplash.com/photo-1581091871343-9a6c099886ed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fHRlY2glMjBnaXJsJTIwbm90ZXN8ZW58MHx8MHx8fDA%3D"
+    image: "/images/blog/blog-8.webp"
   },
   {
     id: 9,
     title: "Data Privacy Regulations and Compliance for Global Tech.",
     description: "Stay ahead of legal requirements. A comprehensive overview of how modern data science and business analytics teams must adapt to stringent global privacy laws like GDPR and CCPA.",
     bgOverlay: "from-[#8B6508] via-[#8B6508]/90 to-transparent",
-    image: "/images/home/hero2.png"
+    image: "/images/blog/blog-9.webp"
   }
 ];
 

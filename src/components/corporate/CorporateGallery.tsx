@@ -6,31 +6,31 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 const galleryData = [
   {
     id: 0,
-    image: "/images/corporate/gallery1.jpg",
+    image: "/images/corporate/Training-1.webp",
     title: "AWS Security training",
     subtitle: "(NTPC)"
   },
   {
     id: 1,
-    image: "/images/corporate/gallery2.jpg",
+    image: "/images/corporate/Training-2.webp",
     title: "AWS Security training",
     subtitle: "(NetApp)"
   },
   {
     id: 2,
-    image: "/images/corporate/gallery3.jpg",
+    image: "/images/corporate/Training-3.webp",
     title: "Cyber Security training",
     subtitle: "(EY)"
   },
   {
     id: 3,
-    image: "/images/corporate/gallery4.jpg",
+    image: "/images/corporate/Training-4.webp",
     title: "AWS Security training",
     subtitle: "(PWC)"
   },
   {
     id: 4,
-    image: "/images/corporate/gallery1.jpg",
+    image: "/images/corporate/Training-5.webp",
     title: "AWS Security training",
     subtitle: "(NetApp)"
   }
@@ -59,7 +59,7 @@ export default function CorporateGallery() {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <h2 className="text-primary-foreground text-center mb-10">
-          Training Gallery
+          Moments from Mildain Trainings
         </h2>
 
         <div className="relative w-full h-[400px] sm:h-[500px] md:h-[650px] lg:h-[750px] rounded-2xl overflow-hidden shadow-2xl group border border-border bg-muted/30">

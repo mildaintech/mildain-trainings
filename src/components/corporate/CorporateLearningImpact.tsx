@@ -10,7 +10,7 @@ const statsData = [
     id: 1,
     icon: Users,
     percentage: "88%",
-    label: "Average Completion Rate"
+    label: "Average Course Completion Rate"
   },
   {
     id: 2,
@@ -32,11 +32,11 @@ export default function CorporateLearningImpact() {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 text-center">
         
         <h2 className="mb-4">
-          What Learning Delivers for<br />Your Organization
+          Business Impact and ROI <br />
         </h2>
         
         <p className="mb-16 md:mb-20 max-w-2xl mx-auto">
-          Proven outcomes across global teams, roles, and industries.
+          Guaranteed results for global teams across every role and industry.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-24 lg:gap-32 max-w-[1100px] mx-auto mb-16 md:mb-20">
@@ -59,7 +59,7 @@ export default function CorporateLearningImpact() {
         </div>
 
         <Button asChild className="relative overflow-hidden group bg-btn-gradient text-primary-foreground text-[18px] md:text-[20px] px-12 h-[54px] md:h-[60px] rounded-md transition-all cursor-pointer font-bold shadow-md">
-          <Link href="#contact-us" className="relative z-10">
+          <Link href="contact-us" className="relative z-10">
             Contact Us
             <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
           </Link>

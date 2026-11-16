@@ -27,7 +27,6 @@ export default function ExplorePrograms() {
 
   useEffect(() => {
     async function fetchCourses() {
-      // 1. FAST LOAD: Check session storage to render instantly in ms
       try {
         const cachedData = sessionStorage.getItem("explore_programs_cache");
         if (cachedData) {
@@ -41,10 +40,9 @@ export default function ExplorePrograms() {
       }
 
       try {
-        // 2. Fetch with 'force-cache' for lightning fast network response
         const res = await fetch("/api/admin/courses", { 
           cache: 'force-cache',
-          next: { revalidate: 60 } // optional: revalidates data every 60 seconds silently
+          next: { revalidate: 60 }
         });
         const data = await res.json();
         if (res.ok) {
@@ -59,7 +57,6 @@ export default function ExplorePrograms() {
           setCourses(formattedData);
           setCategories(finalCategories);
 
-          // 3. Save data to browser memory safely (prevents QuotaExceededError crash)
           try {
             sessionStorage.setItem("explore_programs_cache", JSON.stringify({
               cachedCourses: formattedData,
@@ -176,7 +173,7 @@ export default function ExplorePrograms() {
   };
 
   return (
-    <section className="w-full bg-secondary/5 py-16 lg:py-20 px-4 sm:px-6 lg:px-16 min-h-screen">
+    <section id="our-programs" className="w-full bg-secondary/5 py-16 lg:py-20 px-4 sm:px-6 lg:px-16 min-h-screen">
       <div className="max-w-[1440px] mx-auto w-full">
         
         <div className="w-full text-center mb-12 lg:mb-16">

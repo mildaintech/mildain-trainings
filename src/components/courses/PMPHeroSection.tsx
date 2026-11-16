@@ -90,8 +90,10 @@ export default function PMPHeroSection({ course, formattedCategory }: { course?:
                   src={course.heroBannerImage}
                   alt={course.heroBannerAlt || "Hero"}
                   title={course.heroBannerTitle}
-                  className="w-full max-w-[340px] sm:max-w-[450px] lg:max-w-[550px] h-auto object-contain drop-shadow-2xl"
+                  className="w-full max-w-[340px] sm:max-w-[450px] lg:max-w-[550px] h-auto object-contain drop-shadow-2xl relative z-10"
                 />
+                <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-white to-transparent z-20 pointer-events-none"></div>
+                <div className="absolute top-full left-0 w-full h-[20%] bg-gradient-to-b from-white to-transparent z-20 pointer-events-none"></div>
               </div>
             )}
           </div>

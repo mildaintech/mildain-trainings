@@ -5,22 +5,22 @@ import React from 'react';
 const awardsData = [
   {
     id: 1,
-    image: "/images/corporate/gold-award-winner-2027.png",
+    image: "/images/award/award1.png",
     title: "Partnership for Excellence Awards (2017-Canada)"
   },
   {
     id: 2,
-    image: "/images/corporate/platinum-award-winner-2017.png",
+    image: "/images/award/award2.png",
     title: "Engineering the Leadership Awards (2017-USA)"
   },
   {
     id: 3,
-    image: "/images/corporate/it-development-award-winner-2019.png",
+    image: "/images/award/award3.png",
     title: "Trade and IT Development Awards (2020-India)"
   },
   {
     id: 4,
-    image: "/images/corporate/sme-asia-award-winner-2020.png",
+    image: "/images/award/award4.png",
     title: "SME Asia Awards (2020-Singapore)"
   }
 ];
@@ -31,7 +31,7 @@ export default function CorporateAwards() {
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <h2 className="text-center mb-12 md:mb-16">
-          Awards & Accolades
+          Awards & Recognition
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 max-w-[1200px] mx-auto">

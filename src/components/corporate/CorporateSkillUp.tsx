@@ -21,22 +21,22 @@ export default function CorporateSkillUp() {
         
         <div className="flex flex-col items-start mb-10 md:mb-14">
           <div className="inline-block border-[1.5px] border-primary text-primary px-4 py-1.5 rounded-sm text-sm md:text-base font-bold mb-6 bg-card shadow-sm">
-            Mildain SkillUp+
+            Mildain ProGrowth
           </div>
           
           <h2 className="mb-4">
-            Explore the AI-first Learning Platform
+            The Experts Make Learning Practical
           </h2>
           
           <p className="max-w-[900px] mb-0">
-            Our unique learning platform blends expert-led live sessions, async content, and hands-on projects to deliver an industry-leading 80% completion rate.
+             Live expert sessions, sandbox scenarios, and customized learning paths prepare your teams to deploy the latest AI and data skills right away. 
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mb-16">
           <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-lg group cursor-pointer border border-border">
             <img 
-              src="/images/corporate/corporate-explore-1.png" 
+              src="/images/corporate/corporate-explore-1.webp" 
               alt="Learning Platform Interface" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -47,7 +47,7 @@ export default function CorporateSkillUp() {
             className="relative w-full aspect-[16/10] rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-primary"
           >
             <img 
-              src="/images/corporate/corporate-explore-2.png" 
+              src="/images/corporate/corporate-explore-2.webp" 
               alt="Video Learning Preview" 
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -62,8 +62,8 @@ export default function CorporateSkillUp() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center border-t border-border pt-12 mb-16">
           <div className="lg:col-span-4 flex flex-col">
             <h3 className="mb-0 leading-tight">
-              <span className="text-foreground">Mildain </span>
-              <span className="text-primary">SkillUp+</span>
+              <span className="text-foreground">Mildain  </span>
+              <span className="text-primary">ProGrowth</span>
               <br />
               <span className="text-foreground">Offerings</span>
             </h3>
@@ -72,28 +72,28 @@ export default function CorporateSkillUp() {
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex flex-col space-y-2">
               <p className="text-[16px] md:text-[18px] text-muted-foreground font-medium leading-snug mb-0">
-                Live, expert-led <br className="hidden sm:block" /> sessions monthly
+                 Professionals trained <br className="hidden sm:block" /> across sectors 
               </p>
-              <span className="text-[40px] md:text-[48px] lg:text-[56px] font-extrabold text-foreground leading-none">
+              <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
+                25,000
+              </span>
+            </div>
+            
+            <div className="flex flex-col space-y-2">
+              <p className="text-[16px] md:text-[18px] text-muted-foreground font-medium leading-snug mb-0">
+                 Enterprise clients <br className="hidden sm:block" /> assisted globally
+              </p>
+              <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
                 500
               </span>
             </div>
             
             <div className="flex flex-col space-y-2">
               <p className="text-[16px] md:text-[18px] text-muted-foreground font-medium leading-snug mb-0">
-                Async learning <br className="hidden sm:block" /> programs
+                Tech partners adding  <br className="hidden sm:block" /> strength to every project
               </p>
-              <span className="text-[40px] md:text-[48px] lg:text-[56px] font-extrabold text-foreground leading-none">
-                1800
-              </span>
-            </div>
-            
-            <div className="flex flex-col space-y-2">
-              <p className="text-[16px] md:text-[18px] text-muted-foreground font-medium leading-snug mb-0">
-                Hands-on projects, labs, <br className="hidden sm:block" /> and assessments
-              </p>
-              <span className="text-[40px] md:text-[48px] lg:text-[56px] font-extrabold text-foreground leading-none">
-                1200
+              <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
+                30
               </span>
             </div>
           </div>
@@ -102,13 +102,13 @@ export default function CorporateSkillUp() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
           <Button asChild className="relative overflow-hidden group bg-btn-gradient text-primary-foreground text-[16px] md:text-[18px] px-8 py-6 h-[50px] md:h-[56px] rounded-md shadow-md transition-all cursor-pointer font-bold w-full sm:w-auto">
             <Link href="#free-trial" className="relative z-10">
-              Get a Free Trial
+              Get a Free Consultation 
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
             </Link>
           </Button>
 
           <Button asChild variant="outline" className="border-2 border-primary bg-transparent text-primary hover:bg-primary/10 text-[16px] md:text-[18px] px-8 py-6 h-[50px] md:h-[56px] rounded-md transition-all cursor-pointer font-bold w-full sm:w-auto">
-            <Link href="#explore-skillup">Explore Mildain SkillUp+</Link>
+            <Link href="#explore-skillup">Explore Courses</Link>
           </Button>
         </div>
 
@@ -132,7 +132,7 @@ export default function CorporateSkillUp() {
           <div className="w-full max-w-4xl aspect-video bg-card rounded-xl overflow-hidden border border-border shadow-2xl relative flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <iframe 
               className="w-full h-full"
-              src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1" 
+              src="https://www.youtube.com/embed/KRj5qdH9TXI?autoplay=1" 
               title="Platform Video Preview"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowFullScreen
