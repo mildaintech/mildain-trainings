@@ -1,12 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Play, X } from 'lucide-react';
+import CorporateQuickInquiry from '@/components/shared/CorporateQuickInquiry'; // path apne project ke hisaab se check kar lena
 
 export default function CorporateSkillUp() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleVideoClick = () => {
     if (typeof window !== 'undefined' && navigator.vibrate) {
@@ -100,11 +108,13 @@ export default function CorporateSkillUp() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6">
-          <Button asChild className="relative overflow-hidden group bg-btn-gradient text-primary-foreground text-[16px] md:text-[18px] px-8 py-6 h-[50px] md:h-[56px] rounded-md shadow-md transition-all cursor-pointer font-bold w-full sm:w-auto">
-            <Link href="#free-trial" className="relative z-10">
-              Get a Free Consultation 
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
-            </Link>
+          <Button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="relative overflow-hidden group bg-btn-gradient text-primary-foreground text-[16px] md:text-[18px] px-8 py-6 h-[50px] md:h-[56px] rounded-md shadow-md transition-all cursor-pointer font-bold w-full sm:w-auto"
+          >
+            <span className="relative z-10">Get a Free Consultation</span>
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></span>
           </Button>
 
           <Button asChild variant="outline" className="border-2 border-primary bg-transparent text-primary hover:bg-primary/10 text-[16px] md:text-[18px] px-8 py-6 h-[50px] md:h-[56px] rounded-md transition-all cursor-pointer font-bold w-full sm:w-auto">
@@ -139,6 +149,18 @@ export default function CorporateSkillUp() {
             ></iframe>
           </div>
         </div>
+      )}
+
+      {isModalOpen && mounted && createPortal(
+        <div 
+          className="fixed inset-0 z-[999999] flex items-center justify-center bg-background/80 backdrop-blur-sm p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-md">
+            <CorporateQuickInquiry onClose={() => setIsModalOpen(false)} />
+          </div>
+        </div>,
+        document.body
       )}
     </section>
   );

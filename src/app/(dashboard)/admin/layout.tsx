@@ -28,6 +28,7 @@ function AdminSidebar() {
     { name: "Users", href: "/admin/users", icon: Users },
     { name: "Transactions", href: "/admin/transactions", icon: Receipt },
     { name: "Inquiries", href: "/admin/inquiries", icon: Users },
+    { name: "Corporate Inquiries", href: "/admin/corporate-inquiries", icon: Users },
     { name: "Coupons & Offers", href: "/admin/coupons", icon: Tag },
     { name: "Settings", href: "/admin/settings", icon: Settings }, 
 

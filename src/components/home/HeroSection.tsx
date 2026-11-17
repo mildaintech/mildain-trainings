@@ -2,7 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { createPortal } from 'react-dom';
 import { Button } from '@/components/ui/button';
+import QuickInquiry from '@/components/shared/QuickInquiry';
 
 const slides = [
   {
@@ -55,8 +57,12 @@ const slides = [
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
+    
     const timer = setInterval(() => {
       setIsTransitioning(true);
 
@@ -83,136 +89,149 @@ export default function HeroSection() {
   };
 
   return (
-    <div className="relative w-full h-auto lg:h-[calc(100vh-76px)] lg:min-h-[480px] lg:max-h-[600px] bg-background lg:bg-gradient-to-r lg:from-primary/10 lg:via-primary/5 lg:to-background overflow-hidden flex flex-col">
-      <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/10 to-transparent lg:hidden pointer-events-none"></div>
-      <main className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 h-full flex-grow">
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 items-stretch h-full w-full transition-opacity duration-300 ease-in-out ${
-            isTransitioning ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          <div className="relative flex justify-center lg:justify-end items-end w-full h-full min-h-[280px] sm:min-h-[450px] lg:min-h-full order-1 lg:order-2 pt-0 lg:pt-0">
-            <div className="relative w-full h-full z-10 flex justify-center lg:justify-end items-end">
-              <img
-                src={slides[current].image}
-                alt="Student"
-                className="w-full h-[280px] sm:h-[420px] lg:h-full object-contain object-bottom drop-shadow-xl lg:scale-[1.12] xl:scale-[1.20] origin-bottom transition-transform duration-500"
-              />
-          <div className="absolute -bottom-4 left-0 w-full h-32 bg-gradient-to-t from-background via-background/80 to-transparent lg:hidden pointer-events-none z-20"></div>            </div>
-          </div>
-          
-          <div className="flex flex-col justify-center items-start text-left w-full max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1 relative z-30 pb-10 lg:pb-0 px-2 sm:px-0 h-full lg:-translate-y-2">            <h1 className="mb-4 sm:mb-6 mt-2 lg:mt-0">
-              <span className="whitespace-pre-line">
-                {slides[current].title}
-              </span>
-            </h1>
-            <ul className="flex flex-col gap-2.5 sm:gap-3 mb-6 sm:mb-8 w-full">
-              {slides[current].bullets.map((bullet, idx) => (
-                <li
-                  key={idx}
-                  className="flex items-center gap-2.5"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="shrink-0"
+    <>
+      <div className="relative w-full h-auto lg:h-[calc(100vh-76px)] lg:min-h-[480px] lg:max-h-[600px] bg-background lg:bg-gradient-to-r lg:from-primary/10 lg:via-primary/5 lg:to-background overflow-hidden flex flex-col">
+        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-primary/10 to-transparent lg:hidden pointer-events-none"></div>
+        <main className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16 relative z-10 h-full flex-grow">
+          <div
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-8 items-stretch h-full w-full transition-opacity duration-300 ease-in-out ${
+              isTransitioning ? 'opacity-0' : 'opacity-100'
+            }`}
+          >
+            <div className="relative flex justify-center lg:justify-end items-end w-full h-full min-h-[280px] sm:min-h-[450px] lg:min-h-full order-1 lg:order-2 pt-0 lg:pt-0">
+              <div className="relative w-full h-full z-10 flex justify-center lg:justify-end items-end">
+                <img
+                  src={slides[current].image}
+                  alt="Student"
+                  className="w-full h-[280px] sm:h-[420px] lg:h-full object-contain object-bottom drop-shadow-xl lg:scale-[1.12] xl:scale-[1.20] origin-bottom transition-transform duration-500"
+                />
+                <div className="absolute -bottom-4 left-0 w-full h-32 bg-gradient-to-t from-background via-background/80 to-transparent lg:hidden pointer-events-none z-20"></div>
+              </div>
+            </div>
+            
+            <div className="flex flex-col justify-center items-start text-left w-full max-w-2xl mx-auto lg:mx-0 order-2 lg:order-1 relative z-30 pb-10 lg:pb-0 px-2 sm:px-0 h-full lg:-translate-y-2">
+              <h1 className="mb-4 sm:mb-6 mt-2 lg:mt-0">
+                <span className="whitespace-pre-line">
+                  {slides[current].title}
+                </span>
+              </h1>
+              <ul className="flex flex-col gap-2.5 sm:gap-3 mb-6 sm:mb-8 w-full">
+                {slides[current].bullets.map((bullet, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-center gap-2.5"
                   >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="11"
-                      fill="currentColor"
-                      className="text-primary"
-                    />
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="shrink-0"
+                    >
+                      <circle
+                        cx="12"
+                        cy="12"
+                        r="11"
+                        fill="currentColor"
+                        className="text-primary"
+                      />
 
-                    <path
-                      d="M7 12L10.5 15.5L17 8.5"
-                      stroke="#ffffff"
-                      strokeWidth="2.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                      <path
+                        d="M7 12L10.5 15.5L17 8.5"
+                        stroke="#ffffff"
+                        strokeWidth="2.8"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
 
-                  <p className="mb-0 leading-none">
-                    {bullet}
-                  </p>
+                    <p className="mb-0 leading-none">
+                      {bullet}
+                    </p>
 
-                </li>
-              ))}
+                  </li>
+                ))}
 
-            </ul>
-            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
-
-              <Button
-                asChild
-                className="px-6 h-[44px] sm:h-[48px] rounded-radius w-full sm:w-auto"
-              >
-                <Link href={slides[current].btn1Link}>
-                  {slides[current].btn1}
-                </Link>
-              </Button>
-
-              {slides[current].btn2 && (
+              </ul>
+              <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
 
                 <Button
                   asChild
-                  variant="outline"
                   className="px-6 h-[44px] sm:h-[48px] rounded-radius w-full sm:w-auto"
                 >
-                  <Link href="/login">
-                    {slides[current].btn2}
+                  <Link href={slides[current].btn1Link}>
+                    {slides[current].btn1}
                   </Link>
                 </Button>
 
-              )}
-            </div>
-            <div className="flex lg:hidden items-center gap-2 mt-6 w-full justify-center sm:justify-start">
+                {slides[current].btn2 && (
 
-              {slides.map((_, index) => (
+                  <Button
+                    variant="outline"
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-6 h-[44px] sm:h-[48px] rounded-radius w-full sm:w-auto"
+                  >
+                    {slides[current].btn2}
+                  </Button>
 
-                <button
-                  key={index}
-                  onClick={() => handleDotClick(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    current === index
-                      ? 'bg-primary w-2'
-                      : 'bg-primary/30 hover:bg-primary/60 w-2'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
+                )}
+              </div>
+              <div className="flex lg:hidden items-center gap-2 mt-6 w-full justify-center sm:justify-start">
 
-              ))}
+                {slides.map((_, index) => (
+
+                  <button
+                    key={index}
+                    onClick={() => handleDotClick(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      current === index
+                        ? 'bg-primary w-2'
+                        : 'bg-primary/30 hover:bg-primary/60 w-2'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+
+                ))}
+
+              </div>
 
             </div>
 
           </div>
 
+        </main>
+        <div className="hidden lg:flex absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center gap-2 z-30">
+
+          {slides.map((_, index) => (
+
+            <button
+              key={index}
+              onClick={() => handleDotClick(index)}
+              className={`h-2 rounded-full transition-all duration-300 ${
+                current === index
+                  ? 'bg-primary w-2'
+                  : 'bg-primary/30 hover:bg-primary/60 w-2'
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+
+          ))}
+
         </div>
-
-      </main>
-      <div className="hidden lg:flex absolute bottom-6 left-1/2 transform -translate-x-1/2 items-center gap-2 z-30">
-
-        {slides.map((_, index) => (
-
-          <button
-            key={index}
-            onClick={() => handleDotClick(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              current === index
-                ? 'bg-primary w-2'
-                : 'bg-primary/30 hover:bg-primary/60 w-2'
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-
-        ))}
-
       </div>
 
-    </div>
+     {isModalOpen && mounted && createPortal(
+        <div 
+          className="fixed inset-0 z-[999999] flex items-center justify-center bg-background/80 backdrop-blur-sm p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()} className="w-full max-w-5xl">
+            <QuickInquiry onClose={() => setIsModalOpen(false)} />
+          </div>
+        </div>,
+        document.body
+      )}
+    </>
   );
 }

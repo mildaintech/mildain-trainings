@@ -79,7 +79,7 @@ export default function CourseAdvisor({ course }: { course?: any }) {
             </h3>
 
             <p className="text-xl text-foreground leading-7 mb-4">
-              Your paragraph text goes here. You can write a complete paragraph naturally,
+              Build real-world skills with Mildain’s top industry mentors, bringing decades-long expertise.
             </p>
           </div>
 
