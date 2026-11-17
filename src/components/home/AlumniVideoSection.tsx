@@ -126,15 +126,15 @@ export default function AlumniVideoSection() {
                 Success story
               </div>
 
-              <div className="absolute top-6 right-8 z-10 flex items-center gap-2">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor" className="text-primary-foreground"/>
-                  <path d="M2 17L12 22L22 17" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M2 12L12 17L22 12" stroke="currentColor" className="text-primary-foreground" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <span className="text-primary-foreground font-extrabold text-xl md:text-2xl tracking-widest drop-shadow-md">MILDAIN</span>
+              <div className="absolute top-6 right-8 z-10 flex items-center">
+                <Image
+                  src="/images/logo/logo.webp"
+                  alt="Mildain Logo"
+                  width={140}
+                  height={40}
+                  className="h-7 md:h-9 w-auto object-contain drop-shadow-md"
+                />
               </div>
-
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(46,97,87,0.5)] transition-all duration-300 group-hover:scale-110 group-hover:bg-primary border border-primary-foreground/20">
                   <Play className="text-primary-foreground w-8 h-8 md:w-10 md:h-10 ml-1.5" fill="currentColor" strokeWidth={0} />

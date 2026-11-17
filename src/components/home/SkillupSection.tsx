@@ -41,9 +41,9 @@ export default function SkillupSection() {
           </div>
 
           <div className="relative w-full flex justify-center lg:justify-end">
-            <div className="relative w-full max-w-2xl aspect-video bg-muted overflow-hidden shadow-2xl rounded-sm border border-primary/20">
+            <div className="relative w-full max-w-2xl aspect-video bg-muted overflow-hidden shadow-2xl rounded-sm border-primary/20">
               <Image
-                src="/images/home/leadership-skillup.webp"
+                src="/images/home/leadership-skill.webp"
                 alt="Mildain Skillup Business Team"
                 fill
                 className="object-cover"
