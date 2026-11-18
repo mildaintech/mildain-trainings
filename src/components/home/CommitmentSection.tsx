@@ -22,8 +22,11 @@ export default function CommitmentSection() {
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-start mb-8 lg:mb-12">
             <div className="lg:col-span-5 space-y-6">
-              <div className="inline-block border-[1.5px] border-primary text-primary px-5 py-2.5 rounded-md font-bold tracking-wide">
-                Our Core Purpose
+              <div className="relative w-max border-l-[3px] border-primary pl-4 pr-3 py-1 text-primary font-bold tracking-widest uppercase text-[16px] overflow-hidden group cursor-default">
+                <div className="absolute inset-0 bg-primary/10 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out z-0"></div>
+                <span className="relative z-10 transition-colors duration-300">
+                  Our Core Purpose
+                </span>
               </div>
               <h2>
                 Inclusive Environment<br />

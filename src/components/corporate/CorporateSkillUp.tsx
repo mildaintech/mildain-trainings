@@ -83,7 +83,7 @@ export default function CorporateSkillUp() {
                  Professionals trained <br className="hidden sm:block" /> across sectors 
               </p>
               <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
-                25,000
+                25,000+
               </span>
             </div>
             
@@ -92,7 +92,7 @@ export default function CorporateSkillUp() {
                  Enterprise clients <br className="hidden sm:block" /> assisted globally
               </p>
               <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
-                500
+                500+
               </span>
             </div>
             
@@ -101,7 +101,7 @@ export default function CorporateSkillUp() {
                 Tech partners adding  <br className="hidden sm:block" /> strength to every project
               </p>
               <span className="text-[30px] md:text-[38px] lg:text-[46px] mt-4 font-extrabold text-foreground leading-none">
-                30
+                30+
               </span>
             </div>
           </div>

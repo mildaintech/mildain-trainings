@@ -92,8 +92,7 @@ export default function ExploreSection() {
               Skilled Instructor
             </h3>
             <p className=" text-xl max-w-md md:max-w-none mx-auto md:mx-0">
-              Get inclusive training with seasoned professionals with years of dedicated industry experience.
-            </p>
+              Build real-world skills with Mildain’s top industry mentors, bringing decades-long expertise            </p>
           </div>
 
           <div className="lg:col-span-9 flex flex-col w-full relative">
