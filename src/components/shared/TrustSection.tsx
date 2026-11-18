@@ -51,7 +51,6 @@ export default function TrustSection() {
                   className="max-h-6 md:max-h-10 max-w-full object-contain transition-all duration-300"
                 />
               </div>
-              
             </div>
           ))}
         </div>
