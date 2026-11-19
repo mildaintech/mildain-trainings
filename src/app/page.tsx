@@ -6,7 +6,7 @@ import ProgramsStandOut from '@/components/home/ProgramsStandOut';
 import ExploreSection from '@/components/home/ExploreSection';
 import SkillupSection from '@/components/home/SkillupSection';
 import AlumniVideoSection from '@/components/home/AlumniVideoSection';
-import InsightsCarousel from '@/components/home/InsightsCarousel';
+// import InsightsCarousel from '@/components/home/InsightsCarousel';
 import StickyBottomBar from '@/components/shared/StickyBottomBar';
 import TrustSection from '@/components/shared/TrustSection';
 import ExplorePrograms from '@/components/courses/ExplorePrograms';
@@ -26,7 +26,7 @@ export default function Home() {
       <SkillupSection />
       <EnterpriseLogos />
       <AlumniVideoSection />
-      <InsightsCarousel />
+      {/* <InsightsCarousel /> */}
       <StickyBottomBar />
       <ScrollButton />
     </div>

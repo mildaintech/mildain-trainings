@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     const userRole = user.role || "student";
     if (userRole !== "admin") {
-      return NextResponse.json({ error: "Access denied. Admin login only." }, { status: 403 });
+      return NextResponse.json({ error: "We're Working to Serve You Better – Please Try Again Later." }, { status: 403 });
     }
 
     const token = jwt.sign(

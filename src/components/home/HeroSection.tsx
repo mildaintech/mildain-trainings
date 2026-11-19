@@ -9,7 +9,7 @@ import QuickInquiry from '@/components/shared/QuickInquiry';
 const slides = [
   {
     id: 0,
-    title: "Master AI Courses and Ace\nSmart Technologies",
+    title: "Master AI and Ace\nSmart Technologies",
     bullets: [
       "9000+ Programs Implemented",
       "Over 30 Tech Partners.",
