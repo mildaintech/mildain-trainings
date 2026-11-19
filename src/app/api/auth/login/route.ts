@@ -25,17 +25,23 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
+    const userRole = user.role || "student";
+    if (userRole !== "admin") {
+      return NextResponse.json({ error: "Access denied. Admin login only." }, { status: 403 });
+    }
+
     const token = jwt.sign(
-      { userId: user._id, role: user.role || "student", name: user.name || user.firstName },
+      { userId: user._id, role: userRole, name: user.name || user.firstName },
       process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
 
+    const isHttps = req.headers.get("x-forwarded-proto") === "https" || req.url.startsWith("https://");
     const cookieStore = await cookies();
-    
+
     cookieStore.set("auth_token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isHttps,
       sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60,
       path: "/",
@@ -43,21 +49,21 @@ export async function POST(req: Request) {
 
     cookieStore.set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isHttps,
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60,
       path: "/",
     });
 
-    cookieStore.set("role", user.role || "student", {
-      secure: process.env.NODE_ENV === "production",
+    cookieStore.set("role", userRole, {
+      secure: isHttps,
       sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60,
       path: "/",
     });
 
     return NextResponse.json(
-      { message: "Login successful", role: user.role || "student" },
+      { message: "Login successful", role: userRole },
       { status: 200 }
     );
   } catch (error) {
