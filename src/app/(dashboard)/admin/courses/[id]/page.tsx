@@ -446,7 +446,6 @@
 
 
 
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -568,7 +567,7 @@ export default function EditCoursePage() {
     faqs: [] as any[],
     pathSalariesDescription: "",
     selectedCategory: "",
-    roles: "",
+    roles: [] as any[],
     selectedPathRoles: [] as any[],
     ogImage: "",
     ogImageAlt: "",
@@ -679,7 +678,7 @@ export default function EditCoursePage() {
             faqs: data.faqs || [],
             pathSalariesDescription: data.pathSalariesDescription || "",
             selectedCategory: data.selectedCategory || "",
-            roles: data.roles || "",
+            roles: Array.isArray(data.roles) ? data.roles : [],
             selectedPathRoles: data.selectedPathRoles || [],
             ogImage: data.ogImage || "",
             ogImageAlt: data.ogImageAlt || "",
@@ -792,7 +791,7 @@ export default function EditCoursePage() {
           faqs: formData.faqs,
           pathSalariesDescription: formData.pathSalariesDescription,
           selectedCategory: formData.selectedCategory,
-          roles: formData.roles,
+          roles: Array.isArray(formData.roles) ? formData.roles : [],
           selectedPathRoles: formData.selectedPathRoles,
           ogImage: formData.ogImage,
           ogImageAlt: formData.ogImageAlt,
