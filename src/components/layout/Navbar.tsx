@@ -218,11 +218,13 @@ export default function Navbar() {
           </button>
 
           <nav className="hidden lg:flex items-center gap-5 xl:gap-8 text-[13.5px] xl:text-[14.5px] font-bold text-foreground h-full">
-            <Link href="/blogs" className="hover:text-primary transition-colors">Blogs</Link>
-            <Link href="/careers" className="hover:text-primary transition-colors">Careers</Link>
-            <Link href="/more" className="hover:text-primary transition-colors flex items-center gap-1">
+            {/* <Link href="/blogs" className="hover:text-primary transition-colors">Blogs</Link>
+            <Link href="/careers" className="hover:text-primary transition-colors">Careers</Link> */}
+            <Link href="/about-us" className="hover:text-primary transition-colors">About Us</Link>
+            <Link href="/contact-us" className="hover:text-primary transition-colors">Contact Us</Link>
+            {/* <Link href="/more" className="hover:text-primary transition-colors flex items-center gap-1">
               More <ChevronDown size={14} className="mt-0.5 text-muted-foreground" />
-            </Link>
+            </Link> */}
           </nav>
 
           <div className="hidden lg:flex items-center gap-3 xl:gap-4 h-full">

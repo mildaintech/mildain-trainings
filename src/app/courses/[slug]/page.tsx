@@ -13,7 +13,7 @@ import CourseTrainingOptions from '@/components/courses/CourseTrainingOptions';
 import CourseExamDetails from '@/components/courses/CourseExamDetails';
 import CoursePathSalaries from '@/components/courses/CoursePathSalaries';
 import CourseFAQ from '@/components/courses/CourseFAQ';
-import InsightsCarousel from '@/components/home/InsightsCarousel';
+// import InsightsCarousel from '@/components/home/InsightsCarousel';
 import CourseBenefits from '@/components/courses/CourseBenefits';
 import CourseAdvisor from '@/components/courses/CourseAdvisor';
 import CourseReviews from '@/components/courses/CourseReviews';
@@ -165,7 +165,7 @@ export default async function CourseDetailPage({
         <CoursePathSalaries course={plainCourse} isIndia={isIndia} />
         <CourseCareerSupport course={plainCourse}  />
         <RelatedPrograms category={plainCourse.category} subcategory={plainCourse.subcategory} currentSlug={plainCourse.slug} isIndia={isIndia} />        <CourseFAQ course={plainCourse} />
-        <InsightsCarousel />
+        {/* <InsightsCarousel /> */}
         <ScrollButton />
       </div>
     </div>

@@ -134,24 +134,21 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2 flex flex-col">
-            <h5 className="text-primary-foreground font-bold mb-6">Trainings</h5>
+            <h5 className="text-primary-foreground font-bold mb-6">Trending Courses</h5>
             <ul className="flex flex-col gap-3.5">
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISSP Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISA Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISM Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CRISC Training</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISO Training</Link></li>
+              <li><Link href="/courses/agentic-ai-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Agentic AI Course</Link></li>
+              <li><Link href="/courses/generative-ai-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Generative AI Course</Link></li>
+              <li><Link href="/courses/FDE-Course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">FDE Course</Link></li>
+              <li><Link href="/courses/machine-learning-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Machine Learning Course</Link></li>
             </ul>
           </div>
 
           <div className="lg:col-span-3 flex flex-col">
-            <h5 className="text-primary-foreground font-bold mb-6">Industries</h5>
+            <h5 className="text-primary-foreground font-bold mb-6">Certification Courses</h5>
             <ul className="flex flex-col gap-3.5">
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Healthcare Cybersecurity</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Financial Services Security</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Manufacturing & OT Security</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Retail & PCI Security</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Critical Infrastructure Security</Link></li>
+              <li><Link href="/courses/cisa-certification-coursee" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISA Certification Course </Link></li>
+              <li><Link href="/courses/cism-certification-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISM Certification Course</Link></li>
+              <li><Link href="/courses/crisc-certification-training" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CRISC Certification Course</Link></li>
             </ul>
           </div>
 
@@ -159,8 +156,7 @@ export default function Footer() {
             <h5 className="text-primary-foreground font-bold mb-6">Company</h5>
             <ul className="flex flex-col gap-3.5">
               <li><Link href="corporate-training" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Corporate</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Blog</Link></li>
-              <li><Link href="#" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Career</Link></li>
+              <li><Link href="courses" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Courses</Link></li>
               <li><Link href="about-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">About Us</Link></li>
               <li><Link href="contact-us" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">Contact Us</Link></li>
             </ul>
