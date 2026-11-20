@@ -146,7 +146,7 @@ export default function Footer() {
           <div className="lg:col-span-3 flex flex-col">
             <h5 className="text-primary-foreground font-bold mb-6">Certification Courses</h5>
             <ul className="flex flex-col gap-3.5">
-              <li><Link href="/courses/cisa-certification-coursee" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISA Certification Course </Link></li>
+              <li><Link href="/courses/cisa-certification-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISA Certification Course </Link></li>
               <li><Link href="/courses/cism-certification-course" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CISM Certification Course</Link></li>
               <li><Link href="/courses/crisc-certification-training" className="text-primary-foreground/70 text-[14px] hover:text-primary-foreground transition-colors">CRISC Certification Course</Link></li>
             </ul>

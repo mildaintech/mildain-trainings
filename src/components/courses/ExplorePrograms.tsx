@@ -16,6 +16,15 @@ interface Course {
   image?: string;
   bannerImage?: string;
   logoImage?: string;
+  isMostPopular?: boolean;
+  popularOrder?: number;
+  displayOrder?: number;
+}
+
+interface CategoryItem {
+  _id: string;
+  name: string;
+  displayOrder?: number;
 }
 
 export default function ExplorePrograms() {
@@ -26,62 +35,57 @@ export default function ExplorePrograms() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    async function fetchCourses() {
+    async function fetchData() {
       try {
-        const cachedData = sessionStorage.getItem("explore_programs_cache");
-        if (cachedData) {
-          const { cachedCourses, cachedCategories } = JSON.parse(cachedData);
-          setCourses(cachedCourses);
-          setCategories(cachedCategories);
-          setIsLoading(false);
+        const [coursesRes, categoriesRes] = await Promise.all([
+          fetch("/api/admin/courses", { cache: 'no-store' }),
+          fetch("/api/admin/categories", { cache: 'no-store' })
+        ]);
+
+        const coursesData = coursesRes.ok ? await coursesRes.json() : [];
+        const categoriesData = categoriesRes.ok ? await categoriesRes.json() : [];
+
+        const formattedCourses: Course[] = coursesData.map((c: Course) => ({
+          ...c,
+          category: (c.category || "").replace(/\b\w/g, char => char.toUpperCase())
+        }));
+
+        let sortedCategoryNames: string[] = [];
+
+        if (Array.isArray(categoriesData) && categoriesData.length > 0) {
+          sortedCategoryNames = [...categoriesData]
+            .sort((a: CategoryItem, b: CategoryItem) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999))
+            .map((cat: CategoryItem) => (cat.name || "").replace(/\b\w/g, char => char.toUpperCase()))
+            .filter(Boolean);
+        } else {
+          sortedCategoryNames = Array.from(new Set(formattedCourses.map((c) => c.category))).filter(Boolean);
         }
-      } catch (e) {
-        console.warn("Could not read from session storage", e);
-      }
 
-      try {
-        const res = await fetch("/api/admin/courses", { 
-          cache: 'force-cache',
-          next: { revalidate: 60 }
-        });
-        const data = await res.json();
-        if (res.ok) {
-          const formattedData = data.map((c: Course) => ({
-            ...c,
-            category: (c.category || "").replace(/\b\w/g, char => char.toUpperCase())
-          }));
-
-          const uniqueCategories = Array.from(new Set(formattedData.map((c: Course) => c.category))) as string[];
-          const finalCategories = ["Most Popular", ...uniqueCategories];
-
-          setCourses(formattedData);
-          setCategories(finalCategories);
-
-          try {
-            sessionStorage.setItem("explore_programs_cache", JSON.stringify({
-              cachedCourses: formattedData,
-              cachedCategories: finalCategories
-            }));
-          } catch (storageError) {
-            console.warn("Session storage quota exceeded, skipping local cache saving.", storageError);
-          }
-        }
+        const uniqueCategories = Array.from(new Set(sortedCategoryNames));
+        setCourses(formattedCourses);
+        setCategories(["Most Popular", ...uniqueCategories]);
       } catch (err) {
-        console.error("Failed to fetch courses:", err);
+        console.error("Failed to fetch programs:", err);
       } finally {
         setIsLoading(false);
       }
     }
-    fetchCourses();
+    fetchData();
   }, []);
 
   useEffect(() => {
     setVisibleCount(6);
   }, [activeCategory]);
 
-  const activeCourses = activeCategory === "Most Popular" 
-    ? courses 
-    : courses.filter(c => c.category === activeCategory);
+  const activeCourses = activeCategory === "Most Popular"
+    ? (() => {
+        const popular = courses.filter(c => c.isMostPopular);
+        const list = popular.length > 0 ? popular : courses;
+        return [...list].sort((a, b) => (a.popularOrder ?? 999) - (b.popularOrder ?? 999));
+      })()
+    : [...courses]
+        .filter(c => c.category.toLowerCase() === activeCategory.toLowerCase())
+        .sort((a, b) => (a.displayOrder ?? 999) - (b.displayOrder ?? 999));
 
   const displayedCourses = activeCourses.slice(0, visibleCount);
 
@@ -102,12 +106,10 @@ export default function ExplorePrograms() {
       <div className="pt-10 px-6 pb-6 flex flex-col flex-1 bg-card rounded-b-lg">
         <div className="h-6 bg-muted rounded w-3/4 mb-3"></div>
         <div className="h-6 bg-muted rounded w-1/2 mb-6"></div>
-        
         <div className="mt-auto space-y-2 mb-6">
           <div className="h-4 bg-muted rounded w-full"></div>
           <div className="h-4 bg-muted rounded w-5/6"></div>
         </div>
-
         <div className="w-full py-5 bg-muted rounded-[4px]"></div>
       </div>
     </div>
@@ -238,7 +240,8 @@ export default function ExplorePrograms() {
             ))
           )}
         </div>
-        <div className="hidden lg:flex flex-row gap-6  ">
+
+        <div className="hidden lg:flex flex-row gap-6">
           <div className="w-[280px] shrink-0 flex flex-col gap-3">
             {isLoading ? (
               [...Array(6)].map((_, i) => (
