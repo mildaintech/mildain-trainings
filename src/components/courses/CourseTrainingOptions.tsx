@@ -23,10 +23,9 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
   const badgeText = course?.badge;
 
   return (
-  <section id="training-journey " className="w-full bg-background py-12 lg:py-20">
+  <section id="training-journey" className="scroll-mt-[12rem] w-full bg-background py-12 lg:py-20">
     <div id="options">
-      <div id="training-journey" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
-        
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         <div className="mb-10 text-center lg:text-left">
           <h2 className="mb-4 ">
             <span className="text-primary">{heading}</span>
@@ -119,9 +118,14 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
               </div>
               
               <div className="mt-auto">
-                <button className="w-full bg-background hover:bg-muted/50 border-2 border-primary text-primary font-bold py-3.5 rounded-lg transition-colors mb-3 shadow-sm">
+                <Link
+                  href="/corporate-training"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full bg-background hover:bg-muted/50 border-2 border-primary text-primary font-bold py-3.5 rounded-lg transition-colors mb-3 shadow-sm flex items-center justify-center"
+                >
                   Request Corporate Proposal
-                </button>
+                </Link>
                 <div className="flex items-center justify-center text-[12px] text-muted-foreground">
                   <span>Dedicated corporate response within 2 hours</span>
                 </div>

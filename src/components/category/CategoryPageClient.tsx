@@ -3,6 +3,7 @@
 import React from "react";
 import CategoryHeader from "./CategoryHeader";
 import CategorySubcategories, { SubcategoryItem } from "./CategorySubcategories";
+import WhyChooseMildain from "@/components/shared/WhyChooseMildain";
 import CategoryFaqs, { FaqItem } from "./CategoryFaqs";
 
 interface CategoryData {
@@ -39,6 +40,7 @@ export default function CategoryPageClient({
         categorySlug={category.slug}
         subcategories={subcategories}
       />
+      <WhyChooseMildain />
       <CategoryFaqs faqs={category.faqs} />
     </div>
   );

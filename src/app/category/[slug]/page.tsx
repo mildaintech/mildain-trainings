@@ -2,7 +2,6 @@ import React from 'react';
 import { connectToDatabase } from "@/lib/db";
 import Course from "@/models/Course";
 import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -56,7 +55,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           </div>
         )}
       </div>
-      <Footer />
     </div>
   );
 }

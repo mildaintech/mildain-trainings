@@ -50,7 +50,7 @@ const slides = [
     btn2: "",
     statsNum: "",
     statsText: "",
-    image: "/images/home/home-page-slide-3.webp",
+    image: "/images/home/home-page-slide-4.webp",
   }
 ];
 
