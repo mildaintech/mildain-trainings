@@ -7,13 +7,15 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = [
-  "AI & Machine Learning",
-  "Big Data Analytics",
-  "Cyber Security",
-  "DevOps",
-  "Data Science & Business Analytics",
-  "Quality Management",
-  "Project Management"
+  { name: "Artificial Intelligence", slug: "ai" },
+  { name: "Cyber Security", slug: "cyber-security" },
+  { name: "Cloud Computing", slug: "cloud-computing" },
+  { name: "Guidewire", slug: "guidewire" },
+  { name: "Salesforce", slug: "salesforce" },
+  { name: "Oracle", slug: "oracle" },
+  { name: "IBM", slug: "ibm" },
+  { name: "Technology", slug: "technology" },
+  { name: "Telecom", slug: "telecom" }
 ];
 
 const roles = [
@@ -67,17 +69,17 @@ export default function ExploreSection() {
             Explore by <span className="text-primary">Categories</span>
           </h2>
           <div className="flex flex-wrap justify-center md:justify-start items-center gap-3 md:gap-5 pb-4 md:pb-0">
-            {categories.map((cat, index) => (
+            {categories.map((cat) => (
               <Link
-                key={index}
-                href={`/categories/${cat.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
+                key={cat.slug}
+                href={`/${cat.slug}`}
                 className="px-5 py-2.5 md:px-6 md:py-2 bg-secondary/10 hover:bg-primary hover:text-primary-foreground text-foreground text-[14px] md:text-[16px] rounded-full transition-colors whitespace-nowrap font-medium border border-transparent hover:border-primary/20"
               >
-                {cat}
+                {cat.name}
               </Link>
             ))}
             <Link
-              href="/Courses"
+              href="/courses"
               className="text-primary/90 hover:text-primary font-bold text-[15px] md:text-[16px] whitespace-nowrap flex items-center transition-colors"
             >
               View All Categories <ChevronRight size={18} strokeWidth={2.5} className="ml-1" />

@@ -605,8 +605,8 @@ export default function BasicInfoTab({ formData, setFormData, setError }: { form
         </div>
 
         <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-4">
-          <h2 className="text-[12px] font-bold text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2">
-            Provider Logo
+          <h2 className="text-[10px] font-bold text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2">
+             Menu & Category Provider Logo 
           </h2>
           
           {!formData.logoImage ? (

@@ -156,7 +156,7 @@ export default function Navbar() {
   };
 
   return (
-    <header
+    <nav
       ref={headerRef}
       style={isFixed ? { top: promoHeight } : undefined}
       className={`${isFixed ? 'fixed left-0' : 'relative'} z-[150] w-full bg-background border-b border-border h-[64px] lg:h-[76px] flex items-center transition-opacity duration-150 ${
@@ -232,7 +232,7 @@ export default function Navbar() {
               Corporate
             </Link>
 
-            {!user ? (
+            {/* {!user ? (
               <Button asChild className="bg-transparent hover:bg-primary/10 text-primary border-[1.5px] border-primary font-bold text-[13px] xl:text-[14px] rounded-sm px-5 xl:px-7 h-[38px] xl:h-[42px] transition-all shadow-none shrink-0">
                 <Link href="/login">Login</Link>
               </Button>
@@ -271,7 +271,7 @@ export default function Navbar() {
                   </div>
                 )}
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -314,7 +314,7 @@ export default function Navbar() {
               <Link href="/corporate-training" onClick={() => setIsMobileMenuOpen(false)}>Corporate</Link>
             </Button>
 
-            {!user ? (
+            {/* {!user ? (
               <Button asChild className="bg-transparent hover:bg-primary/10 text-primary border-[1.5px] border-primary font-bold text-[14px] rounded-lg w-full h-[42px]">
                 <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>Login</Link>
               </Button>
@@ -343,10 +343,10 @@ export default function Navbar() {
                   Logout
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       )}
-    </header>
+    </nav>
   );
 }

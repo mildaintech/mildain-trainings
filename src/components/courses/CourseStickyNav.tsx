@@ -87,12 +87,12 @@ export default function CourseStickyNav() {
               >
                 Enroll Now
               </button> */}
-              <button 
+              {/* <button 
                 onClick={() => window.open('/login', '_blank', 'noopener,noreferrer')}
                 className="bg-btn-gradient hover:opacity-90 text-primary-foreground font-bold px-8 py-3 rounded-md shadow-sm transition-all"
               >
                 Enroll Now
-              </button>
+              </button> */}
             </div>
           </div>
 

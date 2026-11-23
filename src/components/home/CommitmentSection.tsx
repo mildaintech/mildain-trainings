@@ -35,8 +35,8 @@ export default function CommitmentSection() {
               </h2>
             </div>
             
-            <div className="lg:col-span-7 lg:pt-20">
-              <p className="w-full lg:w-11/12">
+            <div className="lg:col-span-7 lg:pt-14">
+             <p className="w-full lg:w-11/12">
                 The concept of 'diversity breeds innovation' is central to our standards. Our training initiatives lift the obstacles and create equal opportunities for professionals and leaders globally.
               </p>
             </div>

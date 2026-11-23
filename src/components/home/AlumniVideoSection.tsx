@@ -25,39 +25,30 @@ const testimonials = [
   },
   {
     id: 3,
-    name: "David Chen",
-    role: "Data Scientist, Google",
-    logo: "/images/home/partner/microsoft.png",
-    image: "/images/home/hero.png",
-    quote: '"The hands-on labs and expert mentorship were game-changers for my career trajectory."',
-    text: "Learning from top industry professionals gave me the exact skills needed to transition into data science. The curriculum is up-to-date with current market demands and the dedicated career support helped me secure my dream role quickly."
+    name: "Priya Bhardwaj",
+    role: "Senior IT Risk Analyst (Deloitte)",
+    logo: "/images/home/partner/key-benefit-deloitte.png",
+    image: "/images/studetnt-reviews/success-story-priya-bhardwaj.png",
+    quote: '"Before passing CISA certification, its core domains felt really overwhelming and out of reach."',
+    text: "Fortunately, I got hands-on guidance from the trainer at the Mildain classrooms, which gave me clarity on what I was missing, and I was so amazed by my result. Thanks to Mildain for providing an amazing trainer; they have completely transformed my career. I finally feel like a trusted professional in my domain."
   },
   {
     id: 4,
-    name: "Sarah Jenkins",
-    role: "Cloud Architect, AWS",
-    logo: "/images/home/partner/amazon.png",
-    image: "/images/home/hero1.png",
-    quote: '"An incredible learning experience that directly translated to a major career leap."',
-    text: "The depth of the cloud computing modules is unmatched. I appreciated the rigorous assessments and the real-world cloud deployment scenarios. It thoroughly prepared me for the actual challenges I face daily as a Cloud Architect."
+    name: "Isha Oberoi",
+    role: "Senior Security Analyst, Capgemini",
+    logo: "/images/home/partner/capgemini.png",
+    image: "/images/studetnt-reviews/Isha-Oberoi.png",
+    quote: '" Trainer support, revision prep, and study material gave brief insight into exam questions."',
+    text: "The certification and revision preparation, through the ISACA QAE kit, give me absolute clarity over the examination questions. I was entirely prepared for the examination because of the dedicated training and guidance provided by the expert mentor."
   },
   {
     id: 5,
-    name: "Arjun Mehta",
-    role: "Product Manager, Meta",
-    logo: "/images/home/partner/ec-council.png",
-    image: "/images/home/hero2.png",
-    quote: '"Transformed my understanding of product strategy and agile execution frameworks."',
-    text: "This platform bridges the gap between theoretical knowledge and practical application. The peer-to-peer learning and networking opportunities were invaluable. I highly recommend this to anyone looking to scale their career."
-  },
-  {
-    id: 6,
-    name: "Emily Watson",
-    role: "Security Consultant, ISACA",
-    logo: "/images/home/partner/isaca.png",
-    image: "/images/home/hero.png",
-    quote: '"The most comprehensive cybersecurity training I have ever attended online."',
-    text: "I was looking for a program that could offer both breadth and depth in cybersecurity. The interactive simulations and constant support from mentors made complex topics easy to grasp. It's a must for aspiring security professionals."
+    name: "Nirvair Singh",
+    role: "Enterprise Security Architect, SpaceX",
+    logo: "/images/home/partner/key-benefit-spacex.png",
+    image: "/images/studetnt-reviews/Nirvair-Singh.png",
+    quote: '"Managed my current job along with training successfully with online classes and bootcamps."',
+    text: "The virtual classes made it easy for me to get upskilled while balancing my then-full-time workload. The continuous career support and post-training guidance were crucial as I transitioned into a senior security governance role."
   }
 ];
 

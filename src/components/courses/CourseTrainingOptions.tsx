@@ -24,7 +24,7 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
 
   return (
     <div id="options" className="w-full bg-background py-12 lg:py-20">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
+      <div id="training-journey" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div className="mb-10 text-center lg:text-left">
           <h2 className="mb-4 ">
