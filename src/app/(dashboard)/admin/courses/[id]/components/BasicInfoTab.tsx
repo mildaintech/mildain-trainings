@@ -300,7 +300,7 @@
 
 "use client";
 
-import { Upload, X, Plus } from "lucide-react";
+import { Upload, X } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function BasicInfoTab({ formData, setFormData, setError }: { formData: any, setFormData: any, setError: any }) {
@@ -363,25 +363,6 @@ export default function BasicInfoTab({ formData, setFormData, setError }: { form
     setFormData({ ...formData, [field]: "" });
   };
 
-  const addRole = () => {
-    setFormData({
-      ...formData,
-      roles: [...(formData.roles || []), { roleName: "", salaryInr: "₹", salaryUsd: "$" }]
-    });
-  };
-
-  const removeRole = (index: number) => {
-    const updatedRoles = [...(formData.roles || [])];
-    updatedRoles.splice(index, 1);
-    setFormData({ ...formData, roles: updatedRoles });
-  };
-
-  const updateRole = (index: number, field: string, value: string) => {
-    const updatedRoles = [...(formData.roles || [])];
-    updatedRoles[index] = { ...updatedRoles[index], [field]: value };
-    setFormData({ ...formData, roles: updatedRoles });
-  };
-
   const activeSubcategories = subcategories.filter(sub => {
     if (typeof sub.parentCategory === 'object' && sub.parentCategory !== null) {
       return sub.parentCategory.name === formData.category || sub.parentCategory._id === formData.category;
@@ -440,7 +421,15 @@ export default function BasicInfoTab({ formData, setFormData, setError }: { form
               <select 
                 required
                 value={formData.subcategory || ""}
-                onChange={(e) => setFormData({ ...formData, subcategory: e.target.value })}
+                onChange={(e) => {
+                  const selectedName = e.target.value;
+                  const selectedSub = activeSubcategories.find((sc: any) => sc.name === selectedName);
+                  setFormData({
+                    ...formData,
+                    subcategory: selectedName,
+                    ...(selectedSub?.slug ? { slug: selectedSub.slug } : {}),
+                  });
+                }}
                 className="w-full px-3 py-2 bg-white border border-gray-300 rounded-sm focus:border-gray-900 focus:ring-1 focus:ring-gray-900 outline-none transition-all text-[13px]"
               >
                 <option value="">Select Subcategory</option>
@@ -606,7 +595,7 @@ export default function BasicInfoTab({ formData, setFormData, setError }: { form
 
         <div className="bg-white border border-gray-200 rounded-sm shadow-sm p-6 space-y-4">
           <h2 className="text-[10px] font-bold text-gray-900 uppercase tracking-wider border-b border-gray-100 pb-2">
-             Menu & Category Provider Logo 
+            Menu & Category Provider Logo 
           </h2>
           
           {!formData.logoImage ? (
