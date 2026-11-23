@@ -23,7 +23,8 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
   const badgeText = course?.badge;
 
   return (
-    <div id="options" className="w-full bg-background py-12 lg:py-20">
+  <section id="training-journey " className="w-full bg-background py-12 lg:py-20">
+    <div id="options">
       <div id="training-journey" className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         
         <div className="mb-10 text-center lg:text-left">
@@ -131,5 +132,6 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
         </div>
       </div>
     </div>
+  </section>
   );
 }
