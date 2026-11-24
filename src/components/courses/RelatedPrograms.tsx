@@ -409,9 +409,9 @@ export default function RelatedPrograms({
               >
                 <div className="h-[80px] bg-btn-gradient w-full shrink-0"></div>
 
-                <div className="absolute top-[40px] left-6 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-md border border-slate-100 overflow-hidden p-1.5">
+                <div className="absolute top-[50px] left-6 w-auto h-12 rounded-tl-md rounded-br-md bg-white flex items-center justify-center shadow-md border border-slate-100 overflow-hidden p-0.6">
                   <img
-                    src={program.resolvedLogo || '/images/home/hero1.png'}
+                    src={program.resolvedLogo}
                     alt={program.title || 'Program Logo'}
                     loading="lazy"
                     decoding="async"
