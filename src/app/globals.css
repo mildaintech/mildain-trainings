@@ -46,7 +46,7 @@
   } */
 
   h1 {
-  @apply text-[30px] sm:text-[42px] lg:text-[54px] font-semibold tracking-tight text-foreground leading-tight;
+  @apply text-[32px] sm:text-[44px] lg:text-[56px] font-semibold tracking-tight text-foreground leading-tight;
   font-family: 'Satoshi', sans-serif;
 }
 

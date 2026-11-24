@@ -5,6 +5,9 @@ import CategoryHeader from "./CategoryHeader";
 import CategorySubcategories, { SubcategoryItem } from "./CategorySubcategories";
 import WhyChooseMildain from "@/components/shared/WhyChooseMildain";
 import CategoryFaqs, { FaqItem } from "./CategoryFaqs";
+import PartnerLogos from "../home/PartnerLogos";
+import TrustSection from "../shared/TrustSection";
+import EnterpriseLogos from "../shared/EnterpriseLogos";
 
 interface CategoryData {
   _id: string;
@@ -40,7 +43,11 @@ export default function CategoryPageClient({
         categorySlug={category.slug}
         subcategories={subcategories}
       />
+      <PartnerLogos />
+      <TrustSection />
       <WhyChooseMildain />
+      
+      <EnterpriseLogos />
       <CategoryFaqs faqs={category.faqs} />
     </div>
   );
