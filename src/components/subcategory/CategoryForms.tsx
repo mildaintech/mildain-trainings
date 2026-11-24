@@ -331,6 +331,7 @@
 //   );
 // }
 
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -344,6 +345,7 @@ import SubcategoryAdvisorTab from "./SubcategoryAdvisorTab";
 import SubcategoryReviewsTab from "./SubcategoryReviewsTab";
 import SubcategoryPathSalariesTab from "./SubcategoryPathSalariesTab";
 import CategoryFaqSection from "./CategoryFaqSection";
+import CategorySeoSection from "./CategorySeoSection";
 
 const handleNameSlug = (name: string) => ({
   name,
@@ -360,6 +362,13 @@ export function CategoryForm({ initialData, onSave, onCancel, loading, error }: 
     description: "",
     bannerImage: "",
     faqs: [] as { question: string; answer: string }[],
+    metaTitle: "",
+    metaDescription: "",
+    focusKeyword: "",
+    ogImage: "",
+    ogImageAlt: "",
+    ogImageTitle: "",
+    schemaData: "",
   });
 
   useEffect(() => {
@@ -376,6 +385,13 @@ export function CategoryForm({ initialData, onSave, onCancel, loading, error }: 
         description: initialData.description || "",
         bannerImage: initialData.bannerImage || "",
         faqs: initialData.faqs || [],
+        metaTitle: initialData.metaTitle || "",
+        metaDescription: initialData.metaDescription || "",
+        focusKeyword: initialData.focusKeyword || "",
+        ogImage: initialData.ogImage || "",
+        ogImageAlt: initialData.ogImageAlt || "",
+        ogImageTitle: initialData.ogImageTitle || "",
+        schemaData: initialData.schemaData || "",
       });
     }
   }, [initialData]);
@@ -472,6 +488,8 @@ export function CategoryForm({ initialData, onSave, onCancel, loading, error }: 
         faqs={formData.faqs}
         onChange={(updatedFaqs) => setFormData({ ...formData, faqs: updatedFaqs })}
       />
+
+      <CategorySeoSection formData={formData} setFormData={setFormData} />
     </form>
   );
 }

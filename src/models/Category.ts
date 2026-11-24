@@ -1,30 +1,3 @@
-// import mongoose from 'mongoose';
-
-// const categorySchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true,
-//     unique: true
-//   },
-//   slug: {
-//     type: String,
-//     required: true,
-//     unique: true
-//   },
-//   careerSupportPdf: {
-//     type: String
-//   },
-//   roles: [{
-//     roleName: { type: String },
-//     salaryInr: { type: String },
-//     salaryUsd: { type: String }
-//   }]
-// }, { timestamps: true });
-
-// export default mongoose.models.Category || mongoose.model('Category', categorySchema);
-
-
-
 import mongoose from 'mongoose';
 
 const categorySchema = new mongoose.Schema({
@@ -69,7 +42,35 @@ const categorySchema = new mongoose.Schema({
   faqs: [{
     question: { type: String, required: true },
     answer: { type: String, required: true }
-  }]
+  }],
+  metaTitle: {
+    type: String,
+    default: ''
+  },
+  metaDescription: {
+    type: String,
+    default: ''
+  },
+  focusKeyword: {
+    type: String,
+    default: ''
+  },
+  ogImage: {
+    type: String,
+    default: ''
+  },
+  ogImageAlt: {
+    type: String,
+    default: ''
+  },
+  ogImageTitle: {
+    type: String,
+    default: ''
+  },
+  schemaData: {
+    type: String,
+    default: ''
+  }
 }, { timestamps: true });
 
 if (mongoose.models.Category) {
