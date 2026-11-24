@@ -165,33 +165,40 @@ export default function CourseCurriculum({ course }: { course?: any }) {
   const [visibleCount, setVisibleCount] = useState(5);
 
   useEffect(() => {
-    if (course?.subcategory) {
-      const cached = sessionStorage.getItem(`subcat_${course.subcategory}`);
-      if (cached) {
-        try {
-          setSubcategoryData(JSON.parse(cached));
-        } catch (e) {}
-      }
+    if (!course?.subcategory && !course?.slug) return;
 
-      fetch('/api/admin/subcategories')
-        .then(res => res.json())
-        .then(data => {
-          const subcategories = Array.isArray(data) ? data : (data.data || []);
-          const target = course.subcategory.trim().toLowerCase();
-          const selectedSub = subcategories.find(
-            (s: any) =>
-              s.name?.trim().toLowerCase() === target ||
-              s.slug?.trim().toLowerCase() === target ||
-              s._id === course.subcategory
+    let active = true;
+
+    fetch('/api/admin/subcategories')
+      .then((res) => res.json())
+      .then((data) => {
+        if (!active) return;
+        const subcategories = Array.isArray(data) ? data : (data.data || []);
+        const subTarget = (course.subcategory || '').trim().toLowerCase();
+        const slugTarget = (course.slug || '').trim().toLowerCase();
+
+        const matches = subcategories.filter((s: any) => {
+          const sName = (s.name || '').trim().toLowerCase();
+          const sSlug = (s.slug || '').trim().toLowerCase();
+          return (
+            (subTarget && (sName === subTarget || sSlug === subTarget || s._id === course.subcategory)) ||
+            (slugTarget && (sSlug === slugTarget || sName === slugTarget))
           );
-          if (selectedSub) {
-            setSubcategoryData(selectedSub);
-            sessionStorage.setItem(`subcat_${course.subcategory}`, JSON.stringify(selectedSub));
-          }
-        })
-        .catch(() => {});
-    }
-  }, [course?.subcategory]);
+        });
+
+        const selectedSub =
+          matches.find((s: any) => Array.isArray(s.curriculumModules) && s.curriculumModules.length > 0) ||
+          matches[0] ||
+          null;
+
+        setSubcategoryData(selectedSub);
+      })
+      .catch(() => {});
+
+    return () => {
+      active = false;
+    };
+  }, [course?.subcategory, course?.slug]);
 
   if (!course) return null;
 
@@ -220,7 +227,7 @@ export default function CourseCurriculum({ course }: { course?: any }) {
   };
 
   const handleLoadMore = () => {
-    setVisibleCount(prev => prev + 5);
+    setVisibleCount((prev) => prev + 5);
   };
 
   const visibleModules = modules.slice(0, visibleCount);
