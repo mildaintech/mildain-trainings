@@ -365,14 +365,34 @@ export default function CourseReviews({ course }: { course?: any }) {
 
   if (!course) return null;
 
+  // const videoImage =
+  //   subcategoryData?.successVideoImage ||
+  //   course.successVideoImage ||
+  //   'https://plus.unsplash.com/premium_photo-1661963085061-5068e4e73cc6?q=80&w=1470&auto=format&fit=crop';
+  // const videoImageAlt =
+  //   subcategoryData?.successVideoImageAlt || course.successVideoImageAlt || 'Mildain Alumni Success Story';
+  // const videoImageTitle = subcategoryData?.successVideoImageTitle || course.successVideoImageTitle || '';
+  // const videoUrl = subcategoryData?.successVideoUrl || course.successVideoUrl || '';
+
   const videoImage =
-    subcategoryData?.successVideoImage ||
-    course.successVideoImage ||
-    'https://plus.unsplash.com/premium_photo-1661963085061-5068e4e73cc6?q=80&w=1470&auto=format&fit=crop';
-  const videoImageAlt =
-    subcategoryData?.successVideoImageAlt || course.successVideoImageAlt || 'Mildain Alumni Success Story';
-  const videoImageTitle = subcategoryData?.successVideoImageTitle || course.successVideoImageTitle || '';
-  const videoUrl = subcategoryData?.successVideoUrl || course.successVideoUrl || '';
+  subcategoryData?.successVideoImage ||
+  course.successVideoImage ||
+  '/images/home/success-story.webp';
+
+const videoImageAlt =
+  subcategoryData?.successVideoImageAlt ||
+  course.successVideoImageAlt ||
+  'Mildain Alumni Success Story';
+
+const videoImageTitle =
+  subcategoryData?.successVideoImageTitle ||
+  course.successVideoImageTitle ||
+  '';
+
+const videoUrl =
+  subcategoryData?.successVideoUrl ||
+  course.successVideoUrl ||
+  '';
 
   if (reviews.length === 0 && !videoUrl) return null;
 

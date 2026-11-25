@@ -16,7 +16,7 @@ export default function PartnerLogos() {
     <section className="pt-10 md:pt-12 pb-4 md:pb-6 bg-white overflow-hidden border-t border-border">
       
       <div className="w-full max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 md:mb-8">
-        <h2 className="text-center text-xl md:text-2xl font-semibold text-foreground tracking-wide">
+        <h2 className="text-center text-2xl md:text-3xl font-semibold text-foreground tracking-wide">
           Building Careers With Global Academic and Industry Leaders
         </h2>
       </div>

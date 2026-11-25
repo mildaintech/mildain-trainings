@@ -76,7 +76,7 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
                 </div>
               </div>
               
-              <div className="mt-auto">
+              {/* <div className="mt-auto">
                 <Link 
                   href={`/checkout/${course?.slug}`}
                   target="_blank"
@@ -89,7 +89,7 @@ export default function CourseTrainingOptions({ course, priceDetails }: { course
                   <ShieldCheck size={14} className="text-primary" />
                   <span>Secure checkout process</span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

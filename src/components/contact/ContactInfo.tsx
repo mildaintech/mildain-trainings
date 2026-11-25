@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -80,7 +81,9 @@ export default function ContactInfo() {
           </a>
 
           <a
-            href="mailto:info@mildaintrainings.com"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=info@mildaintrainings.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group w-full flex items-center p-5 lg:p-6 bg-card rounded-2xl border border-border shadow-sm hover:shadow-[0_12px_30px_-8px_rgba(46,97,87,0.25)] hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300 overflow-hidden"
           >
             <div className="w-12 h-12 shrink-0 bg-primary/10 rounded-xl flex items-center justify-center mr-4 group-hover:bg-primary transition-all duration-300">
