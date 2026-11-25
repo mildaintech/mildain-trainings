@@ -1,24 +1,28 @@
-import { headers } from 'next/headers';
-import { MetadataRoute } from 'next';
+import type { MetadataRoute } from "next";
 
-export default async function robots(): Promise<MetadataRoute.Robots> {
-  const headersList = await headers();
-  const host = headersList.get('host') || '';
-
-  if (host.includes('vercel.app')) {
-    return {
-      rules: {
-        userAgent: '*',
-        disallow: '/',
-      },
-    };
-  }
+export default function robots(): MetadataRoute.Robots {
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://mildaintrainings.com").replace(/\/+$/, "");
 
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: `https://${host}/sitemap.xml`,
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: [
+          "/admin",
+          "/admin/",
+          "/api/",
+          "/student",
+          "/student/",
+          "/login",
+          "/register",
+          "/checkout/",
+          "/payment-success",
+          "/payment-failure",
+        ],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: baseUrl,
   };
 }

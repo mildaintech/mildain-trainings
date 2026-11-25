@@ -302,11 +302,11 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-[64px] left-0 w-full bg-background border-b border-border shadow-lg py-4 px-6 flex flex-col gap-4 z-40">
           <div className="flex flex-col gap-4 border-b border-border pb-4">
-            <Link href="/more" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground flex justify-between items-center">
+            {/* <Link href="/more" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground flex justify-between items-center">
               More <ChevronRight size={16} className="text-muted-foreground" />
-            </Link>
-            <Link href="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">Blogs</Link>
-            <Link href="/careers" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">Careers</Link>
+            </Link> */}
+            <Link href="/about-us" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">About Us</Link>
+            <Link href="/contact-us" onClick={() => setIsMobileMenuOpen(false)} className="text-[14px] font-bold text-foreground">Contact Us</Link>
           </div>
           
           <div className="flex flex-col gap-3 mt-2">

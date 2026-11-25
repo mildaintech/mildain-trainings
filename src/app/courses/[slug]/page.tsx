@@ -109,7 +109,7 @@ export default async function CourseDetailPage({
       <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
         <div className="bg-white p-8 rounded-lg shadow-md text-center max-w-md w-full border border-red-100">
           <h1 className="text-2xl font-bold text-red-500 mb-4">Course Not Found</h1>
-          <p className="text-gray-700">Database could not find any course matching the exact slug:</p>
+          <p className="text-gray-700">Data could not find any course matching the exact slug:</p>
           <p className="font-mono bg-gray-100 p-2 rounded mt-3 text-lg font-bold">"{decodedSlug}"</p>
         </div>
       </div>
