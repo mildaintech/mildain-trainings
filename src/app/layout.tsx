@@ -10,8 +10,11 @@ import { SiteLayout } from '@/components/layout/SiteLayout';
 export const metadata: Metadata = {
   title: 'Mildain Trainings - Learn Smarter, Achieve Knowledge',
   description: 'Expand your knowledge and open doors to exciting careers with our online education platform.',
+  verification: {
+    google: 'M9hONyKl9mglI4uY_shOPBxnuSVihz6EY5twMjgHpZo',
+  },
 };
-
+{/* <meta name="google-site-verification" content="M9hONyKl9mglI4uY_shOPBxnuSVihz6EY5twMjgHpZo" /> */}
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const orgSchema = generateOrganizationSchema();
   let globalSchemaData = '';
