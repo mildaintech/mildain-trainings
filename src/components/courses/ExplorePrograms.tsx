@@ -351,14 +351,13 @@
 // }
 
 
-
 'use client';
 
 import { memo, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ChevronDown, ChevronUp, ChevronRight } from "lucide-react";
 import { usePrograms, formatTitleCase } from "@/lib/usePrograms";
-import type { ProgramCourse as Course } from "@/lib/usePrograms";
+import type { ProgramCourse as Course, ProgramsData } from "@/lib/usePrograms";
 
 const shineBase =
   "pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent to-transparent transition-transform duration-1000 ease-in-out group-hover:translate-x-full";
@@ -455,8 +454,8 @@ const CourseCard = memo(function CourseCard({
   );
 });
 
-export default function ExplorePrograms() {
-  const { courses, categories: rawCategories, isLoading } = usePrograms();
+export default function ExplorePrograms({ initialData }: { initialData?: ProgramsData }) {
+  const { courses, categories: rawCategories, isLoading } = usePrograms(initialData);
   const [activeCategory, setActiveCategory] = useState<string>("Most Popular");
   const [visibleCount, setVisibleCount] = useState<number>(6);
 

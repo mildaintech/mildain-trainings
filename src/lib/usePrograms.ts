@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useMemo, useSyncExternalStore } from 'react';
 
 export interface ProgramCourse {
   _id: string;
@@ -25,7 +25,7 @@ export interface ProgramCategory {
   displayOrder?: number;
 }
 
-interface ProgramsData {
+export interface ProgramsData {
   courses: ProgramCourse[];
   categories: ProgramCategory[];
 }
@@ -37,23 +37,34 @@ const EMPTY_CATEGORIES: ProgramCategory[] = [];
 export const formatTitleCase = (value: string) =>
   (value || '').replace(/\b\w/g, (char) => char.toUpperCase());
 
+const normalizeCourses = (list: ProgramCourse[]): ProgramCourse[] =>
+  list.map((c) => ({ ...c, category: formatTitleCase(c.category || '') }));
+
 let snapshot: ProgramsData | null = null;
 let serialized = '';
 let pending: Promise<void> | null = null;
 let refreshed = false;
+let lastSeed: ProgramsData | null = null;
+let needsPersist = false;
 const listeners = new Set<() => void>();
 
-const publish = (data: ProgramsData, persist: boolean) => {
+const notify = () => {
+  listeners.forEach((listener) => listener());
+};
+
+const persist = (value: string) => {
+  try {
+    localStorage.setItem(STORAGE_KEY, value);
+  } catch {}
+};
+
+const publish = (data: ProgramsData, shouldPersist: boolean) => {
   const next = JSON.stringify(data);
   if (next === serialized) return;
   serialized = next;
   snapshot = data;
-  if (persist) {
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {}
-  }
-  listeners.forEach((listener) => listener());
+  if (shouldPersist) persist(next);
+  notify();
 };
 
 const refresh = (): Promise<void> => {
@@ -61,7 +72,7 @@ const refresh = (): Promise<void> => {
     const options: RequestInit & { priority?: string } = { priority: 'high' };
 
     pending = Promise.all([
-      fetch('/api/admin/courses', options).then((res) => (res.ok ? res.json() : null)),
+      fetch('/api/admin/courses?view=cards', options).then((res) => (res.ok ? res.json() : null)),
       fetch('/api/admin/categories', options).then((res) => (res.ok ? res.json() : null)),
     ])
       .then(([coursesRaw, categoriesRaw]) => {
@@ -75,10 +86,7 @@ const refresh = (): Promise<void> => {
         }
 
         const courses = coursesOk
-          ? (coursesRaw as ProgramCourse[]).map((c) => ({
-              ...c,
-              category: formatTitleCase(c.category || ''),
-            }))
+          ? normalizeCourses(coursesRaw as ProgramCourse[])
           : snapshot?.courses ?? EMPTY_COURSES;
 
         const categories = categoriesOk
@@ -115,7 +123,6 @@ if (typeof window !== 'undefined') {
       }
     }
   } catch {}
-  ensureFresh();
 }
 
 const subscribe = (listener: () => void) => {
@@ -126,14 +133,35 @@ const subscribe = (listener: () => void) => {
 };
 
 const getSnapshot = () => snapshot;
-const getServerSnapshot = () => null;
 
-export function usePrograms() {
+export function usePrograms(initialData?: ProgramsData) {
+  const seeded = useMemo<ProgramsData | null>(
+    () =>
+      initialData
+        ? { courses: normalizeCourses(initialData.courses), categories: initialData.categories }
+        : null,
+    [initialData]
+  );
+
+  if (typeof window !== 'undefined' && seeded && lastSeed !== seeded) {
+    lastSeed = seeded;
+    snapshot = seeded;
+    serialized = JSON.stringify(seeded);
+    refreshed = true;
+    needsPersist = true;
+  }
+
+  const getServerSnapshot = useCallback(() => seeded, [seeded]);
   const data = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   useEffect(() => {
+    if (needsPersist) {
+      needsPersist = false;
+      persist(serialized);
+      notify();
+    }
     ensureFresh();
-  }, []);
+  }, [seeded]);
 
   return {
     courses: data ? data.courses : EMPTY_COURSES,
