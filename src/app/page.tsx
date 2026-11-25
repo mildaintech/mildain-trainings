@@ -53,8 +53,8 @@ export const dynamic = 'force-dynamic';
 
 export async function generateMetadata(): Promise<Metadata> {
   return await getDynamicSeoMetadata('/', {
-    title: 'Mildain Trainings - Learn Smarter',
-    description: 'Advance your career with Mildain Trainings',
+    title: 'Mildain Trainings: Career-Focused AI & IT Courses',
+    description: 'Upgrade your skills with career-focused AI, IT and corporate courses. Access expert trainers, hands-on projects and flexible training programs.',
   });
 }
 
