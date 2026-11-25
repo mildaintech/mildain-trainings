@@ -470,7 +470,7 @@ export function CategoryForm({ initialData, onSave, onCancel, loading, error }: 
           <textarea rows={3} value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} className="w-full px-3 py-2 border rounded-sm outline-none text-[13px] focus:ring-1 focus:ring-gray-900" />
         </div>
 
-        <div>
+        {/* <div>
           <label className="block text-[13px] font-bold text-gray-700 mb-1.5">Header Banner Image (Optional, Max 2MB)</label>
           <input type="file" accept="image/*" onChange={handleBannerUpload} className="block w-full text-[13px] text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:text-[12px] file:font-bold file:bg-gray-900 file:text-white hover:file:bg-black" />
           {formData.bannerImage && (
@@ -481,7 +481,7 @@ export function CategoryForm({ initialData, onSave, onCancel, loading, error }: 
               </button>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
 
       <CategoryFaqSection

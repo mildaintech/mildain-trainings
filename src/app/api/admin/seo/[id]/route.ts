@@ -12,14 +12,14 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   try {
     await connectDB();
     const body = await req.json();
-    const { pageUrl, metaTitle, metaDescription, focusKeyword, ogImage, schemaData } = body;
+    const { pageUrl, metaTitle, metaDescription, focusKeyword, ogImage, ogImageAlt, ogImageTitle, schemaData } = body;
 
     const formattedUrl = pageUrl.startsWith('/') ? pageUrl : `/${pageUrl}`;
     const { id } = await params;
 
     const seo = await Seo.findByIdAndUpdate(
       id,
-      { pageUrl: formattedUrl, metaTitle, metaDescription, focusKeyword, ogImage, schemaData },
+      { pageUrl: formattedUrl, metaTitle, metaDescription, focusKeyword, ogImage, ogImageAlt, ogImageTitle, schemaData },
       { returnDocument: 'after' }
     );
 

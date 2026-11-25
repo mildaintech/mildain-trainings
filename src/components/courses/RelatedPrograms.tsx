@@ -409,7 +409,7 @@ export default function RelatedPrograms({
               >
                 <div className="h-[80px] bg-btn-gradient w-full shrink-0"></div>
 
-                <div className="absolute top-[50px] left-6 w-auto h-12 rounded-tl-md rounded-br-md bg-white flex items-center justify-center shadow-md border border-slate-100 overflow-hidden p-0.6">
+                <div className="absolute top-[50px] left-6 w-auto h-12 rounded-tl-md rounded-br-md bg-white flex items-center justify-center shadow-md border border-slate-100 overflow-hidden p-1.2">
                   <img
                     src={program.resolvedLogo}
                     alt={program.title || 'Program Logo'}

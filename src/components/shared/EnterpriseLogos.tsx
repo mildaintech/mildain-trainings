@@ -23,7 +23,7 @@ export default function EnterpriseLogos() {
     <section className="w-full bg-background py-12 lg:py-16">
       <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 xl:px-16">
         <h2 className="text-center mb-10 lg:mb-12">
-          Trusted by 100+ TechGiants Globally
+          Associated with 500+ Hiring partners
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-x-4 gap-y-8 md:gap-x-5 md:gap-y-10">
           {enterprises.map((item) => (

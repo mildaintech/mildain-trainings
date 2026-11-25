@@ -195,7 +195,7 @@ export default function QuickInquiry({ onClose }: QuickInquiryProps) {
             Begin Your Learning Journey with Us!
           </h3>
           <p className="mt-4 text-[16px] leading-relaxed" style={onDarkSoft}>
-            Get personalized course recommendations and expert guidance to choose the right training program for your professional growth.
+            Get personalized course recommendations and expert guidance to choose the right training program for your career growth and professional development.
           </p>
         </div>
 
