@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { Play, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 
@@ -30,7 +30,7 @@ const testimonials = [
     logo: "/images/home/partner/key-benefit-deloitte.png",
     image: "/images/studetnt-reviews/success-story-priya-bhardwaj.png",
     quote: '"Before passing CISA certification, its core domains felt really overwhelming and out of reach."',
-    text: "Fortunately, I got hands-on guidance from the trainer at the Mildain classrooms, which gave me clarity on what I was missing, and I was so amazed by my result. Thanks to Mildain for providing an amazing trainer; they have completely transformed my career. I finally feel like a trusted professional in my domain."
+    text: "Fortunately, I got hands-on guidance from the trainer at the Mildain classrooms, which gave me clarity on what I was missing, and I was so amazed by my result. Thanks to Mildain for providing an amazing trainer; they have completely transformed my career."
   },
   {
     id: 4,
@@ -55,7 +55,11 @@ const testimonials = [
 export default function AlumniVideoSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false); // Nayi state video track karne ke liye
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,14 +71,55 @@ export default function AlumniVideoSection() {
   }, []);
 
   const cardsToShow = isMobile ? 1 : 2;
-  const maxIndex = testimonials.length - cardsToShow;
+  const maxIndex = Math.max(0, testimonials.length - cardsToShow);
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  useEffect(() => {
+    setCurrentIndex((prev) => Math.min(prev, maxIndex));
+  }, [maxIndex]);
+
+  const handlePrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  }, [maxIndex]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  }, [maxIndex]);
+
+  useEffect(() => {
+    if (isPaused || maxIndex <= 0) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isPaused, maxIndex]);
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setIsPaused(true);
+    touchEndX.current = null;
+    touchStartX.current = e.targetTouches[0].clientX;
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current !== null && touchEndX.current !== null) {
+      const distance = touchStartX.current - touchEndX.current;
+      const minSwipeDistance = 40;
+
+      if (distance > minSwipeDistance) {
+        handleNext();
+      } else if (distance < -minSwipeDistance) {
+        handlePrev();
+      }
+    }
+
+    touchStartX.current = null;
+    touchEndX.current = null;
+    setIsPaused(false);
   };
 
   return (
@@ -89,7 +134,7 @@ export default function AlumniVideoSection() {
 
         <div 
           className="relative w-full aspect-video lg:aspect-[2.5/1] rounded-2xl overflow-hidden cursor-pointer group shadow-xl bg-muted border border-border/50"
-          onClick={() => setIsVideoPlaying(true)} // Click karne par video play hoga
+          onClick={() => setIsVideoPlaying(true)}
         >
           {isVideoPlaying ? (
             <iframe 
@@ -126,6 +171,7 @@ export default function AlumniVideoSection() {
                   className="h-7 md:h-9 w-auto object-contain drop-shadow-md"
                 />
               </div>
+
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
                 <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(46,97,87,0.5)] transition-all duration-300 group-hover:scale-110 group-hover:bg-primary border border-primary-foreground/20">
                   <Play className="text-primary-foreground w-8 h-8 md:w-10 md:h-10 ml-1.5" fill="currentColor" strokeWidth={0} />
@@ -135,15 +181,22 @@ export default function AlumniVideoSection() {
           )}
         </div>
 
-        <div className="relative mt-16 md:mt-24 w-full group/slider">
-          <div className="overflow-hidden md:px-4 lg:px-8">
+        <div 
+          className="relative mt-16 md:mt-24 w-full"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="overflow-hidden md:px-10 lg:px-12 touch-pan-y select-none">
             <div 
               className="flex transition-transform duration-700 ease-in-out"
               style={{ transform: `translateX(-${currentIndex * (100 / cardsToShow)}%)` }}
             >
               {testimonials.map((test) => (
-                <div key={test.id} className="w-full lg:w-1/2 flex-shrink-0 px-3 md:px-4 flex py-4">
-                  <div className="bg-card border border-border/80 bg-secondary/5  rounded-2xl px-8 py-2 md:px-10 md:py-4 flex flex-col w-full h-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(46,97,87,0.08)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/card">
+                <div key={test.id} className="w-full lg:w-1/2 flex-shrink-0 px-2 sm:px-3 md:px-4 flex py-4">
+                  <div className="bg-card border border-border/80 bg-secondary/5 rounded-2xl px-6 py-6 sm:px-8 md:px-10 md:py-8 flex flex-col w-full h-full shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(46,97,87,0.08)] hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group/card">
                     
                     <Quote className="absolute top-6 right-6 w-20 h-20 text-primary/5 -rotate-12 group-hover/card:text-primary/10 group-hover/card:rotate-0 transition-all duration-500" strokeWidth={1} />
                     
@@ -160,10 +213,10 @@ export default function AlumniVideoSection() {
                         <h4 className="mb-0">
                           {test.name}
                         </h4>
-                        <p className=" text-[1.2rem] text-stone-900  mt-1 mb-0 opacity-90">
+                        <p className="text-[1.2rem] text-stone-900 mt-1 mb-0 opacity-90">
                           {test.role}
                         </p>
-                        <div className="h-10 md:h-12 w-auto mt-2  inline-flex items-center justify-start max-w-fit">
+                        <div className="h-10 md:h-12 w-auto mt-2 inline-flex items-center justify-start max-w-fit">
                           <img 
                             src={test.logo} 
                             alt="Company Logo" 
@@ -180,7 +233,7 @@ export default function AlumniVideoSection() {
 
                       <div className="w-12 h-1 bg-primary/20 my-5 rounded-full group-hover/card:bg-primary/60 group-hover/card:w-20 transition-all duration-500"></div>
 
-                      <p className=" text-[1.3rem] mb-0 opacity-80 leading-relaxed text-justify">
+                      <p className="text-[1.3rem] mb-0 opacity-80 leading-relaxed text-justify">
                         {test.text}
                       </p>
                     </div>
@@ -191,37 +244,22 @@ export default function AlumniVideoSection() {
           </div>
 
           <button 
+            type="button"
+            aria-label="Previous review"
             onClick={handlePrev}
-            className="absolute left-0 md:-left-4 lg:-left-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary-foreground hover:border-primary hover:bg-primary transition-all bg-background shadow-lg z-20 opacity-0 md:opacity-100 group-hover/slider:opacity-100 disabled:opacity-0 disabled:pointer-events-none"
-            disabled={currentIndex === 0}
+            className="hidden md:flex absolute left-0 lg:-left-3 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-border items-center justify-center text-muted-foreground hover:text-primary-foreground hover:border-primary hover:bg-primary transition-all bg-background shadow-lg z-20 cursor-pointer"
           >
             <ChevronLeft size={28} strokeWidth={2} />
           </button>
           
           <button 
+            type="button"
+            aria-label="Next review"
             onClick={handleNext}
-            className="absolute right-0 md:-right-4 lg:-right-6 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary-foreground hover:border-primary hover:bg-primary transition-all bg-background shadow-lg z-20 opacity-0 md:opacity-100 group-hover/slider:opacity-100 disabled:opacity-0 disabled:pointer-events-none"
-            disabled={currentIndex >= maxIndex}
+            className="hidden md:flex absolute right-0 lg:-right-3 top-1/2 -translate-y-1/2 w-12 h-12 lg:w-14 lg:h-14 rounded-full border border-border items-center justify-center text-muted-foreground hover:text-primary-foreground hover:border-primary hover:bg-primary transition-all bg-background shadow-lg z-20 cursor-pointer"
           >
             <ChevronRight size={28} strokeWidth={2} />
           </button>
-
-          <div className="flex md:hidden items-center justify-center gap-4 mt-6">
-            <button 
-              onClick={handlePrev}
-              className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary-foreground hover:bg-primary transition-all bg-background shadow-sm"
-              disabled={currentIndex === 0}
-            >
-              <ChevronLeft size={24} strokeWidth={2} />
-            </button>
-            <button 
-              onClick={handleNext}
-              className="w-12 h-12 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-primary-foreground hover:bg-primary transition-all bg-background shadow-sm"
-              disabled={currentIndex >= maxIndex}
-            >
-              <ChevronRight size={24} strokeWidth={2} />
-            </button>
-          </div>
         </div>
 
       </div>
