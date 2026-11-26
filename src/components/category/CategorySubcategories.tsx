@@ -262,7 +262,7 @@ export default function CategorySubcategories({
                       <div className="w-full h-40 sm:h-44 bg-muted rounded-sm"></div>
                     )}
 
-                    <div className="absolute -bottom-6 left-6 h-[52px] min-w-[76px] max-w-[85%] w-fit bg-card rounded-sm shadow-md border border-border flex items-center justify-center px-1 py-1 z-10">
+                    <div className="absolute -bottom-6 left-6 h-[52px] min-w-auto max-w-[85%] w-fit bg-card rounded-sm shadow-md border border-border flex items-center justify-center px-1 py-1 z-10">
                       {course.logoImage || course.image ? (
                         <img
                           src={course.logoImage || course.image}
