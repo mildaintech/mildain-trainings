@@ -40,15 +40,15 @@ export default function CoursesHeader() {
               Our Courses
             </span>
 
-            <h1 className="text-[40px] sm:text-[48px] md:text-[56px] xl:text-[60px] font-extrabold leading-[1.05] tracking-tight mb-6 text-white">
-              Build In-Demand Skills With{' '}
+            <h1 className="text-[40px] sm:text-[48px] md:text-[56px] xl:text-[60px] font-bold leading-[1.07] tracking-tight mb-6 text-white">
+              Explore{' '}
               <span className="bg-gradient-to-r from-[#a8e0d6] via-white to-[#a8e0d6] bg-clip-text text-transparent">
-                Expert-Led Courses
+                Online Courses & Certification Programs
               </span>
             </h1>
 
-            <p className="text-[17px] md:text-[19px] text-white/85 leading-relaxed max-w-[560px]">
-              Indust Industry-aligned certification and skill-building programs in cIndustry-aligned certification and skill-building programs in cybersecurity, AI and data, designed for professionals and teams.ybersecurity, AI and data, designed for professionals and teams.ry-aligned certification and skill-building programs in cybersecurity, AI and data, designed for professionals and teams.
+            <p className="text-[17px] md:text-[19px] text-white/85 leading-relaxed letter-spacing-[0.07em] max-w-[660px]">
+              As technology is advancing rapidly, the skills you currently hold may not be sufficient to meet required goals or targets. Keeping yourself current and upskilled with in-demand courses opens ways for a promotion, a competitive salary hike, a career change, or more. Structured training can create a link between your skills and the opportunities waiting ahead of you.
             </p>
           </div>
 

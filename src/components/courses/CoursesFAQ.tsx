@@ -6,8 +6,38 @@ import { Plus, X } from 'lucide-react';
 const faqData = [
   {
     id: 1,
-    question: "What is corporate IT training?",
-    answer: "Corporate IT training offers organizations a means of teaching employees necessary technology skills, professional abilities, and competencies that are essential for their industries. The courses can include training in areas such as cloud computing, cybersecurity, artificial intelligence, data analysis, project management, and IT service management."
+    question: "How do I pick the right training course to begin my course journey?",
+    answer: "Start by figuring out the skills you want to build, the tech that honestly matters in your current role, and the career moves you're aiming for. Then look at courses that match your experience level, what you want to learn, and what interests you professionally. You can also talk to a training advisor if you want help."
+  },
+  {
+    id: 2,
+    question: " Are the courses built for beginners, or only for people who already have experience?",
+    answer: "Actually, it depends on the course you choose. Some courses cover the basics for beginners. Others dig into advanced skills for professionals already working in this field. Check the requirements for each course before you sign up."
+  },
+  {
+    id: 3,
+    question: "Do I need technical knowledge before enrolling?",
+    answer: "Not always. Every course offers something unique. Foundational courses may be suitable for learners starting from scratch, whereas advanced technology and certification courses may require relevant experience or an understanding of basic concepts."
+  },
+    {
+    id: 4,
+    question: "Are sessions online or in a classroom?",
+    answer: "Mildain Trainings runs instructor-led online and classroom sessions. We can also arrange on-site corporate training for organizations, subject to the usual terms and conditions. Available learning modes may vary depending on the course and location."
+  },
+  {
+    id: 5,
+    question: "Will I get hands-on experience during the training?",
+    answer: "Practical learning is a big part of how Mildain trains people. Depending on the course, sessions may include hands-on exercises, lab assignments, demonstrations, and real-world business scenarios to help you understand how concepts are applied in professional environments."
+  },
+  {
+    id: 6,
+    question: " Do these courses get me prepared for industry-recognized certifications?",
+    answer: "Many training programs are designed to support preparation for relevant industry certifications. The certification body, exam requirements, and how much prep you get depend on which course you pick. Check the course page for the certification details."
+  },
+    {
+    id: 7,
+    question: "How long does a training course take to finish?",
+    answer: "Duration varies by subject, how deep the curriculum goes, what you're trying to learn, and the training level. You can find the expected duration on the respective course page or speak with a training advisor for further details."
   },
 ];
 
