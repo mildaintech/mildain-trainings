@@ -61,11 +61,11 @@ export async function generateMetadata({
       canonical: absoluteCanonical
     },
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
       googleBot: {
-        index: false,
-        follow: false,
+        index: true,
+        follow: true,
       },
     },
     openGraph: {
