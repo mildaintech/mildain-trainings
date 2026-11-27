@@ -1,55 +1,223 @@
-"use client";
+// "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import Link from "next/link";
+// import Image from "next/image";
+// import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+
+// export default function LoginPage() {
+//   const router = useRouter();
+//   const [formData, setFormData] = useState({ email: "", password: "" });
+//   const [error, setError] = useState("");
+//   const [loading, setLoading] = useState(false);
+//   const [showPassword, setShowPassword] = useState(false);
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+//     setError("");
+
+//     try {
+//       const res = await fetch("/api/auth/login", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(formData),
+//       });
+
+//       const data = await res.json();
+
+//       if (!res.ok) {
+//         throw new Error(data.error || "Login failed");
+//       }
+
+//       if (data.role === "admin") {
+//         router.push("/admin/courses");
+//       } else {
+//         router.push("/student");
+//       }
+      
+//     } catch (err: any) {
+//       setError(err.message);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen flex flex-col lg:flex-row  bg-secondary/5">
+//       <div className="w-full lg:w-[45%] flex flex-col p-6 sm:p-12 overflow-y-auto relative">
+        
+//         <Link 
+//           href="/" 
+//           className="absolute top-6 left-6 sm:top-10 sm:left-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-background hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+//           aria-label="Back to Home"
+//         >
+//           <ArrowLeft size={20} strokeWidth={2} />
+//         </Link>
+
+//         <div className="w-full max-w-md mx-auto my-auto pt-16 lg:pt-0">
+//           <div className="flex justify-center mb-8">
+//             <Image
+//               src="/images/logo/mildain training logo.png"
+//               alt="Mildain Logo"
+//               width={180}
+//               height={45}
+//               className="h-9 w-auto object-contain"
+//               priority
+//             />
+//           </div>
+
+//           <div className="text-center mb-8">
+//             <h1 className="text-[24px] sm:text-[28px] font-bold text-foreground leading-tight mb-2">Welcome back!</h1>
+//             <p className="text-[14px] sm:text-[15px] text-muted-foreground m-0">Log in with your email</p>
+//           </div>
+          
+//           {error && (
+//             <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-md text-sm mb-5 font-medium text-center">
+//               {error}
+//             </div>
+//           )}
+
+//           <form onSubmit={handleSubmit} className="space-y-4">
+//             <div>
+//               <input 
+//                 type="email" 
+//                 required 
+//                 placeholder="Email address*"
+//                 className="w-full p-3.5 bg-background border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
+//                 onChange={(e) => {
+//                   setFormData({...formData, email: e.target.value});
+//                   setError("");
+//                 }}
+//               />
+//             </div>
+            
+//             <div className="relative">
+//               <input 
+//                 type={showPassword ? "text" : "password"}
+//                 required 
+//                 placeholder="Password*"
+//                 className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
+//                 onChange={(e) => {
+//                   setFormData({...formData, password: e.target.value});
+//                   setError("");
+//                 }}
+//               />
+//               <div className="absolute inset-y-0 right-0 flex items-center pr-4">
+//                 <button
+//                   type="button"
+//                   onClick={() => setShowPassword(!showPassword)}
+//                   className="text-muted-foreground/90 hover:text-foreground focus:outline-none transition-colors"
+//                 >
+//                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+//                 </button>
+//               </div>
+//             </div>
+
+//             <div className="flex items-center justify-end mt-2 mb-4">
+//               <Link href="/forgot-password" className="text-[13px] placeholder:text-muted-foreground/90 hover:underline font-semibold">
+//                 Forgot Password?
+//               </Link>
+//             </div>
+
+//             <button 
+//               type="submit" 
+//               disabled={loading}
+//               className="relative overflow-hidden group w-full bg-btn-gradient placeholder:text-muted-foreground/90-foreground py-3.5 rounded-md font-bold transition-all disabled:opacity-70 mt-2 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
+//             >
+//               <span className="relative z-10">{loading ? "Logging in..." : "Login"}</span>
+//               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
+//             </button>
+//           </form>
+
+//           <div className="mt-8 text-center">
+//             <p className="text-[14px] text-muted-foreground mb-6">
+//               Don't have an account? <Link href="/register" className="placeholder:text-muted-foreground/90 font-semibold hover:underline">Sign Up</Link>
+//             </p>
+//             <p className="text-[12px] text-muted-foreground/90 pt-4 border-t border-border">
+//               ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline placeholder:text-muted-foreground/90">Privacy Policy</Link>
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="hidden lg:flex lg:w-[55%] bg-muted relative items-center justify-center overflow-hidden border-l border-border">
+//         <div className="absolute inset-0 bg-primary/10 z-10 mix-blend-multiply"></div>
+//         <Image 
+//           src="/images/workteam.png"
+//           alt="Login"
+//           fill
+//           className="object-cover opacity-90"
+//           priority
+//         />
+//       </div>
+//     </div>
+//   );
+// }
+
+
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
+import { useLeadSecurity } from '@/hooks/useLeadSecurity';
 
 export default function LoginPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState("");
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const { executeSecurity, resetSecurity, SecurityElements } = useLeadSecurity();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError("");
+    setError('');
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const securityPayload = await executeSecurity();
+
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          ...securityPayload,
+        }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "Login failed");
+        resetSecurity();
+        throw new Error(data.error || 'Login failed');
       }
 
-      if (data.role === "admin") {
-        router.push("/admin/courses");
+      resetSecurity();
+
+      if (data.role === 'admin') {
+        router.push('/admin/courses');
       } else {
-        router.push("/student");
+        router.push('/student');
       }
-      
     } catch (err: any) {
-      setError(err.message);
+      setError(err.message || 'Login failed');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row  bg-secondary/5">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-secondary/5">
       <div className="w-full lg:w-[45%] flex flex-col p-6 sm:p-12 overflow-y-auto relative">
-        
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="absolute top-6 left-6 sm:top-10 sm:left-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-background hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
           aria-label="Back to Home"
         >
@@ -69,10 +237,14 @@ export default function LoginPage() {
           </div>
 
           <div className="text-center mb-8">
-            <h1 className="text-[24px] sm:text-[28px] font-bold text-foreground leading-tight mb-2">Welcome back!</h1>
-            <p className="text-[14px] sm:text-[15px] text-muted-foreground m-0">Log in with your email</p>
+            <h1 className="text-[24px] sm:text-[28px] font-bold text-foreground leading-tight mb-2">
+              Welcome back!
+            </h1>
+            <p className="text-[14px] sm:text-[15px] text-muted-foreground m-0">
+              Log in with your email
+            </p>
           </div>
-          
+
           {error && (
             <div className="bg-destructive/10 border border-destructive/20 text-destructive p-3 rounded-md text-sm mb-5 font-medium text-center">
               {error}
@@ -80,28 +252,30 @@ export default function LoginPage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
+            {SecurityElements}
+
             <div>
-              <input 
-                type="email" 
-                required 
+              <input
+                type="email"
+                required
                 placeholder="Email address*"
                 className="w-full p-3.5 bg-background border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
                 onChange={(e) => {
-                  setFormData({...formData, email: e.target.value});
-                  setError("");
+                  setFormData({ ...formData, email: e.target.value });
+                  setError('');
                 }}
               />
             </div>
-            
+
             <div className="relative">
-              <input 
-                type={showPassword ? "text" : "password"}
-                required 
+              <input
+                type={showPassword ? 'text' : 'password'}
+                required
                 placeholder="Password*"
-                className="w-full p-3.5 bg-background  border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
+                className="w-full p-3.5 bg-background border-border rounded-md focus:border-primary focus:ring-1 focus:ring-primary outline-none text-[15px] placeholder:text-muted-foreground/90 transition-all"
                 onChange={(e) => {
-                  setFormData({...formData, password: e.target.value});
-                  setError("");
+                  setFormData({ ...formData, password: e.target.value });
+                  setError('');
                 }}
               />
               <div className="absolute inset-y-0 right-0 flex items-center pr-4">
@@ -116,27 +290,39 @@ export default function LoginPage() {
             </div>
 
             <div className="flex items-center justify-end mt-2 mb-4">
-              <Link href="/forgot-password" className="text-[13px] placeholder:text-muted-foreground/90 hover:underline font-semibold">
+              <Link
+                href="/forgot-password"
+                className="text-[13px] placeholder:text-muted-foreground/90 hover:underline font-semibold"
+              >
                 Forgot Password?
               </Link>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading}
               className="relative overflow-hidden group w-full bg-btn-gradient placeholder:text-muted-foreground/90-foreground py-3.5 rounded-md font-bold transition-all disabled:opacity-70 mt-2 text-[15px] shadow-sm hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
             >
-              <span className="relative z-10">{loading ? "Logging in..." : "Login"}</span>
+              <span className="relative z-10">{loading ? 'Logging in...' : 'Login'}</span>
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none"></span>
             </button>
           </form>
 
           <div className="mt-8 text-center">
             <p className="text-[14px] text-muted-foreground mb-6">
-              Don't have an account? <Link href="/register" className="placeholder:text-muted-foreground/90 font-semibold hover:underline">Sign Up</Link>
+              Don&apos;t have an account?{' '}
+              <Link
+                href="/register"
+                className="placeholder:text-muted-foreground/90 font-semibold hover:underline"
+              >
+                Sign Up
+              </Link>
             </p>
             <p className="text-[12px] text-muted-foreground/90 pt-4 border-t border-border">
-              ©2026 - Mildain Trainings. All Rights Reserved. | <Link href="/privacy-policy" className="hover:underline placeholder:text-muted-foreground/90">Privacy Policy</Link>
+              ©2026 - Mildain Trainings. All Rights Reserved. |{' '}
+              <Link href="/privacy-policy" className="hover:underline placeholder:text-muted-foreground/90">
+                Privacy Policy
+              </Link>
             </p>
           </div>
         </div>
@@ -144,7 +330,7 @@ export default function LoginPage() {
 
       <div className="hidden lg:flex lg:w-[55%] bg-muted relative items-center justify-center overflow-hidden border-l border-border">
         <div className="absolute inset-0 bg-primary/10 z-10 mix-blend-multiply"></div>
-        <Image 
+        <Image
           src="/images/workteam.png"
           alt="Login"
           fill
