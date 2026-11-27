@@ -30,7 +30,8 @@ function AdminSidebar() {
     { name: "Inquiries", href: "/admin/inquiries", icon: Users },
     { name: "Corporate Inquiries", href: "/admin/corporate-inquiries", icon: Users },
     { name: "Coupons & Offers", href: "/admin/coupons", icon: Tag },
-    { name: "Settings", href: "/admin/settings", icon: Settings }, 
+    { name: "Settings", href: "/admin/settings", icon: Settings },
+    { name: "Contact Inquiries", href: "/admin/contact-inquiries", icon: Users }, 
 
   ];
 
