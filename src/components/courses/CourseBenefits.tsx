@@ -51,7 +51,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mb-8">
+        {/* <div className="flex flex-wrap items-center gap-3 mb-8">
           {renderTabs.map((tab: any, index: number) => (
             <button
               key={`tab-${index}`}
@@ -65,7 +65,7 @@ export default function CourseBenefits({ course, isIndia }: { course?: any, isIn
               {tab.tabName || `Role ${index + 1}`}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="w-full bg-card rounded-xl shadow-md border border-border p-8">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-border gap-8 md:gap-0">
